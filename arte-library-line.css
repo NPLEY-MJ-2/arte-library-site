@@ -489,77 +489,12 @@ a:hover > .artbanner { border-color: var(--blue); }
 }
 .badge-tag--notice { border-color: var(--blue); color: var(--blue); }
 
-/* ==========================================================================
-   통계·DB
-   ========================================================================== */
-
-.stats-grid { grid-template-columns: 1.75fr 1fr; }
-.stats-l { padding: 40px; display: flex; flex-direction: column; gap: 20px; justify-content: center; }
-.stats-h { font-size: 38px; font-weight: 700; line-height: 1.2; }
-.stats-d { font-size: 15px; color: var(--gray-500); line-height: 1.6; }
-.stats-r { display: grid; grid-template-rows: repeat(3, 1fr); }
-.stats-r a {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 40px; font-size: 17px; font-weight: 700; line-height: 1.4;
-  border-bottom: 1px solid var(--hair);
-}
-.stats-r a:last-child { border-bottom: 0; }
-.stats-r a:hover { background: var(--blue-soft); color: var(--blue); }
+/* 통계·DB / AI 아키비스트·OPEN API·방문예약 / 마퀴 규칙은 Figma 'main_수정중'에 없는
+   구시안 섹션이라 HTML과 함께 제거했다 (2026-09-04). */
 
 /* ==========================================================================
-   AI 아키비스트 / OPEN API / 방문예약
+   하단 배너 / 푸터
    ========================================================================== */
-
-.trio-cell { padding: 32px; display: flex; flex-direction: column; gap: 14px; }
-.trio-eyebrow { font-size: 13px; font-weight: 600; color: var(--gray-500); }
-.trio-t { font-size: 28px; line-height: 1.2; }
-.trio-d { font-size: 15px; color: var(--gray-500); line-height: 1.6; }
-.trio-d b { color: var(--ink); font-weight: 600; }
-
-.ai-q {
-  display: flex; align-items: center; margin-top: 16px;
-  padding: 12px 20px; border: 1px solid var(--gray-300); border-radius: 999px;
-}
-.ai-q input {
-  flex: 1; min-width: 0; border: 0; outline: 0; background: none;
-  font-family: inherit; font-size: 14px; font-weight: 600;
-  letter-spacing: -0.02em; color: var(--ink);
-}
-.ai-a { padding-left: 20px; border-left: 2px solid var(--blue); font-size: 14px; line-height: 1.6; }
-.ai-a b { font-weight: 600; }
-.ai-src { margin-top: 14px; font-size: 13px; color: var(--gray-500); }
-
-.api-mark {
-  margin-top: auto;
-  font-family: 'ArteBasic', sans-serif; font-size: 54px; font-weight: 400;
-  line-height: 1.2; color: var(--gray-300);
-}
-
-/* 방문예약 — 블루 필 + 화이트 라인아트 (작업중 화면과 동일 처리) */
-.resv { background: var(--blue); color: #fff; }
-.resv .trio-eyebrow { color: rgba(255, 255, 255, 0.75); }
-.resv .trio-d { color: rgba(255, 255, 255, 0.85); }
-.resv-art {
-  margin-top: auto;
-  fill: none; stroke: #fff; stroke-width: 2;
-  stroke-linecap: round; stroke-linejoin: round;
-}
-
-/* ==========================================================================
-   마퀴 / 하단 배너 / 푸터
-   ========================================================================== */
-
-.marquee {
-  margin-top: 48px;
-  border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
-  overflow: hidden;
-}
-.marquee-in {
-  display: flex; gap: 48px; padding: 22px 0 22px 40px; white-space: nowrap;
-  font-family: 'ArteBasic', sans-serif; font-size: 38px; font-weight: 400; line-height: 1.2;
-}
-.marquee-in span { flex: none; }
-.marquee-in i { font-style: normal; color: var(--blue); }
 
 .banners { padding: 32px 0 48px; }
 .banner-rail { display: flex; align-items: center; gap: 16px; }
@@ -642,23 +577,17 @@ a:hover > .artbanner { border-color: var(--blue); }
   .poster { height: 320px; padding: 24px; }
   .poster-yr { font-size: 38px; }
 
-  .grid-2, .grid-3, .reco-grid, .stats-grid { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .reco-grid { grid-template-columns: 1fr; }
   .grid > .cell { border-left: 0; border-top: 1px solid var(--hair); }
   .grid > .cell:first-child { border-top: 0; }
-  .cell-pad, .bn-cell, .reco-left > a, .bookcur, .trio-cell, .stats-l { padding: 24px; }
+  .cell-pad, .bn-cell, .reco-left > a, .bookcur { padding: 24px; }
 
   .books { gap: 20px; }
   .book-cover { height: 200px; }
   .bookcur-list { grid-template-columns: 1fr 1fr; }
   .bc-cover { height: 160px; }
   .bookcur-hl { font-size: 27px; }
-  .stats-h { font-size: 24px; }
-  .stats-r a { padding: 20px 24px; font-size: 15px; }
   .bn-t, .reco-t { font-size: 22px; }
-  .trio-t { font-size: 22px; }
-  .api-mark { font-size: 38px; }
-  .marquee { margin-top: 48px; }
-  .marquee-in { font-size: 24px; padding: 20px 0 20px 20px; }
   .banners { padding: 32px 0 48px; }
   .banner-track { display: block; }
   .banner-track a { flex: none; width: 100%; border-left: 0; border-top: 1px solid var(--hair); padding: 20px 4px; min-height: 0; }

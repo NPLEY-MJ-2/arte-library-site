@@ -26,35 +26,45 @@
 <a class="skip" href="#main">본문 바로가기</a>
 
 <!-- ========== 정부 배너 바 ========== -->
-<div class="govbar">
-  <div class="wrap">
-    <span class="kace">한국문화예술교육진흥원</span>
-    <span>이 누리집은 운영기관 누리집입니다.</span>
+<!-- ========== 마스트헤드 (정부 공식 누리집 안내) ========== -->
+<div class="masthead">
+  <div class="mh-in">
+    <img class="mh-flag" src="assets/icon-flag.svg" alt="" width="24" height="24">
+    <p>이 누리집은 대한민국 공식 전자정부 누리집입니다.</p>
   </div>
 </div>
 
-<!-- ========== 헤더 / GNB (arte-library-line.html과 동일 마크업) ========== -->
+<!-- ========== 헤더 / GNB ========== -->
 <header class="hd">
-  <div class="wrap">
-    <div class="hd-util"><button type="button">글자·화면 설정</button></div>
-    <div class="hd-main">
-      <a class="logo" href="arte-library-line.html"><b>arte</b><span>라이브러리</span></a>
-      <nav class="hd-acts" aria-label="회원 및 검색">
-        <a href="#">로그인</a><span class="bar" aria-hidden="true"></span>
-        <a href="#">회원가입</a><span class="bar" aria-hidden="true"></span>
-        <a href="#">전체메뉴</a><span class="bar" aria-hidden="true"></span>
-        <!-- 통합검색 — 이 페이지(AI 검색)의 진입점. 다른 페이지 헤더에서도 이 링크가 여기로 연결되어야 한다 -->
-        <a href="arte-library-ai-search.html">통합검색</a>
-      </nav>
-    </div>
+  <div class="hd-in">
+    <a class="hd-logo" href="arte-library-line.html">
+      <img src="assets/logo-arte-library.png" alt="arte 라이브러리" width="199" height="28">
+    </a>
+
     <nav class="gnb" aria-label="주 메뉴">
-      <a href="arte-library-docs.html">문서·도서 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="arte-library-line.html#media">영상 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="arte-library-line.html#reco">추천 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="arte-library-region.html">지역별 정보 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="arte-library-line.html#stats">통계 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
-      <a href="arte-library-line.html#guide">누리집 안내 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></a>
+      <a href="arte-library-docs.html">문서·도서</a>
+      <a href="arte-library-line.html#media">영상</a>
+      <a href="arte-library-line.html#reco">추천</a>
+      <a href="arte-library-region.html">지역별 정보</a>
+      <a href="#">통계</a>
+      <a href="#">누리집 안내</a>
     </nav>
+
+    <div class="hd-btn">
+      <div class="hd-account">
+        <a href="#">로그인</a>
+        <span class="hd-bar" aria-hidden="true"></span>
+        <a href="#">회원가입</a>
+        <span class="hd-bar" aria-hidden="true"></span>
+        <a href="#">화면설정</a>
+      </div>
+      <a class="hd-icon" href="arte-library-ai-search.html" aria-label="통합검색">
+        <img src="assets/icon-search-header.svg" alt="" width="30" height="30">
+      </a>
+      <button class="hd-icon" type="button" aria-label="전체메뉴">
+        <img src="assets/icon-menu.svg" alt="" width="30" height="30">
+      </button>
+    </div>
   </div>
 </header>
 
@@ -269,32 +279,53 @@
 
 <!-- ========== 푸터 (arte-library-line.html과 동일) ========== -->
 <footer class="ft">
-  <div class="wrap">
-    <div class="ft-top">
-      <div>
-        <p class="logo"><b>arte</b><span>라이브러리</span></p>
-        <p class="ft-addr">
-          (우 03926) 서울특별시 마포구 상암산로 76 YTN 뉴스퀘어 11~12층 한국문화예술교육진흥원<br>
-          대표전화 : <a href="tel:0262095900">02)6209-5900</a> &nbsp; 팩스 : 02)6209-1392 &nbsp;
-          Email : <a href="mailto:contact@arte.or.kr">contact@arte.or.kr</a> &nbsp; 담당부서 : 법무정보화팀
-        </p>
-        <nav class="ft-links" aria-label="정책">
-          <a href="#">저작권 안내</a>
-          <a href="#">개인정보 처리방침</a>
-          <a href="#">홈페이지 저작권 정책</a>
+
+  <div class="ft-related">
+    <div class="ft-related-box">
+      <span>관련 사이트 바로 가기</span>
+      <img src="assets/icon-btn-more.svg" alt="" width="24" height="24">
+    </div>
+  </div>
+
+  <div class="ft-surface">
+    <div class="ft-in">
+      <img class="ft-logo" src="assets/logo-arte-library.png" alt="arte 라이브러리" width="199" height="28">
+
+      <div class="ft-grid">
+        <div class="ft-info">
+          <p>(우 03926) 서울특별시 마포구 상암산로 76 YTN 뉴스퀘어 11~12층 한국문화예술교육진흥원</p>
+          <p>
+            <b>대표전화</b> <a href="tel:0262095900">02)6209-5900</a>
+            <b>팩스</b> 02)6209-1392
+            <b>Email</b> <a href="mailto:contact@arte.or.kr">contact@arte.or.kr</a>
+            <b>담당부서</b> 법무정보화팀
+          </p>
+        </div>
+        <nav class="ft-util" aria-label="바로가기">
+          <a href="#">외부자료등록 <img src="assets/icon-arrow-right-sm.svg" alt="" width="20" height="20"></a>
+          <a href="#">이벤트 <img src="assets/icon-arrow-right-sm.svg" alt="" width="20" height="20"></a>
         </nav>
       </div>
-      <button class="ft-sites" type="button">관련 사이트 바로가기 <span aria-hidden="true">+</span></button>
-    </div>
-    <div class="ft-bot">
-      <p>COPYRIGHT ⓒ KOREA ARTS &amp; CULTURE EDUCATION SERVICE ALL RIGHTS RESERVED.</p>
-      <div class="ft-org">
-        <span>문화체육관광부</span>
-        <span>한국문화예술교육진흥원</span>
-        <span class="note">이 누리집은 문화체육관광부 산하기관 누리집입니다.</span>
+
+      <div class="ft-copy">
+        <nav class="ft-policy" aria-label="정책">
+          <a href="#">저작권 안내</a>
+          <a href="#"><b>개인정보 처리방침</b></a>
+          <a href="#">홈페이지 저작권 정책</a>
+        </nav>
+        <p class="ft-copytxt">© 2026 Ministry of the Interior and Safety. All rights reserved.</p>
       </div>
     </div>
   </div>
+
+  <div class="ft-identifier">
+    <div class="ft-id-in">
+      <img src="assets/identifier-logo.svg" alt="문화체육관광부" height="20">
+      <img src="assets/identifier-txt.svg" alt="한국문화예술교육진흥원" height="16">
+      <span>이 누리집은 문화체육관광부 산하기관 누리집입니다.</span>
+    </div>
+  </div>
+
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

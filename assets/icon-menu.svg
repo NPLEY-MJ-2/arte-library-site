@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="dehaze">
+<mask id="mask0_0_492" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="30" height="30">
+<rect id="Bounding box" width="30" height="30" fill="#D9D9D9"/>
+</mask>
+<g mask="url(#mask0_0_492)">
+<path id="dehaze_2" d="M3.75 8.75049V6.25049H26.25V8.75049H3.75ZM3.75 23.7505V21.2505H26.25V23.7505H3.75ZM3.75 16.2505V13.7505H26.25V16.2505H3.75Z" fill="black"/>
+</g>
+</g>
+</svg>

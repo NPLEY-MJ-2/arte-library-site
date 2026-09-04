@@ -1,0 +1,26 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="780" height="204" viewBox="0 0 780 204" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="img" clip-path="url(#clip0_0_448)">
+<rect width="780" height="204" fill="black"/>
+<rect id="Rectangle 39592580" x="618" y="140.172" width="64" height="64" fill="#FF2268"/>
+<path id="Union" d="M542 210.172V274.172H408V210.172H542Z" fill="#FF2268"/>
+<path id="Union_2" d="M752 210.172H822V274.172H618V210.172H688V140.172H752V210.172Z" fill="#0428DA"/>
+<path id="Union_3" d="M822 204.172H758V134.172H618V70.1719H822V204.172Z" fill="#FFD006"/>
+<rect id="Rectangle 39592587" x="548" y="210.172" width="64" height="64" fill="#01A44B"/>
+<path id="Union_4" d="M262 70.1719V134.172H-12V70.1719H262Z" fill="#FF2268"/>
+<path id="Union_5" d="M402 70.1719V140.172H472V204.172H338V134.172H268V70.1719H402Z" fill="#0428DA"/>
+<path id="Union_6" d="M822 0.171875V64.1719H688V0.171875H822Z" fill="#FF2268"/>
+<path id="Union_7" d="M332 64.1719H268V-69.8281H402V-5.82812H332V64.1719Z" fill="#FFD006"/>
+<rect id="Rectangle 39592588" x="198" y="-69.8281" width="64" height="64" fill="#0428DA"/>
+<path id="Subtract" d="M262 274.172H128V204.172H192V140.172H262V274.172Z" fill="#0428DA"/>
+<path id="Union_8" d="M752 -69.8281V-5.82812H548V-69.8281H752Z" fill="#0428DA"/>
+<rect id="Rectangle 39592571" x="128" y="0.171875" width="134" height="64" fill="#01A44B"/>
+<rect id="Rectangle 39592592" x="-12" y="-5.82812" width="64" height="70" fill="#01A44B"/>
+<rect id="Rectangle 39592594" x="-12" y="-69.8281" width="64" height="64" fill="#01A44B"/>
+<path id="Union_9" d="M612 134.172H478V64.1719H408V0.171875H612V134.172Z" fill="#FF2268"/>
+</g>
+<defs>
+<clipPath id="clip0_0_448">
+<rect width="780" height="204" fill="white"/>
+</clipPath>
+</defs>
+</svg>

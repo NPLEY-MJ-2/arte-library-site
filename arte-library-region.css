@@ -1,263 +1,65 @@
 /* ==========================================================================
-   arte 라이브러리 — 지역별 정보 > 프로그램 페이지 전용 스타일
-   공통 시스템(토큰·헤더·푸터·chip·more·nav-btn·display)은 arte-library-line.css 재사용.
-   이 파일에는 이 페이지에만 필요한 규칙만 둔다.
-
-   출처: Figma sub_지역별정보 (nodeId 19388:1668, fileKey MggyO8qQHuiYJRDenEWqlL)
-   Figma 참조 코드(React+Tailwind)는 그대로 쓰지 않고 프로젝트 컨벤션으로 재작성함.
-
-   토큰 준수: 타입 스케일 14단계 / 자간 -0.02em / 행간 1.2·1.4·1.6
-             라운드 4·999px / 여백 4px 배수(120px 포함) / 모션 없음
+   arte 라이브러리 — 지역별 정보 > 프로그램 전용
+   Figma 'sub_지역별정보'(19388:1668) 1:1.
+   서브페이지 공통 셸(.sub / .fil / .lst / .pager)은 arte-library-docs.css 재사용.
    ========================================================================== */
 
-/* ==========================================================================
-   브레드크럼 + 타이틀 + 분류 탭
-   ========================================================================== */
+/* 지역 지도 — 원본 벡터 조합을 통이미지로 대체 (Figma 노드 19388:1753) */
+.rg-map { width: 100%; height: auto; margin-bottom: 32px; }
 
-.crumb {
-  display: flex; align-items: center; gap: 10px;
-  margin-top: 32px;
-  font-size: 14px; color: var(--gray-500);
+.fil-date { font-size: 16px; }
+.fil-date img { transform: none; }
+
+/* 상단 집계 타일 */
+.lst-top { display: flex; flex-direction: column; gap: 24px; }
+.rg-stats { display: flex; }
+.rg-stat {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 2px; padding: 16px 8px; border: 1px solid var(--ink);
 }
-.crumb a:hover { color: var(--blue); }
-.crumb .sep { color: var(--gray-300); }
-.crumb strong { font-weight: 600; color: var(--ink); }
+.rg-stat + .rg-stat { border-left: 0; }
+.rg-stat--on { background: #007ade; border-color: #007ade; color: #fff; }
+.rg-stat-l { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.rg-stat-l b { font-size: clamp(15px, 1.09vw, 21px); font-weight: 600; }
+.rg-stat-l span { font-size: clamp(14px, 1.04vw, 20px); font-weight: 400; }
+.rg-stat-n { font-size: clamp(24px, 2.14vw, 41px); font-weight: 700; line-height: 1.5; color: #007ade; }
+.rg-stat--on .rg-stat-n { color: #fff; }
 
-.region-head {
-  display: flex; flex-direction: column; align-items: center; gap: 40px;
-  padding: 40px 0 64px; text-align: center;
+/* 안내 + 더보기 */
+.rg-listwrap { display: flex; flex-direction: column; gap: 24px; }
+.rg-note { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.rg-note p { font-size: clamp(14px, 0.94vw, 18px); font-weight: 500; color: #007ade; }
+.rg-more { display: inline-flex; align-items: center; gap: 2px; font-size: 16px; font-weight: 500; }
+.rg-more img { width: 16px; height: 16px; }
+.rg-more:hover { color: #007ade; }
+
+/* 프로그램 카드 3열 */
+.rg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.prog { display: flex; align-items: stretch; border: 1px solid var(--ink); overflow: hidden; background: var(--white); }
+.prog-thumb { flex: none; width: clamp(90px, 6.88vw, 132px); object-fit: cover; align-self: stretch; height: auto; }
+.prog-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px; padding: 20px; }
+.prog-head { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.prog-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 3px 12px; background: var(--ink); border: 1.5px solid var(--ink);
+  font-size: 14px; font-weight: 500; color: #fff;
 }
-.region-title { font-size: 54px; line-height: 1.2; }
-
-.region-tabs {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  width: 100%; max-width: 900px;
-  gap: 8px;
-}
-.region-tabs button {
-  padding: 16px 0; border: 1px solid var(--ink);
-  background: var(--white); color: var(--ink);
-  font-size: 22px; font-weight: 600; line-height: 1.4;
-}
-.region-tabs button:hover { border-color: var(--blue); color: var(--blue); }
-.region-tabs button[aria-selected='true'] {
-  background: var(--ink); border-color: var(--ink); color: #fff;
-}
-.region-tabs button[aria-selected='true']:hover { color: #fff; }
-
-/* ==========================================================================
-   섹션 헤딩 (프로그램 / 운영단체 / 지역별 자료)
-   ========================================================================== */
-
-.region-intro {
-  display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 24px; flex-wrap: wrap;
-  padding-bottom: 24px; border-bottom: 2px solid var(--blue);
-}
-.region-intro h2 { font-size: 54px; line-height: 1.2; }
-.region-intro p { max-width: 620px; font-size: 17px; color: var(--gray-500); line-height: 1.4; text-align: right; }
-
-/* ==========================================================================
-   본문 레이아웃 — 좌측 필터 + 우측 리스트 (Figma gap 120px)
-   ========================================================================== */
-
-.region-board { display: grid; grid-template-columns: 292px 1fr; gap: 120px; padding: 40px 0 80px; }
-
-/* ---- 좌측 필터 ---------------------------------------------------------- */
-
-.region-filters > * + * { margin-top: 24px; }
-.f-label { display: block; font-size: 16px; font-weight: 500; line-height: 1.4; margin-bottom: 12px; }
-
-.f-search {
-  display: flex; align-items: center; gap: 8px;
-  height: 48px; padding: 0 12px 0 16px;
-  border: 1px solid var(--gray-300); border-radius: 4px;
-  background: var(--white);
-}
-.f-search input {
-  flex: 1; min-width: 0; border: 0; outline: 0; background: none;
-  font-family: inherit; font-size: 15px; letter-spacing: -0.02em; color: var(--ink);
-}
-.f-search input::placeholder { color: var(--gray-500); }
-.f-search button { border: 0; background: none; color: var(--gray-500); padding: 4px; }
-.f-search button:hover { color: var(--blue); }
-
-/* 지역 지도 — Figma의 실제 행정구역 벡터(100여 개 path)는 재현하지 않고
-   기존 라인아트 컨벤션(1.4px 스트로크, 블루 단일 액센트)으로 단순화한
-   상징적 실루엣으로 대체했다. 실제 좌표 기반 지도가 필요하면 별도 확인 필요. */
-.region-map {
-  display: block; width: 100%; height: auto;
-  border: 1px solid var(--hair); background: var(--gray-100);
-}
-.region-map .map-fill { fill: none; stroke: var(--gray-300); stroke-width: 1.4; stroke-linejoin: round; }
-.region-map .pin { fill: none; stroke: var(--blue); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.region-map .pin-dot { fill: var(--blue); }
-.region-map [data-pin] { cursor: pointer; }
-.region-map [data-pin]:hover .pin,
-.region-map [data-pin]:hover .pin-dot { stroke: var(--blue-deep); fill: var(--blue-deep); }
-.region-map .pin-active .pin { stroke: var(--blue-deep); }
-.region-map .pin-active .pin-dot { fill: var(--blue-deep); }
-
-.f-note {
-  display: flex; gap: 8px;
-  font-size: 13px; color: var(--gray-500); line-height: 1.6;
-}
-.f-note svg { flex: none; margin-top: 2px; color: var(--gray-300); }
-
-/* 필터 그룹 — 헤어라인 구분, 아코디언 (문서 목록 페이지와 동일 패턴) */
-.f-group { border-top: 1px solid var(--hair); padding-top: 20px; }
-.f-group-head {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; padding: 0 0 16px; border: 0; background: none;
-  font-size: 18px; font-weight: 700; line-height: 1.4; text-align: left;
-}
-.f-group-head:hover { color: var(--blue); }
-.f-group-head svg { flex: none; color: var(--gray-500); }
-.f-group-head[aria-expanded='false'] + .f-body { display: none; }
-
-.f-chips { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 16px; }
-.f-chips .chip { height: 32px; padding: 0 12px; font-size: 13px; }
-.f-chips .chip:hover { border-color: var(--blue); color: var(--blue); }
-.f-chips .chip[aria-pressed='true'] { background: var(--ink); color: #fff; border-color: var(--ink); }
-
-.f-range { display: flex; align-items: center; gap: 12px; }
-.f-date {
-  flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  height: 48px; padding: 0 14px;
-  border: 1px solid var(--gray-300); border-radius: 4px;
-}
-.f-date input {
-  flex: 1; min-width: 0; border: 0; outline: 0; background: none;
-  font-family: inherit; font-size: 14px; letter-spacing: -0.02em; color: var(--gray-500);
-}
-.f-date svg { flex: none; color: var(--gray-500); }
-.f-range .tilde { color: var(--gray-500); }
-
-/* ---- 우측 리스트 --------------------------------------------------------- */
-
-.region-list { min-width: 0; }
-
-.res-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 24px; flex-wrap: wrap;
-  padding-bottom: 20px; border-bottom: 1px solid var(--hair);
-}
-.res-count { font-size: 15px; color: var(--gray-800); white-space: nowrap; }
-.res-count b { font-weight: 700; color: var(--ink); }
-.res-count .sep { margin: 0 10px; color: var(--gray-300); }
-
-.res-sort { display: flex; align-items: center; gap: 16px; flex: none; }
-.res-sort .s { flex: none; white-space: nowrap; border: 0; background: none; font-size: 15px; color: var(--gray-500); }
-.res-sort .s:hover { color: var(--blue); }
-.res-sort .s[aria-pressed='true'] { color: var(--ink); font-weight: 700; }
-.res-sort .divider { width: 1px; height: 12px; background: var(--gray-300); }
-.res-sort .select select { height: 40px; min-width: 148px; padding: 0 36px 0 14px; font-size: 14px; }
-
-.select { position: relative; display: block; }
-.select select {
-  width: 100%; height: 48px; padding: 0 40px 0 16px;
-  border: 1px solid var(--gray-300); border-radius: 4px;
-  background: var(--white); color: var(--ink);
-  font-family: inherit; font-size: 14px; letter-spacing: -0.02em;
-  appearance: none;
-}
-.select select:hover { border-color: var(--blue); }
-.select svg { position: absolute; right: 14px; top: 50%; margin-top: -8px; pointer-events: none; color: var(--gray-500); }
-
-/* 누적 통계 3분할 — 현재 선택된 분류를 블루로 강조 */
-.region-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 24px; background: var(--hair); border: 1px solid var(--hair); }
-.region-stat { padding: 20px 16px; background: var(--white); text-align: center; }
-.region-stat-l { font-size: 15px; font-weight: 600; color: var(--ink); }
-.region-stat-l span { margin-left: 6px; font-size: 13px; font-weight: 400; color: var(--gray-500); }
-.region-stat-n { margin-top: 4px; font-family: 'ArteBasic', sans-serif; font-size: 38px; font-weight: 700; line-height: 1.2; color: var(--gray-300); }
-.region-stat--on { background: var(--blue); }
-.region-stat--on .region-stat-l,
-.region-stat--on .region-stat-l span { color: rgba(255, 255, 255, 0.85); }
-.region-stat--on .region-stat-n { color: #fff; }
-
-.region-note {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-  margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--hair);
-}
-.region-note p { font-size: 14px; color: var(--blue); }
-.more-sm { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 500; color: var(--ink); }
-.more-sm:hover { color: var(--blue); }
-
-/* 결과 카드 리스트 — 132px 썸네일 + 본문 (기획서 샘플 1건 반복, 지역 배지만 순환) */
-.region-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
-.region-card {
-  display: flex; gap: 24px;
-  border: 1px solid var(--hair);
-}
-.region-card:hover { border-color: var(--blue); }
-.region-thumb {
-  flex: none; width: 132px; align-self: stretch;
-  display: grid; place-items: center;
-  background: var(--gray-100);
-  font-size: 11px; color: var(--gray-500); text-align: center; padding: 8px;
-}
-.region-body-col { flex: 1; min-width: 0; padding: 20px 20px 20px 0; display: flex; flex-direction: column; gap: 12px; }
-.region-badge {
-  align-self: flex-start;
-  display: inline-flex; align-items: center; height: 26px; padding: 0 12px;
-  background: var(--ink); color: #fff;
-  font-size: 13px; font-weight: 500; line-height: 1.6;
-}
-.region-card-t { font-size: 22px; font-weight: 600; line-height: 1.4; }
-.region-card:hover .region-card-t { color: var(--blue); }
-.region-card-d {
-  font-size: 14px; color: var(--gray-500); line-height: 1.6;
+.prog-t { font-size: clamp(16px, 1.04vw, 20px); font-weight: 600; line-height: 1.5; }
+.prog:hover .prog-t { color: #007ade; }
+.prog-d {
+  font-size: 14px; font-weight: 500; color: var(--gray-555); line-height: 1.5;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
-.region-card-tags {
-  display: flex; flex-wrap: wrap; gap: 4px 20px; margin-top: auto;
-  font-size: 13px; color: var(--gray-800);
-}
+.prog-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 8px; font-size: 14px; font-weight: 500; }
 
-/* 페이지네이션 (문서 목록 페이지와 동일 패턴) */
-.pager { display: flex; align-items: center; justify-content: center; gap: 6px; padding-top: 32px; }
-.pager button {
-  min-width: 36px; height: 36px; padding: 0 8px;
-  display: grid; place-items: center;
-  border: 0; border-radius: 999px; background: none;
-  font-size: 14px; color: var(--gray-800);
+@media (max-width: 1200px) {
+  .rg-grid { grid-template-columns: repeat(2, 1fr); }
 }
-.pager button:hover { color: var(--blue); }
-.pager button[aria-current='page'] { background: var(--ink); color: #fff; font-weight: 700; }
-.pager .edge { color: var(--gray-500); }
-.pager .edge:disabled { opacity: 0.35; cursor: not-allowed; }
-
-/* ==========================================================================
-   모바일 (390px 기준, 브레이크포인트 768px)
-   ========================================================================== */
 
 @media (max-width: 768px) {
-  .crumb { margin-top: 20px; font-size: 12px; gap: 6px; flex-wrap: wrap; }
-  .region-head { padding: 28px 0 40px; gap: 24px; }
-  .region-title { font-size: 28px; }
-  .region-tabs { max-width: none; }
-  .region-tabs button { font-size: 15px; padding: 12px 4px; }
-
-  .region-intro { flex-direction: column; align-items: flex-start; gap: 12px; padding-bottom: 20px; }
-  .region-intro h2 { font-size: 28px; }
-  .region-intro p { text-align: left; font-size: 14px; }
-
-  .region-board { grid-template-columns: 1fr; gap: 32px; padding: 24px 0 48px; }
-
-  .region-stats { grid-template-columns: 1fr; }
-  .region-stat { display: flex; align-items: center; justify-content: space-between; text-align: left; }
-  .region-stat-n { margin-top: 0; font-size: 24px; }
-
-  .region-cards { gap: 12px; }
-  .region-card { flex-direction: column; }
-  .region-thumb { width: 100%; height: 120px; }
-  .region-body-col { padding: 16px; }
-  .region-card-t { font-size: 18px; }
-
-  .pager button { min-width: 32px; height: 32px; font-size: 13px; }
-  .pager .hide-sm { display: none; }
-}
-
-@media print {
-  .pager, .f-search button, .region-tabs { display: none; }
+  .rg-grid { grid-template-columns: 1fr; }
+  .rg-stats { flex-direction: column; }
+  .rg-stat + .rg-stat { border-left: 1px solid var(--ink); border-top: 0; }
+  .rg-map { max-width: 240px; margin-inline: auto; }
+  .prog-body { padding: 16px; gap: 10px; }
 }

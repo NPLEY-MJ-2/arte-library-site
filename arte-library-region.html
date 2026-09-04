@@ -5,27 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>arte 라이브러리 — 지역별 정보</title>
 <!--
-  arte 라이브러리 — 지역별 정보 > 프로그램 페이지
-  · 출처: Figma "sub_지역별정보" (nodeId 19388:1668, fileKey MggyO8qQHuiYJRDenEWqlL), 1920×1850
-    get_design_context의 React+Tailwind 참조 코드는 그대로 쓰지 않고 이 프로젝트의
-    순수 HTML/CSS/바닐라JS 컨벤션(arte-library-line.css 공통 시스템)으로 재작성함
-  · 스타일: arte-library-line.css 라인 디자인 시스템 재사용
-    (1px 헤어라인 · 화이트 캔버스 · 블루 #3353ff 단일 액센트)
-  · 이미지 없음(저작권) → 프로그램 목록 썸네일은 [이미지 자리] 텍스트로 대체
-  · 지역 지도: Figma 원본은 실제 행정구역 벡터(100여 개 path)로 구성되어 있으나
-    그대로 재현하지 않고 기존 라인아트 컨벤션(1.4px 스트로크, 블루 단일 액센트)으로
-    단순화한 상징적 실루엣 + 핀 5개로 대체함(정확한 좌표 아님, 확정 필요 시 재작업)
-  · 모션 미사용 (tokens.md 준수)
+  arte 라이브러리 — 지역별 정보 > 프로그램
+  · Figma 'sub_지역별정보'(fileKey MggyO8qQHuiYJRDenEWqlL / node 19388:1668) 1:1 재구현 (2026-09-04)
+  · 이미지: Figma 실제 에셋(assets/). 지도는 벡터 100여 개 조합이라 원본 노드(19388:1753)를 통이미지로 내보내 사용
+  · Figma 원문의 "문화에술교육" 오탈자는 원문 그대로 유지
 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="arte-library-line.css">
+<link rel="stylesheet" href="arte-library-docs.css">
 <link rel="stylesheet" href="arte-library-region.css">
 </head>
 <body>
 
 <a class="skip" href="#main">본문 바로가기</a>
 
-<!-- ========== 정부 배너 바 ========== -->
 <!-- ========== 마스트헤드 (정부 공식 누리집 안내) ========== -->
 <div class="masthead">
   <div class="mh-in">
@@ -42,7 +35,7 @@
     </a>
 
     <nav class="gnb" aria-label="주 메뉴">
-      <a href="arte-library-docs.html">문서·도서</a>
+      <a href="arte-library-docs.html">아카이브·도서</a>
       <a href="arte-library-line.html#media">영상</a>
       <a href="arte-library-line.html#reco">추천</a>
       <a href="arte-library-region.html" aria-current="page">지역별 정보</a>
@@ -68,310 +61,256 @@
   </div>
 </header>
 
-<main id="main">
-  <div class="wrap">
+<main id="main" class="sub">
+  <div class="sub-in">
 
-    <!-- ========== 브레드크럼 ========== -->
-    <nav class="crumb" aria-label="현재 위치">
-      <a href="arte-library-line.html">홈</a>
-      <span class="sep" aria-hidden="true">〉</span>
-      <span>지역별 정보</span>
-      <span class="sep" aria-hidden="true">〉</span>
-      <strong>프로그램</strong>
-    </nav>
-
-    <!-- ========== 타이틀 + 분류 탭 ========== -->
-    <div class="region-head">
-      <h1 class="display region-title">지역별 정보</h1>
-      <nav class="region-tabs" role="tablist" aria-label="지역별 정보 분류">
-        <button role="tab" aria-selected="true">프로그램</button>
-        <button role="tab" aria-selected="false">운영단체</button>
-        <button role="tab" aria-selected="false">지역별 자료</button>
+    <!-- ========== 타이틀 ========== -->
+    <div class="sub-title">
+      <nav class="crumb" aria-label="현재 위치">
+        <a href="arte-library-line.html">HOME</a>
+        <img src="assets/icon-crumb.svg" alt="" width="12" height="12">
+        <span>지역별 정보</span>
+        <img src="assets/icon-crumb.svg" alt="" width="12" height="12">
+        <strong>프로그램</strong>
       </nav>
+
+      <div class="sub-title-b">
+        <h1 class="sub-h1">지역별 정보</h1>
+        <nav class="sub-tabs" aria-label="지역별 정보 분류">
+          <a href="arte-library-region.html" aria-current="page">프로그램</a>
+          <a href="#">운영단체</a>
+          <a href="#">지역별 자료</a>
+        </nav>
+      </div>
     </div>
 
     <!-- ========== 본문 ========== -->
-    <section aria-label="지역별 프로그램 정보">
+    <div class="sub-content">
 
-      <div class="region-intro">
-        <h2 class="display">프로그램</h2>
-        <!-- 기획서/Figma 원문의 "문화에술교육"은 오탈자로 보이나 원문 그대로 유지 -->
+      <div class="sub-head">
+        <h2 class="sub-h2">프로그램</h2>
+        <!-- Figma 원문 표기 그대로 유지 ("문화에술교육") -->
         <p>지역별 문화에술교육 프로그램 정보를 검색하고 조회할 수 있습니다.</p>
       </div>
 
-      <div class="region-board">
+      <div class="sub-board">
 
         <!-- ---------- 좌측: 검색 조건 ---------- -->
-        <aside class="region-filters" aria-label="검색 조건">
+        <aside class="fil" aria-label="검색 조건">
 
-          <div>
-            <label class="f-label" for="rkw">검색</label>
-            <div class="f-search">
+          <div class="fil-block">
+            <p class="fil-label">검색</p>
+            <div class="fil-search">
+              <label class="sr" for="rkw">검색어</label>
               <input id="rkw" type="search" placeholder="검색어를 입력하세요">
-              <button type="button" aria-label="검색">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-              </button>
+              <button type="button" aria-label="검색"><img src="assets/icon-search-sm.svg" alt="" width="20" height="20"></button>
             </div>
           </div>
 
-          <div class="region-map-block">
-            <span class="f-label">지역</span>
-            <svg class="region-map" viewBox="0 0 292 415" role="img" aria-label="지역 선택 지도(상징적 실루엣)">
-              <path class="map-fill" d="M100,20 C130,15 160,25 175,55 C190,85 185,120 200,150 C215,180 230,200 220,230 C210,260 175,270 180,300 C185,325 165,345 140,345 C115,345 95,320 90,295 C85,270 60,255 55,225 C50,195 65,170 60,140 C55,110 70,80 85,55 C95,35 90,25 100,20 Z"/>
-              <path class="map-fill" d="M84,392a26,13 0 1 0 52,0a26,13 0 1 0 -52,0Z"/>
-              <path class="map-fill" d="M96,90h40M88,140h44M78,190h48M92,240h56M110,290h46" stroke-opacity=".6"/>
-
-              <g class="pin-marker" data-pin tabindex="0" role="button" aria-label="수도권" transform="translate(128,120)">
-                <path class="pin" d="M0,0C0,0 -10,-11 -10,-18A10,10 0 1 1 10,-18C10,-11 0,0 0,0Z"/>
-                <circle class="pin-dot" cx="0" cy="-18" r="3"/>
-              </g>
-              <g class="pin-marker" data-pin tabindex="0" role="button" aria-label="강원권" transform="translate(190,148)">
-                <path class="pin" d="M0,0C0,0 -10,-11 -10,-18A10,10 0 1 1 10,-18C10,-11 0,0 0,0Z"/>
-                <circle class="pin-dot" cx="0" cy="-18" r="3"/>
-              </g>
-              <g class="pin-marker" data-pin tabindex="0" role="button" aria-label="충청·전라권" transform="translate(88,228)">
-                <path class="pin" d="M0,0C0,0 -10,-11 -10,-18A10,10 0 1 1 10,-18C10,-11 0,0 0,0Z"/>
-                <circle class="pin-dot" cx="0" cy="-18" r="3"/>
-              </g>
-              <g class="pin-marker" data-pin tabindex="0" role="button" aria-label="경상권" transform="translate(188,282)">
-                <path class="pin" d="M0,0C0,0 -10,-11 -10,-18A10,10 0 1 1 10,-18C10,-11 0,0 0,0Z"/>
-                <circle class="pin-dot" cx="0" cy="-18" r="3"/>
-              </g>
-              <g class="pin-marker" data-pin tabindex="0" role="button" aria-label="제주권" transform="translate(110,378)">
-                <path class="pin" d="M0,0C0,0 -10,-11 -10,-18A10,10 0 1 1 10,-18C10,-11 0,0 0,0Z"/>
-                <circle class="pin-dot" cx="0" cy="-18" r="3"/>
-              </g>
-            </svg>
+          <div class="fil-group">
+            <p class="fil-label">지역</p>
+            <img class="rg-map" src="assets/region-map.png" alt="지역 선택 지도 — 서울, 대전, 전남, 부산, 제주 표시">
+            <p class="fil-note">
+              <img src="assets/icon-info.svg" alt="" width="20" height="20">
+              다양한 조건을 설정하여 원하는 자료를 검색할 수 있습니다. (중복 선택 가능)
+            </p>
           </div>
 
-          <p class="f-note">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.01"/></svg>
-            다양한 조건을 설정하여 원하는 자료를 검색할 수 있습니다. (중복 선택 가능)
-          </p>
+          <button class="fil-acc" type="button" aria-expanded="false">장르 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+          <button class="fil-acc" type="button" aria-expanded="false">교육대상 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
 
-          <div class="f-group">
-            <button class="f-group-head" type="button" aria-expanded="false">
-              장르
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="f-body">
-              <div class="f-chips">
-                <button class="chip" type="button" aria-pressed="true">전체</button>
-                <button class="chip" type="button" aria-pressed="false">음악</button>
-                <button class="chip" type="button" aria-pressed="false">미술</button>
-                <button class="chip" type="button" aria-pressed="false">무용</button>
-                <button class="chip" type="button" aria-pressed="false">연극</button>
-                <button class="chip" type="button" aria-pressed="false">기타</button>
-              </div>
+          <div class="fil-group">
+            <p class="fil-label">운영기간</p>
+            <div class="fil-range">
+              <button class="fil-select fil-date" type="button">연도-월-일 <img src="assets/icon-calendar.svg" alt="" width="20" height="20"></button>
+              <span class="fil-tilde" aria-hidden="true">–</span>
+              <button class="fil-select fil-date" type="button">연도-월-일 <img src="assets/icon-calendar.svg" alt="" width="20" height="20"></button>
             </div>
           </div>
-
-          <div class="f-group">
-            <button class="f-group-head" type="button" aria-expanded="false">
-              교육대상
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="f-body">
-              <div class="f-chips">
-                <button class="chip" type="button" aria-pressed="true">전체</button>
-                <button class="chip" type="button" aria-pressed="false">유아</button>
-                <button class="chip" type="button" aria-pressed="false">아동·청소년</button>
-                <button class="chip" type="button" aria-pressed="false">성인</button>
-                <button class="chip" type="button" aria-pressed="false">노인</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="f-group">
-            <span class="f-label">운영기간</span>
-            <div class="f-range">
-              <label class="sr" for="d-from">운영기간 시작</label>
-              <div class="f-date">
-                <input id="d-from" type="text" placeholder="연도-월-일">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-              </div>
-              <span class="tilde" aria-hidden="true">~</span>
-              <label class="sr" for="d-to">운영기간 종료</label>
-              <div class="f-date">
-                <input id="d-to" type="text" placeholder="연도-월-일">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-              </div>
-            </div>
-          </div>
-
         </aside>
 
-        <!-- ---------- 우측: 결과 ---------- -->
-        <div class="region-list">
+        <!-- ---------- 우측: 목록 ---------- -->
+        <section class="lst" aria-label="지역별 프로그램 목록">
 
-          <div class="res-bar">
-            <p class="res-count">전체 <b>4,793건</b><span class="sep" aria-hidden="true">|</span>페이지 <b>1 / 200</b></p>
-            <div class="res-sort">
-              <button class="s" type="button" aria-pressed="true">최신순</button>
-              <span class="divider" aria-hidden="true"></span>
-              <button class="s" type="button" aria-pressed="false">조회순</button>
-              <span class="select">
-                <label class="sr" for="per">페이지당 표시 개수</label>
-                <select id="per">
-                  <option>10개씩 보기</option>
-                  <option>20개씩 보기</option>
-                  <option>50개씩 보기</option>
-                </select>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-              </span>
+          <div class="lst-top">
+            <div class="lst-bar">
+              <div class="lst-count">
+                <span><em>전체</em> <b>4,793건</b></span>
+                <span><em>페이지</em> <b>1 / 200</b></span>
+              </div>
+              <div class="lst-sort">
+                <button type="button" aria-pressed="true">최신순</button>
+                <img class="lst-divider" src="assets/icon-divider.svg" alt="" width="16" height="1">
+                <button type="button" aria-pressed="false">조회순</button>
+                <button class="lst-per" type="button">10개씩 보기 <img src="assets/icon-chevron-white.svg" alt="" width="20" height="20"></button>
+              </div>
+            </div>
+
+            <div class="rg-stats">
+              <div class="rg-stat rg-stat--on">
+                <p class="rg-stat-l"><b>프로그램</b> <span>누적(건)</span></p>
+                <p class="rg-stat-n">3,095</p>
+              </div>
+              <div class="rg-stat">
+                <p class="rg-stat-l"><b>운영단체</b> <span>누적(개)</span></p>
+                <p class="rg-stat-n">1,441</p>
+              </div>
+              <div class="rg-stat">
+                <p class="rg-stat-l"><b>지역별 자료</b> <span>누적(건)</span></p>
+                <p class="rg-stat-n">1,778</p>
+              </div>
             </div>
           </div>
 
-          <!-- 누적 통계 3분할 — 현재 선택된 분류(프로그램)를 블루로 강조 -->
-          <div class="region-stats">
-            <div class="region-stat region-stat--on">
-              <p class="region-stat-l">프로그램<span>누적(건)</span></p>
-              <p class="region-stat-n">3,095</p>
+          <div class="rg-listwrap">
+            <div class="rg-note">
+              <p>* 단체회원으로 가입하시면, 단체 및 프로그램 정보를 등록하실 수 있습니다.</p>
+              <a class="rg-more" href="#">더보기 <img src="assets/icon-more-sm.svg" alt="" width="16" height="16"></a>
             </div>
-            <div class="region-stat">
-              <p class="region-stat-l">운영단체<span>누적(개)</span></p>
-              <p class="region-stat-n">1,441</p>
-            </div>
-            <div class="region-stat">
-              <p class="region-stat-l">지역별 자료<span>누적(건)</span></p>
-              <p class="region-stat-n">1,778</p>
+
+            <div class="rg-grid">
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-2.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-3.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-4.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-3.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-4.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-2.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-4.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-2.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
+              <a class="prog" href="#">
+                <img class="prog-thumb" src="assets/prog-thumb-3.png" alt="" loading="lazy">
+                <div class="prog-body">
+                  <div class="prog-head">
+                    <span class="prog-badge">서울</span>
+                    <h3 class="prog-t">찾아-Dream(드림)</h3>
+                  </div>
+                  <p class="prog-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상…</p>
+                  <p class="prog-meta"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></p>
+                </div>
+              </a>
+
             </div>
           </div>
-
-          <div class="region-note">
-            <p>* 단체회원으로 가입하시면, 단체 및 프로그램 정보를 등록하실 수 있습니다.</p>
-            <a class="more-sm" href="#">더보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
-          </div>
-
-          <!-- 결과 카드 10건 — 기획서(Figma) 샘플 1건을 반복, 지역 배지만 순환 -->
-          <ul class="region-cards">
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">서울</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">부산</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">대구</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">인천</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">광주</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">대전</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">울산</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">경기</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">강원</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-            <li><a class="region-card" href="#">
-              <div class="region-thumb">[이미지 자리]</div>
-              <div class="region-body-col">
-                <span class="region-badge">제주</span>
-                <h3 class="region-card-t">찾아-Dream(드림)</h3>
-                <p class="region-card-d">연극을 통해 자신의 감정과 사회적 관계를 재발견하고, 삶의 이야기를 표현해보는 장년층(만 50세~64세) 대상...</p>
-                <div class="region-card-tags"><span>연극</span><span>중장년</span><span>2025</span><span>다름(DARM)</span></div>
-              </div>
-            </a></li>
-
-          </ul>
 
           <nav class="pager" aria-label="페이지">
-            <button class="edge" type="button" disabled aria-label="첫 페이지">«</button>
-            <button class="edge" type="button" disabled aria-label="이전 페이지">‹</button>
-            <button type="button" aria-current="page">1</button>
-            <button type="button">2</button>
-            <button type="button">3</button>
-            <button type="button">4</button>
-            <button type="button">5</button>
-            <button type="button" class="hide-sm">6</button>
-            <button type="button" class="hide-sm">7</button>
-            <button type="button" class="hide-sm">8</button>
-            <button type="button" class="hide-sm">9</button>
-            <button type="button" class="hide-sm">10</button>
-            <button class="edge" type="button" aria-label="다음 페이지">›</button>
-            <button class="edge" type="button" aria-label="마지막 페이지">»</button>
+            <span class="pager-edge">
+              <button type="button" aria-label="첫 페이지"><img src="assets/icon-page-first.svg" alt="" width="20" height="20"></button>
+              <button type="button" aria-label="이전 페이지"><img src="assets/icon-page-prev.svg" alt="" width="20" height="20"></button>
+            </span>
+            <span class="pager-nums">
+              <button type="button" aria-current="page">1</button>
+              <button type="button">2</button>
+              <button type="button">3</button>
+              <button type="button">4</button>
+              <button type="button">5</button>
+              <button type="button">6</button>
+              <button type="button">7</button>
+              <button type="button">8</button>
+              <button type="button">9</button>
+              <button type="button">10</button>
+            </span>
+            <span class="pager-edge pager-edge--next">
+              <button type="button" aria-label="다음 페이지"><img src="assets/icon-page-prev.svg" alt="" width="20" height="20"></button>
+              <button type="button" aria-label="마지막 페이지"><img src="assets/icon-page-first.svg" alt="" width="20" height="20"></button>
+            </span>
           </nav>
 
-        </div>
+        </section>
       </div>
-    </section>
+    </div>
   </div>
 </main>
 
-<!-- ========== 푸터 (홈과 동일) ========== -->
+<!-- ========== 푸터 ========== -->
 <footer class="ft">
 
   <div class="ft-related">
@@ -424,7 +363,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="arte-library-region.js"></script>
+<script src="arte-library-docs.js"></script>
 <script src="arte-motion.js"></script>
 </body>
 </html>

@@ -5,27 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>arte 라이브러리 — AI 검색</title>
 <!--
-  arte 라이브러리 — AI 검색 페이지
-  · Figma 소스: sub_AI검색_01(초기, 19388:2385) / sub_AI검색_02결과(결과, 19388:2135) — fileKey MggyO8qQHuiYJRDenEWqlL
-  · 한 페이지에서 data-state="initial|result" 토글로 두 상태를 표현 (바닐라 JS, 실제 검색 로직 없음)
-  · 스타일: arte-library-line.css 의 라인 디자인 시스템 재사용
-    (1px 헤어라인 · 화이트 캔버스 · 블루 #3353ff 단일 액센트)
-  · Figma 원본은 검정 50% 두꺼운 테두리(border-4~6)·#007ade 블루·자유 타입 스케일을 쓰지만,
-    팀 토큰(두꺼운 검은 아웃라인 금지 / 블루 단일 액센트 / 14단계 타입 스케일)에 맞춰 조정했다.
-  · 이미지 없음(저작권) → 표지·썸네일은 [이미지 자리] 텍스트로 대체
-  · 모션 미사용 (tokens.md 준수)
-  · 헤더/푸터: arte-library-line.html 마크업을 그대로 복사. GNB 특정 항목에 aria-current 없음
-    (이 페이지는 헤더의 '통합검색' 링크로 진입하는 페이지) — 상세는 문서 하단 주석 참고
+  arte 라이브러리 — AI 검색
+  · Figma 'sub_AI검색_01'(19388:2385, 초기) / 'sub_AI검색_02결과'(19388:2135 · ai 패널 19388:2189, 결과) 1:1 재구현
+  · fileKey MggyO8qQHuiYJRDenEWqlL / 2026-09-04
+  · 한 페이지에서 main[data-state="initial|result"] 로 두 상태를 토글 (검색 제출 시 결과 상태)
+  · 이미지: Figma 실제 에셋(assets/)
 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="arte-library-line.css">
+<link rel="stylesheet" href="arte-library-docs.css">
 <link rel="stylesheet" href="arte-library-ai-search.css">
 </head>
 <body>
 
 <a class="skip" href="#main">본문 바로가기</a>
 
-<!-- ========== 정부 배너 바 ========== -->
 <!-- ========== 마스트헤드 (정부 공식 누리집 안내) ========== -->
 <div class="masthead">
   <div class="mh-in">
@@ -42,7 +36,7 @@
     </a>
 
     <nav class="gnb" aria-label="주 메뉴">
-      <a href="arte-library-docs.html">문서·도서</a>
+      <a href="arte-library-docs.html">아카이브·도서</a>
       <a href="arte-library-line.html#media">영상</a>
       <a href="arte-library-line.html#reco">추천</a>
       <a href="arte-library-region.html">지역별 정보</a>
@@ -68,216 +62,200 @@
   </div>
 </header>
 
-<main id="main" data-state="initial">
+<main id="main" class="ais" data-state="initial">
+  <div class="ais-in">
 
-  <!-- ========== AI 검색창 ========== -->
-  <section class="sec aisearch-hero">
-    <div class="wrap">
-      <p class="eyebrow">AI 검색</p>
-      <form class="search search--ai" id="aiForm" role="search" onsubmit="return false">
-        <label class="sr" for="aiInput">AI 아키비스트에게 질문</label>
-        <input id="aiInput" type="search" placeholder="예술강사의 역할은 무엇인가요?">
-        <button class="go" type="submit" aria-label="AI 검색">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        </button>
-      </form>
+    <!-- ========== 검색어 ========== -->
+    <form class="ais-search" id="aiForm" role="search">
+      <label class="sr" for="aiInput">AI 검색어</label>
+      <input id="aiInput" type="search" value="예술강사의 역할은 무엇인가요?">
+      <button type="submit" aria-label="검색"><img src="assets/icon-search-lg.svg" alt="" width="64" height="64"></button>
+    </form>
 
-      <div class="prompts" data-when="initial">
-        <button class="chip" type="button" data-example="예술강사의 역할은 무엇인가요?">#예술강사의 역할은 무엇인가요?</button>
-        <button class="chip" type="button" data-example="요즘 가장 인기있는 문화예술교육을 알려줘.">#요즘 가장 인기있는 문화예술교육을 알려줘.</button>
-        <button class="chip" type="button" data-example="최근 3년간 문화예술교육 트렌드를 요약해줘.">#최근 3년간 문화예술교육 트렌드를 요약해줘.</button>
+    <!-- ========== AI 패널 ========== -->
+    <div class="ais-panel">
+
+      <div class="ais-panel-top">
+        <div class="ais-panel-head">
+          <span class="ais-title">
+            <img src="assets/icon-ai.svg" alt="" width="28" height="28">
+            AI 검색 결과
+          </span>
+          <button class="ais-action" type="button" data-when="initial" aria-label="다시 생성">
+            <img src="assets/icon-ai-action.svg" alt="" width="44" height="44">
+          </button>
+          <p class="ais-quota" data-when="result"><b>9회 남음</b> <span>(일일 최대 10회)</span></p>
+        </div>
+
+        <p class="ais-desc" data-when="initial">arte 라이브러리 AI 검색은 질문하신 내용을 분석하여 arte 라이브러리 소장자료에서 가장 적합한 내용을 찾아 드리는 맞춤형 AI 서비스입니다.</p>
+        <p class="ais-desc" data-when="result">한국의 예술 강사는 「문화예술교육 지원법」에 근거해 ‘학교 예술강사 지원사업’ 등 국가 정책을 실현하는 전문 교육 주체입니다. 공교육과 예술현장을 유기적으로 연결해 학생의 창의·문화 감수성을 함양하는 공교육 보완자이자, 국민의 보편적 문화 향유 권리를 보장하는 국가 정책 이행자 역할을 수행합니다</p>
       </div>
-    </div>
-  </section>
 
-  <!-- ========== AI 답변 패널 (초기 소개 / 결과 — data-when으로 토글) ========== -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="linebox ai-panel">
-        <div class="cell ai-panel-pad">
+      <!-- 초기: 로딩 스켈레톤 -->
+      <div class="ais-skeleton" data-when="initial" aria-hidden="true">
+        <div class="skel"><span class="skel-img"></span><span class="skel-lines"><i></i><i></i><i></i></span></div>
+        <div class="skel"><span class="skel-img"></span><span class="skel-lines"><i></i><i></i><i></i></span></div>
+      </div>
 
-          <!-- 초기: AI 서비스 소개 -->
-          <div class="ai-intro" data-when="initial">
-            <div class="ai-panel-head">
-              <span class="ai-ico" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z"/></svg>
-              </span>
-              <h2 class="ai-panel-title display">AI 검색이란</h2>
-            </div>
-            <p class="ai-panel-desc">arte 라이브러리 AI 검색은 질문하신 내용을 분석하여 arte 라이브러리 소장자료에서 가장 적합한 내용을 찾아 드리는 맞춤형 AI 서비스입니다.</p>
-            <p class="ai-panel-hint">질문을 입력하면 AI가 소장자료를 근거로 답변과 원문 출처를 함께 정리해 드립니다. 위 예시 질문을 눌러 바로 확인해보세요.</p>
-          </div>
+      <!-- 결과: 근거 자료 -->
+      <div class="ais-result" data-when="result">
+        <div class="lst-cat" role="tablist" aria-label="AI 결과 분류">
+          <button role="tab" aria-selected="true">전체</button>
+          <button role="tab" aria-selected="false">아카이브·도서</button>
+          <button role="tab" aria-selected="false">영상</button>
+          <button role="tab" aria-selected="false">추천</button>
+          <button role="tab" aria-selected="false">지역</button>
+        </div>
 
-          <!-- 결과: AI 검색 결과 -->
-          <div class="ai-result" data-when="result">
-            <div class="ai-panel-head ai-panel-head--result">
-              <div class="ai-panel-head-l">
-                <span class="ai-ico ai-ico--on" aria-hidden="true">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.287 1.288L3 12l5.8 1.9a2 2 0 0 1 1.288 1.287L12 21l1.9-5.8a2 2 0 0 1 1.287-1.288L21 12l-5.8-1.9a2 2 0 0 1-1.288-1.287Z"/></svg>
-                </span>
-                <h2 class="ai-panel-title ai-panel-title--on display">AI 검색 결과</h2>
+        <div class="ais-ev-grid">
+
+          <a class="ais-ev" href="#">
+            <img class="ais-ev-thumb" src="assets/ai-ev-1.png" alt="" loading="lazy">
+            <div class="ais-ev-body">
+              <h3 class="ais-ev-t">‘함께 만드는 수업, 협력수업’ 교사와 예술강사를 위한 협력수업 길라잡이</h3>
+              <div class="ais-ev-x">
+                <span class="ais-ev-badge">원문 15p 3번째 문단</span>
+                <p>…<mark>예술강사는 해당분야의 전문성을 보유한 전문 인력으로서 학교 현장에 파견되는 것이므로 학교 담당 교사의 교육전문성과 예술강사의 예술전문성</mark>이 예술강사는 해당분야의 전문성을 보유한 전문 인력으로서…</p>
               </div>
-              <p class="ai-quota"><b>9회</b> 남음 <span>(일일 최대 10회)</span></p>
             </div>
+          </a>
 
-            <p class="ai-answer">한국의 예술 강사는 「문화예술교육 지원법」에 근거해 &lsquo;학교 예술강사 지원사업&rsquo; 등 국가 정책을 실현하는 전문 교육 주체입니다. 공교육과 예술현장을 유기적으로 연결해 학생의 창의·문화 감수성을 함양하는 공교육 보완자이자, 국민의 보편적 문화 향유 권리를 보장하는 국가 정책 이행자 역할을 수행합니다.</p>
-
-            <div class="ai-cat-tabs tabs" role="tablist" aria-label="AI 검색 결과 분류">
-              <button role="tab" aria-selected="true">전체</button>
-              <button role="tab" aria-selected="false">문서·도서</button>
-              <button role="tab" aria-selected="false">영상</button>
-              <button role="tab" aria-selected="false">추천</button>
-              <button role="tab" aria-selected="false">지역</button>
+          <a class="ais-ev" href="#">
+            <img class="ais-ev-thumb" src="assets/ai-ev-2.png" alt="" loading="lazy">
+            <div class="ais-ev-body">
+              <h3 class="ais-ev-t">‘함께 만드는 수업, 협력수업’ 교사와 예술강사를 위한 협력수업 길라잡이</h3>
+              <div class="ais-ev-x">
+                <span class="ais-ev-badge">원문 15p 3번째 문단</span>
+                <p>…<mark>예술강사는 해당분야의 전문성을 보유한 전문 인력으로서 학교 현장에 파견되는 것이므로 학교 담당 교사의 교육전문성과 예술강사의 예술전문성</mark>이 예술강사는 해당분야의 전문성을 보유한 전문 인력으로서…</p>
+              </div>
             </div>
+          </a>
 
-            <div class="ai-evidence">
-
-              <a class="ai-ev-card" href="#">
-                <div class="ai-ev-thumb"><span class="ph">[표지 이미지 자리]</span></div>
-                <div class="ai-ev-body">
-                  <h3 class="ai-ev-t">&lsquo;함께 만드는 수업, 협력수업&rsquo; 교사와 예술강사를 위한 협력수업 길라잡이</h3>
-                  <span class="badge">원문 15p 3번째 문단</span>
-                  <p class="ai-ev-x">…<mark>예술강사는 해당분야의 전문성을 보유한 전문 인력으로서 학교 현장에 파견되는 것이므로 학교 담당 교사의 교육전문성과 예술강사의 예술전문성</mark>이 예술강사는 해당분야의 전문성을 보유한 전문 인력으로서 학교 현장에 파견되는 것이므로 학교 담당 교사의 교육전문성과 예술강사의 예술전문성이…</p>
-                </div>
-              </a>
-
-              <a class="ai-ev-card" href="#">
-                <div class="ai-ev-thumb"><span class="ph">[표지 이미지 자리]</span></div>
-                <div class="ai-ev-body">
-                  <h3 class="ai-ev-t">&lsquo;함께 만드는 수업, 협력수업&rsquo; 교사와 예술강사를 위한 협력수업 길라잡이</h3>
-                  <span class="badge">원문 15p 3번째 문단</span>
-                  <p class="ai-ev-x">…<mark>예술강사는 해당분야의 전문성을 보유한 전문 인력으로서 학교 현장에 파견되는 것이므로 학교 담당 교사의 교육전문성과 예술강사의 예술전문성</mark>이 예술강사는 해당분야의 전문성을 보유한 전문 인력으로서 학교 현장에 파견되는 것이므로 학교 담당 교사의 교육전문성과 예술강사의 예술전문성이…</p>
-                </div>
-              </a>
-
-              <a class="ai-ev-card" href="#">
-                <div class="ai-ev-thumb ai-ev-thumb--vid">
-                  <span class="play" aria-hidden="true">▶</span>
-                  <span class="ph">[영상 썸네일 자리]</span>
-                </div>
-                <div class="ai-ev-body">
-                  <h3 class="ai-ev-t">[학교예술강사 지원사업] 가이드 영상 ㅣ 강사용</h3>
-                  <span class="badge">영상 00:01:02</span>
-                  <p class="ai-ev-x"><mark>…한국문화예술교육진흥원은 문화예술교육 정책을 바탕으로 문화예술교육사, 예술강사, 행정인력, 교원, 기획자 등 대상자별 맞춤 교육과 역량강화를 위해 여러 사업을 추진하고 있다…</mark></p>
-                </div>
-              </a>
-
-              <a class="ai-ev-card ai-ev-card--text" href="#">
-                <div class="ai-ev-body ai-ev-body--full">
-                  <h3 class="ai-ev-t">전문인력 역량강화를 위한 연수 및 프로그램</h3>
-                  <p class="ai-ev-x"><mark>…한국문화예술교육진흥원은 문화예술교육 정책을 바탕으로 문화예술교육사, 예술강사, 행정인력, 교원, 기획자 등 대상자별 맞춤 교육과 역량강화를 위해 여</mark></p>
-                </div>
-              </a>
-
+          <a class="ais-ev" href="#">
+            <span class="ais-ev-thumb ais-ev-thumb--vid">
+              <img class="ais-ev-vid-bg" src="assets/ai-ev-3.png" alt="" loading="lazy">
+              <img class="ais-ev-vid-fg" src="assets/ai-ev-3.png" alt="" loading="lazy">
+              <img class="ais-ev-play" src="assets/icon-play-sm.svg" alt="" width="24" height="24">
+            </span>
+            <div class="ais-ev-body">
+              <h3 class="ais-ev-t">[학교예술강사 지원사업] 가이드 영상 ㅣ 강사용</h3>
+              <div class="ais-ev-x">
+                <span class="ais-ev-badge">영상 00:01:02</span>
+                <p><mark>...한국문화예술교육진흥원은 문화예술교육 정책을 바탕으로 문화예술교육사, 예술강사, 행정인력, 교원, 기획자 등 대상자별 맞춤 교육과 역량강화를 위해 여러 사업을 추진하고 있다…</mark></p>
+              </div>
             </div>
+          </a>
 
-            <button class="ai-more-btn" type="button">
-              20개 자료 모두 보기
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-          </div>
+          <a class="ais-ev" href="#">
+            <img class="ais-ev-thumb" src="assets/ai-ev-4.png" alt="" loading="lazy">
+            <div class="ais-ev-body ais-ev-body--between">
+              <h3 class="ais-ev-t">전문인력 역량강화를 위한 연수 및 프로그램 <img src="assets/icon-external.svg" alt="" width="24" height="24"></h3>
+              <p class="ais-ev-x ais-ev-x--plain"><mark>...한국문화예술교육진흥원은 문화예술교육 정책을 바탕으로 문화예술교육사, 예술강사, 행정인력, 교원, 기획자 등 대상자별 맞춤 교육과 역량강화를 위해 여</mark></p>
+            </div>
+          </a>
 
         </div>
+
+        <button class="ais-all" type="button">20개 자료 모두 보기 <img src="assets/icon-dropdown.svg" alt="" width="30" height="30"></button>
       </div>
     </div>
-  </section>
 
-  <!-- ========== 키워드 검색 결과 (두 상태 공통 — Figma 두 프레임에 동일하게 존재) ========== -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="kw-head">
-        <h2 class="sec-title display">키워드 검색 결과</h2>
-        <p class="kw-total">총 <b>1,237건</b></p>
+    <!-- ========== 키워드 검색 결과 (두 상태 공통) ========== -->
+    <section class="kw" aria-label="키워드 검색 결과">
+      <div class="kw-top">
+        <h2 class="kw-h">키워드 검색 결과</h2>
+        <p class="kw-total">총 1,237건</p>
       </div>
 
-      <div class="tabs kw-tabs" role="tablist" aria-label="키워드 검색 결과 분류">
+      <div class="kw-tabs" role="tablist" aria-label="검색 결과 분류">
         <button role="tab" aria-selected="true">전체</button>
-        <button role="tab" aria-selected="false">문서·도서</button>
+        <button role="tab" aria-selected="false">아카이브·도서</button>
         <button role="tab" aria-selected="false">영상</button>
         <button role="tab" aria-selected="false">추천</button>
         <button role="tab" aria-selected="false">지역</button>
-        <a class="kw-ext" href="#" target="_blank" rel="noopener noreferrer">
-          국가학술정보 검색
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-        </a>
+        <button class="kw-ext" role="tab" aria-selected="false">국가학술정보 검색 <img src="assets/icon-external.svg" alt="" width="24" height="24"></button>
       </div>
 
-      <!-- 문서·도서 -->
-      <div class="kw-block">
-        <div class="kw-block-head">
-          <div class="kw-block-h"><h3 class="kw-block-t display">문서·도서</h3><span class="kw-count">360건</span></div>
-          <a class="more" href="arte-library-docs.html">더보기</a>
+      <div class="kw-blocks">
+
+        <!-- 아카이브·도서 -->
+        <div class="kw-block">
+          <div class="kw-block-head">
+            <h3>아카이브·도서 <span>360건</span></h3>
+            <a class="kw-more" href="arte-library-docs.html">더보기 <img src="assets/icon-more-arrow.svg" alt="" width="24" height="24"></a>
+          </div>
+          <a class="kw-item" href="#">
+            <img class="kw-thumb" src="assets/ai-doc-cover.png" alt="" loading="lazy">
+            <div class="kw-item-b">
+              <p class="kw-crumb">HOME <img src="assets/icon-crumb.svg" alt="" width="12" height="12"> 아카이브·도서 <img src="assets/icon-crumb.svg" alt="" width="12" height="12"> 문화예술교육현장</p>
+              <h4 class="kw-item-t">‘함께 만드는 수업, 협력수업’ 교사와 <b>예술강사</b>를 위한 협력수업 길라잡이 <img class="doc-mark" src="assets/mark-arte.svg" alt="arte 저작권"></h4>
+              <p class="kw-date">2019.03.03</p>
+              <p class="kw-item-d">「함께 만드는 수업, 협력수업: 교사와 <b>예술강사</b>를 위한 협력수업 길라잡이」 는 제목 그대로 협력수업의 길로 안내하는 것을 목적으로 제작되었다. 반드시 따라야 할 매뉴얼이 아니라 학교 문화예술교육을 위한 협력수업의 방향을 그려보고, 교사와 예술강사가 그 길에 함께 할 수 있도록 하는 초대장이라고 할 수 있다. 이 안에는 협력수업을 수행했던 교사와 예술강사의…</p>
+            </div>
+          </a>
         </div>
-        <a class="kw-item" href="#">
-          <div class="kw-thumb"><span class="ph">[표지 이미지 자리]</span></div>
-          <div class="kw-item-body">
-            <p class="kw-crumb">HOME <span aria-hidden="true">›</span> 문서·도서 <span aria-hidden="true">›</span> 문화예술교육현장</p>
-            <h4 class="kw-item-t">&lsquo;함께 만드는 수업, 협력수업&rsquo; 교사와 <span class="hl">예술강사</span>를 위한 협력수업 길라잡이<span class="arte-mark">arte</span></h4>
-            <p class="kw-item-date">2019.03.03</p>
-            <p class="kw-item-d">「함께 만드는 수업, 협력수업: 교사와 <span class="hl">예술강사</span>를 위한 협력수업 길라잡이」는 제목 그대로 협력수업의 길로 안내하는 것을 목적으로 제작되었다. 반드시 따라야 할 매뉴얼이 아니라 학교 문화예술교육을 위한 협력수업의 방향을 그려보고, 교사와 예술강사가 그 길에 함께 할 수 있도록 하는 초대장이라고 할 수 있다. 이 안에는 협력수업을 수행했던 교사와 예술강사의…</p>
-          </div>
-        </a>
-      </div>
 
-      <!-- 영상 -->
-      <div class="kw-block">
-        <div class="kw-block-head">
-          <div class="kw-block-h"><h3 class="kw-block-t display">영상</h3><span class="kw-count">360건</span></div>
-          <a class="more" href="arte-library-line.html#media">더보기</a>
+        <!-- 영상 -->
+        <div class="kw-block">
+          <div class="kw-block-head">
+            <h3>영상 <span>360건</span></h3>
+            <a class="kw-more" href="#">더보기 <img src="assets/icon-more-arrow.svg" alt="" width="24" height="24"></a>
+          </div>
+          <a class="kw-item" href="#">
+            <span class="kw-thumb kw-thumb--vid">
+              <img class="kw-vid-bg" src="assets/ai-video-thumb.png" alt="" loading="lazy">
+              <img class="kw-vid-fg" src="assets/ai-video-thumb.png" alt="" loading="lazy">
+              <img class="kw-play" src="assets/icon-play-lg.svg" alt="" width="92" height="92">
+            </span>
+            <div class="kw-item-b">
+              <p class="kw-crumb">HOME <img src="assets/icon-crumb.svg" alt="" width="12" height="12"> 영상</p>
+              <h4 class="kw-item-t">2025 학교<b>예술강사</b> 지원사업</h4>
+              <p class="kw-date">2021.02.16</p>
+              <p class="kw-item-d">“학교<b>예술강사</b> 지원사업”은 전국 초·중·고등학교에 예술강사가 찾아가 학교 담당교사와 협력하여 수업을 진행하는 사업입니다</p>
+            </div>
+          </a>
         </div>
-        <a class="kw-item" href="#">
-          <div class="kw-thumb kw-thumb--vid">
-            <span class="play" aria-hidden="true">▶</span>
-            <span class="ph">[영상 썸네일 자리]</span>
-          </div>
-          <div class="kw-item-body">
-            <p class="kw-crumb">HOME <span aria-hidden="true">›</span> 영상</p>
-            <h4 class="kw-item-t">2025 학교<span class="hl">예술강사</span> 지원사업</h4>
-            <p class="kw-item-date">2021.02.16</p>
-            <p class="kw-item-d">&ldquo;학교<span class="hl">예술강사</span> 지원사업&rdquo;은 전국 초·중·고등학교에 예술강사가 찾아가 학교 담당교사와 협력하여 수업을 진행하는 사업입니다.</p>
-          </div>
-        </a>
-      </div>
 
-      <!-- 추천 -->
-      <div class="kw-block">
-        <div class="kw-block-head">
-          <div class="kw-block-h"><h3 class="kw-block-t display">추천</h3><span class="kw-count">360건</span></div>
-          <a class="more" href="arte-library-line.html#reco">더보기</a>
+        <!-- 추천 -->
+        <div class="kw-block">
+          <div class="kw-block-head">
+            <h3>추천 <span>360건</span></h3>
+            <a class="kw-more" href="arte-library-line.html#reco">더보기 <img src="assets/icon-more-arrow.svg" alt="" width="24" height="24"></a>
+          </div>
+          <a class="kw-item kw-item--notext" href="#">
+            <div class="kw-item-b">
+              <p class="kw-crumb">HOME <img src="assets/icon-crumb.svg" alt="" width="12" height="12"> 추천 <img src="assets/icon-crumb.svg" alt="" width="12" height="12"> 주제별 큐레이션</p>
+              <h4 class="kw-item-t">노인복지 문화예술교육</h4>
+              <p class="kw-date">2021.02.16</p>
+              <p class="kw-item-d">경험을 통해 삶에서 의미 있는 것들을 발견해갈 수 있도록 돕기 위해 복지시설 이용자 문화예술교육 지원을 하고 있다. 무용, 미술, 연극, 음악, 사진 등 다양한 예술 장르의 <b>예술강사</b>를 전국에 있는 노인복지관에 파견하여 노인들이 예술을 통해서 다양한 삶의 이야기를 나누고 일상 속에서 예술을 발견하여 삶이 더욱 풍요로워지도록 노인복지문화예술교육을 진행한다</p>
+            </div>
+          </a>
         </div>
-        <a class="kw-item kw-item--notext" href="#">
-          <div class="kw-item-body">
-            <p class="kw-crumb">HOME <span aria-hidden="true">›</span> 추천 <span aria-hidden="true">›</span> 주제별 큐레이션</p>
-            <h4 class="kw-item-t">노인복지 문화예술교육</h4>
-            <p class="kw-item-date">2021.02.16</p>
-            <p class="kw-item-d">경험을 통해 삶에서 의미 있는 것들을 발견해갈 수 있도록 돕기 위해 복지시설 이용자 문화예술교육 지원을 하고 있다. 무용, 미술, 연극, 음악, 사진 등 다양한 예술 장르의 <span class="hl">예술강사</span>를 전국에 있는 노인복지관에 파견하여 노인들이 예술을 통해서 다양한 삶의 이야기를 나누고 일상 속에서 예술을 발견하여 삶이 더욱 풍요로워지도록 노인복지문화예술교육을 진행한다.</p>
-          </div>
-        </a>
-      </div>
 
-      <!-- 지역 -->
-      <div class="kw-block">
-        <div class="kw-block-head">
-          <div class="kw-block-h"><h3 class="kw-block-t display">지역</h3><span class="kw-count">360건</span></div>
-          <a class="more" href="arte-library-region.html">더보기</a>
+        <!-- 지역 -->
+        <div class="kw-block">
+          <div class="kw-block-head">
+            <h3>지역 <span>360건</span></h3>
+            <a class="kw-more" href="arte-library-region.html">더보기 <img src="assets/icon-more-arrow.svg" alt="" width="24" height="24"></a>
+          </div>
+          <a class="kw-item" href="#">
+            <span class="kw-thumb kw-thumb--plain" aria-hidden="true"></span>
+            <div class="kw-item-b">
+              <p class="kw-crumb">HOME <img src="assets/icon-crumb.svg" alt="" width="12" height="12"> 지역 <img src="assets/icon-crumb.svg" alt="" width="12" height="12"> 단체DB</p>
+              <h4 class="kw-item-t">(문화집단)너느로</h4>
+              <p class="kw-date">2021.02.16</p>
+              <p class="kw-item-d">(문화집단)너느로는 연출가, 작가, 기획자, 배우, 연희자, 인형전문가, 미디어 아티스트 등으로 구성된 예술단체이다. 굿, 꼭두각시놀음 등 한국의 전통연희를 새롭게 구성하여 대중에게 새롭고 흥미롭게 다가갈 수 있는 공연콘텐츠를 창작하고 있다. 또한 서울시 은평구 구파발을 중심으로 어린이부터 노인에 이르기까지 생애주기별</p>
+            </div>
+          </a>
         </div>
-        <a class="kw-item" href="#">
-          <div class="kw-thumb kw-thumb--plain"></div>
-          <div class="kw-item-body">
-            <p class="kw-crumb">HOME <span aria-hidden="true">›</span> 지역 <span aria-hidden="true">›</span> 단체DB</p>
-            <h4 class="kw-item-t">(문화집단)너느로</h4>
-            <p class="kw-item-date">2021.02.16</p>
-            <p class="kw-item-d">(문화집단)너느로는 연출가, 작가, 기획자, 배우, 연희자, 인형전문가, 미디어 아티스트 등으로 구성된 예술단체이다. 굿, 꼭두각시놀음 등 한국의 전통연희를 새롭게 구성하여 대중에게 새롭고 흥미롭게 다가갈 수 있는 공연콘텐츠를 창작하고 있다.</p>
-          </div>
-        </a>
+
       </div>
+    </section>
 
-    </div>
-  </section>
-
+  </div>
 </main>
 
-<!-- ========== 푸터 (arte-library-line.html과 동일) ========== -->
+<!-- ========== 푸터 ========== -->
 <footer class="ft">
 
   <div class="ft-related">

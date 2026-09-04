@@ -14,6 +14,14 @@
   font-display: swap;
 }
 
+/* 서브페이지 디스플레이 서체 — Figma 'Paperlogy 6 SemiBold' */
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
 :root {
   --blue: #0078d7;          /* KV 헤드라인 */
   --blue-badge: #0428da;    /* 배지·강조 */

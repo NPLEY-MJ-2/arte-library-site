@@ -3,15 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>arte 라이브러리 — 문서·도서 (문서 목록)</title>
+<title>arte 라이브러리 — 아카이브 · 도서</title>
 <!--
-  arte 라이브러리 — 문서·도서 > 문서 목록 페이지
-  · 콘텐츠·레이아웃: 사용자 제공 기획서 기준
-  · 기획서의 파란 네모 + 숫자(1~10)는 설명용 표식이므로 구현하지 않음
-  · 스타일: arte-library-line.css 의 라인 디자인 시스템 재사용
-    (1px 헤어라인 · 화이트 캔버스 · 블루 #3353ff 단일 액센트)
-  · 결과 카드 10건은 기획서 샘플 1건을 반복한 것 — 주제 배지만 분류별로 순환시켜 상태를 보여준다
-  · 모션 미사용 (tokens.md 준수)
+  arte 라이브러리 — 아카이브 · 도서
+  · Figma 'sub_아카이브 · 도서'(fileKey MggyO8qQHuiYJRDenEWqlL / node 19388:1376) 1:1 재구현 (2026-09-04)
+  · 이미지: Figma 실제 에셋(assets/)
+  · Figma 내 잔존 표기(브레드크럼·탭의 "문서")는 사용자 확정 네이밍(아카이브)으로 통일
 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="arte-library-line.css">
@@ -21,7 +18,6 @@
 
 <a class="skip" href="#main">본문 바로가기</a>
 
-<!-- ========== 정부 배너 바 ========== -->
 <!-- ========== 마스트헤드 (정부 공식 누리집 안내) ========== -->
 <div class="masthead">
   <div class="mh-in">
@@ -38,7 +34,7 @@
     </a>
 
     <nav class="gnb" aria-label="주 메뉴">
-      <a href="arte-library-docs.html" aria-current="page">문서·도서</a>
+      <a href="arte-library-docs.html" aria-current="page">아카이브·도서</a>
       <a href="arte-library-line.html#media">영상</a>
       <a href="arte-library-line.html#reco">추천</a>
       <a href="arte-library-region.html">지역별 정보</a>
@@ -64,395 +60,200 @@
   </div>
 </header>
 
-<main id="main">
-  <div class="wrap">
+<main id="main" class="sub">
+  <div class="sub-in">
 
-    <!-- ========== 페이지 타이틀 ========== -->
-    <div class="page-head">
+    <!-- ========== 타이틀 ========== -->
+    <div class="sub-title">
       <nav class="crumb" aria-label="현재 위치">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg>
-        <span class="sr">홈</span>
-        <span class="sep" aria-hidden="true">〉</span>
-        <span>문서·도서</span>
-        <span class="sep" aria-hidden="true">〉</span>
-        <strong>문서</strong>
+        <a href="arte-library-line.html">HOME</a>
+        <img src="assets/icon-crumb.svg" alt="" width="12" height="12">
+        <span>아카이브·도서</span>
+        <img src="assets/icon-crumb.svg" alt="" width="12" height="12">
+        <strong>아카이브</strong>
       </nav>
-      <h1 class="page-title display">문서 · 도서</h1>
-      <nav class="subtabs" aria-label="문서·도서 분류">
-        <a href="#" aria-current="page">문서</a>
-        <a href="#">도서</a>
-      </nav>
-    </div>
 
-    <!-- ========== 섹션 인트로 ========== -->
-    <div class="intro">
-      <h2 class="display">문서</h2>
-      <p>
-        연구보고서, 현장, 행사 기록, 연수, 국제교류, 보고서 등 문화예술교육 관련 문서 자료를 제공합니다.
-        <span class="note">한국문화예술교육진흥원 저작권 자료에는 <span class="arte-mark">arte</span> 가 표시됩니다.</span>
-      </p>
-    </div>
-
-    <!-- ========== 필터 + 결과 ========== -->
-    <div class="board">
-
-      <!-- ---------- 좌측: 검색 조건 ---------- -->
-      <aside class="filters" aria-label="검색 조건">
-
-        <div>
-          <span class="f-label" id="cond-label">검색 조건</span>
-          <span class="select">
-            <label class="sr" for="cond">검색 조건 선택</label>
-            <select id="cond">
-              <option>전체</option>
-              <option>제목</option>
-              <option>내용</option>
-              <option>만든이(단체)</option>
-            </select>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </span>
-        </div>
-
-        <div>
-          <label class="f-label" for="kw">검색</label>
-          <div class="f-search">
-            <input id="kw" type="search" placeholder="검색어를 입력하세요">
-            <button type="button" aria-label="검색">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-            </button>
-          </div>
-          <p class="f-note">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.01"/></svg>
-            다양한 조건을 설정하여 원하는 자료를 검색할 수 있습니다. (중복 선택 가능)
-          </p>
-        </div>
-
-        <div class="f-group">
-          <button class="f-group-head" type="button" aria-expanded="true">
-            주제
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="f-body">
-            <div class="f-chips">
-              <button class="chip" type="button" aria-pressed="true">전체</button>
-              <button class="chip" type="button" aria-pressed="false">문화예술교육현장</button>
-              <button class="chip" type="button" aria-pressed="false">연구보고서</button>
-              <button class="chip" type="button" aria-pressed="false">연수 결과자료집</button>
-              <button class="chip" type="button" aria-pressed="false">축제학술행사 기록</button>
-              <button class="chip" type="button" aria-pressed="false">문화예술교육사</button>
-              <button class="chip" type="button" aria-pressed="false">연차보고서</button>
-              <button class="chip" type="button" aria-pressed="false">국제교류</button>
-              <button class="chip" type="button" aria-pressed="false">기타</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="f-group">
-          <button class="f-group-head" type="button" aria-expanded="false">
-            장르
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="f-body">
-            <div class="f-chips">
-              <button class="chip" type="button" aria-pressed="true">전체</button>
-              <button class="chip" type="button" aria-pressed="false">음악</button>
-              <button class="chip" type="button" aria-pressed="false">미술</button>
-              <button class="chip" type="button" aria-pressed="false">무용</button>
-              <button class="chip" type="button" aria-pressed="false">연극</button>
-              <button class="chip" type="button" aria-pressed="false">기타</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="f-group">
-          <button class="f-group-head" type="button" aria-expanded="false">
-            교육대상
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="f-body">
-            <div class="f-chips">
-              <button class="chip" type="button" aria-pressed="true">전체</button>
-              <button class="chip" type="button" aria-pressed="false">유아</button>
-              <button class="chip" type="button" aria-pressed="false">아동·청소년</button>
-              <button class="chip" type="button" aria-pressed="false">성인</button>
-              <button class="chip" type="button" aria-pressed="false">노인</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="f-group">
-          <button class="f-group-head" type="button" aria-expanded="false">
-            자료유형
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="f-body">
-            <div class="f-chips">
-              <button class="chip" type="button" aria-pressed="true">전체</button>
-              <button class="chip" type="button" aria-pressed="false">자료집/일반문서</button>
-              <button class="chip" type="button" aria-pressed="false">연구보고서</button>
-              <button class="chip" type="button" aria-pressed="false">교육안</button>
-              <button class="chip" type="button" aria-pressed="false">기타</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="f-group">
-          <button class="f-group-head" type="button" aria-expanded="false">
-            저작권자
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="f-body">
-            <div class="f-chips">
-              <button class="chip" type="button" aria-pressed="true">전체</button>
-              <button class="chip" type="button" aria-pressed="false">한국문화예술교육진흥원</button>
-              <button class="chip" type="button" aria-pressed="false">광역문화예술교육지원센터</button>
-              <button class="chip" type="button" aria-pressed="false">기타</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="f-group">
-          <button class="f-group-head" type="button" aria-expanded="true">
-            발행연도
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div class="f-body">
-            <div class="f-range">
-              <span class="select">
-                <label class="sr" for="yr-from">발행연도 시작</label>
-                <select id="yr-from">
-                  <option>2021년</option><option>2022년</option><option>2023년</option>
-                  <option>2024년</option><option>2025년</option>
-                </select>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-              </span>
-              <span class="tilde" aria-hidden="true">~</span>
-              <span class="select">
-                <label class="sr" for="yr-to">발행연도 종료</label>
-                <select id="yr-to">
-                  <option>2025년</option><option>2024년</option><option>2023년</option>
-                  <option>2022년</option><option>2021년</option>
-                </select>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-              </span>
-            </div>
-          </div>
-        </div>
-
-      </aside>
-
-      <!-- ---------- 우측: 결과 ---------- -->
-      <section aria-label="문서 검색 결과">
-
-        <div class="res-tabs" role="tablist" aria-label="주제 분류">
-          <button role="tab" aria-selected="true">전체</button>
-          <button role="tab" aria-selected="false">문화예술교육현장</button>
-          <button role="tab" aria-selected="false">연구보고서</button>
-          <button role="tab" aria-selected="false">연수 결과자료집</button>
-          <button role="tab" aria-selected="false">축제학술행사 기록</button>
-          <button role="tab" aria-selected="false">문화예술교육사</button>
-          <button role="tab" aria-selected="false">연차보고서</button>
-          <button role="tab" aria-selected="false">국제교류</button>
-          <button role="tab" aria-selected="false">기타</button>
-        </div>
-
-        <div class="res-bar">
-          <p class="res-count">전체 <b>4,793건</b><span class="sep" aria-hidden="true">|</span>페이지 <b>1 / 200</b></p>
-          <div class="res-sort">
-            <button class="s" type="button" aria-pressed="true">최신순</button>
-            <span class="divider" aria-hidden="true"></span>
-            <button class="s" type="button" aria-pressed="false">조회순</button>
-            <span class="select">
-              <label class="sr" for="per">페이지당 표시 개수</label>
-              <select id="per">
-                <option>10개씩 보기</option>
-                <option>20개씩 보기</option>
-                <option>50개씩 보기</option>
-              </select>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </span>
-          </div>
-        </div>
-
-        <!-- 결과 카드 10건 — 기획서 샘플 1건을 반복, 주제 배지만 분류별로 순환 -->
-        <div class="res-list">
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">문화예술교육현장</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">문화예술교육현장</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">연구보고서</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">연수 결과자료집</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">축제학술행사 기록</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">문화예술교육사</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">연차보고서</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">국제교류</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">기타</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-          <a class="res-card" href="#">
-            <div class="res-thumb">[표지 이미지 자리]</div>
-            <div class="res-body">
-              <span class="badge">문화예술교육현장</span>
-              <h3 class="res-t">2025 지역 문화예술교육 성과자료집<span class="arte-mark">arte</span></h3>
-              <p class="res-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육…</p>
-              <dl class="res-meta">
-                <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                <dt>장르</dt><dd>기타</dd>
-                <dt>발행연도</dt><dd>2025</dd>
-                <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-              </dl>
-            </div>
-          </a>
-
-        </div>
-
-        <nav class="pager" aria-label="페이지">
-          <button class="edge" type="button" disabled aria-label="첫 페이지">«</button>
-          <button class="edge" type="button" disabled aria-label="이전 페이지">‹</button>
-          <button type="button" aria-current="page">1</button>
-          <button type="button">2</button>
-          <button type="button">3</button>
-          <button type="button">4</button>
-          <button type="button">5</button>
-          <button type="button" class="hide-sm">6</button>
-          <button type="button" class="hide-sm">7</button>
-          <button type="button" class="hide-sm">8</button>
-          <button type="button" class="hide-sm">9</button>
-          <button type="button" class="hide-sm">10</button>
-          <button class="edge" type="button" aria-label="다음 페이지">›</button>
-          <button class="edge" type="button" aria-label="마지막 페이지">»</button>
+      <div class="sub-title-b">
+        <h1 class="sub-h1">아카이브 · 도서</h1>
+        <nav class="sub-tabs" aria-label="아카이브·도서 분류">
+          <a href="arte-library-docs.html" aria-current="page">아카이브</a>
+          <a href="#">도서</a>
         </nav>
+      </div>
+    </div>
 
-      </section>
+    <!-- ========== 본문 ========== -->
+    <div class="sub-content">
+
+      <div class="sub-head">
+        <h2 class="sub-h2">아카이브</h2>
+        <p>연구보고서, 현장, 행사 기록, 연수, 국제교류, 보고서 등 문화예술교육 관련 문서 자료를 제공합니다.</p>
+      </div>
+
+      <div class="sub-board">
+
+        <!-- ---------- 좌측: 검색 조건 ---------- -->
+        <aside class="fil" aria-label="검색 조건">
+
+          <div class="fil-top">
+            <div class="fil-block">
+              <p class="fil-label">검색 조건</p>
+              <div class="fil-fields">
+                <button class="fil-select" type="button">
+                  전체
+                  <img src="assets/icon-chevron.svg" alt="" width="20" height="20">
+                </button>
+                <div class="fil-search">
+                  <label class="sr" for="kw">검색어</label>
+                  <input id="kw" type="search" placeholder="검색어를 입력하세요">
+                  <button type="button" aria-label="검색"><img src="assets/icon-search-sm.svg" alt="" width="20" height="20"></button>
+                </div>
+              </div>
+            </div>
+            <p class="fil-note">
+              <img src="assets/icon-info.svg" alt="" width="20" height="20">
+              다양한 조건을 설정하여 원하는 자료를 검색할 수 있습니다. (중복 선택 가능)
+            </p>
+          </div>
+
+          <div class="fil-group">
+            <p class="fil-label">주제</p>
+            <div class="fil-chips">
+              <button type="button" aria-pressed="true">전체</button>
+              <button type="button" aria-pressed="false">문화예술교육현장</button>
+              <button type="button" aria-pressed="false">연구보고서</button>
+              <button type="button" aria-pressed="false">연수결과자료집</button>
+              <button type="button" aria-pressed="false">축제·학술행사기록</button>
+              <button type="button" aria-pressed="false">문화예술교육사</button>
+              <button type="button" aria-pressed="false">연차보고서</button>
+              <button type="button" aria-pressed="false">국제교류</button>
+              <button type="button" aria-pressed="false">기타</button>
+            </div>
+          </div>
+
+          <button class="fil-acc" type="button" aria-expanded="false">장르 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+          <button class="fil-acc" type="button" aria-expanded="false">교육대상 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+          <button class="fil-acc" type="button" aria-expanded="false">자료유형 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+          <button class="fil-acc" type="button" aria-expanded="false">저작권자 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+
+          <div class="fil-group">
+            <p class="fil-label">발행연도</p>
+            <div class="fil-range">
+              <button class="fil-select" type="button">2021년 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+              <span class="fil-tilde" aria-hidden="true">–</span>
+              <button class="fil-select" type="button">2025년 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- ---------- 우측: 목록 ---------- -->
+        <section class="lst" aria-label="아카이브 검색 결과">
+
+          <div class="lst-cat" role="tablist" aria-label="주제 분류">
+            <button role="tab" aria-selected="true">전체</button>
+            <button role="tab" aria-selected="false">문화예술교육현장</button>
+            <button role="tab" aria-selected="false">연구보고서</button>
+            <button role="tab" aria-selected="false">행사자료</button>
+            <button role="tab" aria-selected="false">연수자료</button>
+            <button role="tab" aria-selected="false">문화예술교육사</button>
+            <button role="tab" aria-selected="false">국제교류</button>
+            <button role="tab" aria-selected="false">연차보고서</button>
+            <button role="tab" aria-selected="false">기타</button>
+          </div>
+
+          <p class="lst-tip">
+            한국문화예술교육진흥원 저작권 자료에는
+            <img src="assets/mark-arte.svg" alt="arte" width="74" height="24">
+            가 표시됩니다
+          </p>
+
+          <div class="lst-bar">
+            <div class="lst-count">
+              <span><em>전체</em> <b>4,793건</b></span>
+              <span><em>페이지</em> <b>1 / 200</b></span>
+            </div>
+            <div class="lst-sort">
+              <button type="button" aria-pressed="true">최신순</button>
+              <img class="lst-divider" src="assets/icon-divider.svg" alt="" width="16" height="1">
+              <button type="button" aria-pressed="false">조회순</button>
+              <button class="lst-per" type="button">10개씩 보기 <img src="assets/icon-chevron-white.svg" alt="" width="20" height="20"></button>
+            </div>
+          </div>
+
+          <div class="lst-grid">
+
+            <a class="doc" href="#">
+              <div class="doc-cover">
+                <img class="doc-cover-bg" src="assets/docs-book1.png" alt="">
+                <img class="doc-cover-fg" src="assets/docs-book1.png" alt="2025 지역 문화예술교육 성과자료집 표지">
+              </div>
+              <div class="doc-body">
+                <div class="doc-head">
+                  <p class="doc-cat">문화예술교육현장</p>
+                  <h3 class="doc-t">2025 지역 문화예술교육 성과자료집 <img class="doc-mark" src="assets/mark-arte.svg" alt="arte 저작권"></h3>
+                </div>
+                <p class="doc-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육 정책 흐름과 현장 실천 사례, 사업 운영 성과, 향후 지역 기반 문화예술교육의 지속 방향</p>
+                <dl class="doc-meta">
+                  <dt>자료유형</dt><dd>자료집/일반문서</dd>
+                  <dt>장르</dt><dd>기타</dd>
+                  <dt>발행연도</dt><dd>2025</dd>
+                  <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
+                </dl>
+              </div>
+            </a>
+
+            <a class="doc" href="#">
+              <div class="doc-cover doc-cover--dark">
+                <img class="doc-cover-bg" src="assets/docs-book2.png" alt="">
+                <img class="doc-cover-fg" src="assets/docs-book2.png" alt="꿈다락 문화예술학교 프로그램 북 표지">
+              </div>
+              <div class="doc-body">
+                <div class="doc-head">
+                  <p class="doc-cat">문화예술교육현장</p>
+                  <h3 class="doc-t">꿈다락 문화예술학교 프로그램 북 <img class="doc-mark" src="assets/mark-arte.svg" alt="arte 저작권"></h3>
+                </div>
+                <p class="doc-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육 정책 흐름과 현장 실천 사례, 사업 운영 성과, 향후 지역 기반 문화예술교육의 지속 방향</p>
+                <dl class="doc-meta">
+                  <dt>자료유형</dt><dd>자료집/일반문서</dd>
+                  <dt>장르</dt><dd>기타</dd>
+                  <dt>발행연도</dt><dd>2025</dd>
+                  <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
+                </dl>
+              </div>
+            </a>
+
+          </div>
+
+          <nav class="pager" aria-label="페이지">
+            <span class="pager-edge">
+              <button type="button" aria-label="첫 페이지"><img src="assets/icon-page-first.svg" alt="" width="20" height="20"></button>
+              <button type="button" aria-label="이전 페이지"><img src="assets/icon-page-prev.svg" alt="" width="20" height="20"></button>
+            </span>
+            <span class="pager-nums">
+              <button type="button" aria-current="page">1</button>
+              <button type="button">2</button>
+              <button type="button">3</button>
+              <button type="button">4</button>
+              <button type="button">5</button>
+              <button type="button">6</button>
+              <button type="button">7</button>
+              <button type="button">8</button>
+              <button type="button">9</button>
+              <button type="button">10</button>
+            </span>
+            <span class="pager-edge pager-edge--next">
+              <button type="button" aria-label="다음 페이지"><img src="assets/icon-page-prev.svg" alt="" width="20" height="20"></button>
+              <button type="button" aria-label="마지막 페이지"><img src="assets/icon-page-first.svg" alt="" width="20" height="20"></button>
+            </span>
+          </nav>
+
+        </section>
+      </div>
     </div>
   </div>
 </main>
 
 <!-- ========== 푸터 ========== -->
-<!-- 기획서 이미지는 페이지네이션에서 끊겨 있으나, 메인과 동일한 공통 푸터를 적용 -->
 <footer class="ft">
 
   <div class="ft-related">

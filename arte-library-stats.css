@@ -60,8 +60,13 @@
   border: 1px solid var(--ink); background: var(--white); padding: 12px 16px;
   font-size: 18px; font-weight: 500; text-align: left;
 }
+.stat-nav-current span, .stat-field span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
 .stat-nav-current:hover, .stat-field:hover { background: var(--gray-bg); }
 .chevron-icon { display: flex; flex: none; color: var(--ink); }
+
+/* 항목 선택 박스 + 그 아래 열리는 리스트는 하나로 이어진 프레임 — 간격 0, 이중 보더 방지 */
+.stat-nav-dropdown { display: flex; flex-direction: column; gap: 0; }
+.stat-nav-dropdown .stat-nav-current { border-bottom: 0; }
 
 .stat-nav-list { display: flex; flex-direction: column; border: 1px solid var(--ink); }
 .stat-nav-item {
@@ -71,8 +76,9 @@
 .stat-nav-item.is-active { background: var(--ink); color: #f9fafb; }
 .stat-nav-item:hover:not(.is-active) { background: var(--gray-bg); }
 
-.stat-period-row { display: flex; gap: 8px; }
-.stat-period-row .stat-field { flex: 1; }
+.stat-period-row { display: flex; align-items: center; gap: 8px; }
+.stat-period-row .stat-field { flex: 1; min-width: 0; }
+.stat-period-divider { flex: none; width: 6px; height: 1px; background: var(--gray-888); }
 .stat-field--full { width: 100%; }
 
 .stat-search-btn {
@@ -92,10 +98,14 @@
 }
 .kpi-card:first-child { border-left: 0; }
 .kpi-card.is-active { border-left-color: transparent; color: #fff; }
+.kpi-icon { flex: none; width: 48px; height: 48px; color: #1c1b1f; }
+.kpi-icon svg { width: 100%; height: 100%; }
+.kpi-card.is-active .kpi-icon { color: #fff; }
+.kpi-stack { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .kpi-card:not(.is-active) .kpi-value { color: var(--kpi-color); }
-.kpi-label { display: block; font-size: 14px; font-weight: 500; }
+.kpi-label { display: block; font-size: 14px; font-weight: 500; white-space: nowrap; }
 .kpi-card.is-active .kpi-label { color: #fff; }
-.kpi-value { display: block; font-size: 24px; font-weight: 700; margin-top: 4px; }
+.kpi-value { display: block; font-size: 24px; font-weight: 700; white-space: nowrap; }
 
 /* ---- KPI 카드 (자료통계) ---- */
 
@@ -184,9 +194,10 @@
 
   .kpi-row { flex-wrap: wrap; }
   .kpi-card {
-    flex: 1 1 50%; width: 50%; padding: 20px 12px; flex-direction: column; align-items: flex-start; gap: 6px;
+    flex: 1 1 50%; width: 50%; padding: 20px 12px; align-items: flex-start; gap: 6px;
     border-left: 0; border-top: 1px solid var(--ink);
   }
+  .kpi-icon { display: none; } /* Figma 모바일 스펙: KPI 카드에 아이콘 없이 라벨+값만 표시 */
   .kpi-card:nth-child(odd) { border-left: 0; }
   .kpi-card:nth-child(2n) { border-left: 1px solid var(--ink); }
   .kpi-card:nth-child(-n+2) { border-top: 0; }

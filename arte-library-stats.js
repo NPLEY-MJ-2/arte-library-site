@@ -23,19 +23,19 @@
   var ADMIN = {
     items: [
       {
-        id: 'lecturers', label: '강사 수', kpiUnit: '(명)', kpiValue: '169,635', color: CAT_COLOR.강사수, unit: '(단위: 명)', scaleMax: 16000,
+        id: 'lecturers', label: '강사 수', icon: 'person', kpiUnit: '(명)', kpiValue: '169,635', color: CAT_COLOR.강사수, unit: '(단위: 명)', scaleMax: 16000,
         values: [3086, 4091, 5087, 5412, 6116, 7494, 9883, 9032, 9527, 9422, 10194, 12164, 11666, 10681, 11093, 14049, 12577, 11994, 6071]
       },
       {
-        id: 'beneficiaries', label: '수혜자 수', kpiUnit: '(명)', kpiValue: '44,017,237', color: CAT_COLOR.수혜자수, unit: '(단위: 명)', scaleMax: 3500000,
+        id: 'beneficiaries', label: '수혜자 수', icon: 'heart', kpiUnit: '(명)', kpiValue: '44,017,237', color: CAT_COLOR.수혜자수, unit: '(단위: 명)', scaleMax: 3500000,
         values: [1202514, 1574022, 1798883, 1916201, 1984637, 2317039, 2698324, 2805866, 3079609, 2620112, 2698324, 2727654, 2561453, 2874302, 2678771, 3108939, 2424581, 1867318, 1065642]
       },
       {
-        id: 'budget', label: '예산', kpiUnit: '(백만원)', kpiValue: '2,178,013', color: CAT_COLOR.예산, unit: '(단위: 백만원)', scaleMax: 160000,
+        id: 'budget', label: '예산', icon: 'piggy', kpiUnit: '(백만원)', kpiValue: '2,178,013', color: CAT_COLOR.예산, unit: '(단위: 백만원)', scaleMax: 160000,
         values: [37542, 67486, 75978, 77765, 88939, 117989, 135866, 132737, 147933, 146592, 150168, 147039, 136760, 132291, 125140, 121564, 91173, 98324, 146592]
       },
       {
-        id: 'orgs', label: '지원기관 수', kpiUnit: '(개)', kpiValue: '190,986', color: CAT_COLOR.지원기관수, unit: '(단위: 개)', scaleMax: 14000,
+        id: 'orgs', label: '지원기관 수', icon: 'building', kpiUnit: '(개)', kpiValue: '190,986', color: CAT_COLOR.지원기관수, unit: '(단위: 개)', scaleMax: 14000,
         values: [4419, 5592, 6687, 6765, 7939, 9659, 10676, 11223, 12788, 12201, 11849, 12749, 12592, 13179, 11419, 11966, 10128, 10089, 8994]
       }
     ]
@@ -95,7 +95,11 @@
     book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
     video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><path d="M15 10l6-3v10l-6-3"/></svg>',
     thumb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88z"/></svg>',
-    globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
+    globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+    person: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9C.5 8.5 2 4 6.2 4c2.1 0 3.5 1.2 4.3 2.4C11.3 5.2 12.7 4 14.8 4 19 4 20.5 8.5 22 12c-2.5 4.4-10 9-10 9z"/></svg>',
+    piggy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10a4 4 0 0 1 4-4h6a5 5 0 0 1 5 5v1l2 2-2 1v2a2 2 0 0 1-2 2h-1v2h-2v-2H9v2H7v-2a4 4 0 0 1-4-4v-2z"/><circle cx="8" cy="12" r=".8" fill="currentColor" stroke="none"/></svg>',
+    building: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="12" height="18"/><path d="M16 8h4v13h-4"/><path d="M8 7h1M11 7h1M8 11h1M11 11h1M8 15h1M11 15h1"/></svg>'
   };
 
   var DATA = {
@@ -221,8 +225,15 @@
     card.href = '#' + item.id;
     if (isActive) card.style.background = item.color;
     else card.style.setProperty('--kpi-color', item.color);
-    card.appendChild(txt('span', 'kpi-label', item.label + ' ' + item.unit));
-    card.appendChild(txt('strong', 'kpi-value', item.value));
+
+    var icon = el('span', 'kpi-icon');
+    icon.innerHTML = ICONS[item.icon] || '';
+    card.appendChild(icon);
+
+    var stack = el('span', 'kpi-stack');
+    stack.appendChild(txt('span', 'kpi-label', item.label + ' ' + item.unit));
+    stack.appendChild(txt('strong', 'kpi-value', item.value));
+    card.appendChild(stack);
     return card;
   }
 
@@ -292,6 +303,8 @@
 
     nav.appendChild(txt('p', 'stat-nav-label', '항목'));
 
+    var dropdown = el('div', 'stat-nav-dropdown');
+
     var current = el('button', 'stat-nav-current');
     current.type = 'button';
     current.appendChild(txt('span', '', activeItem.label));
@@ -299,7 +312,7 @@
     current.addEventListener('click', function () {
       nav.classList.toggle('is-open');
     });
-    nav.appendChild(current);
+    dropdown.appendChild(current);
 
     var list = el('div', 'stat-nav-list');
     items.forEach(function (it) {
@@ -312,11 +325,13 @@
       });
       list.appendChild(b);
     });
-    nav.appendChild(list);
+    dropdown.appendChild(list);
+    nav.appendChild(dropdown);
 
     nav.appendChild(txt('p', 'stat-nav-label', '기간'));
     var periodRow = el('div', 'stat-period-row');
-    ['2021년', '2025년'].forEach(function (v) {
+    ['2021년', '2025년'].forEach(function (v, i) {
+      if (i === 1) periodRow.appendChild(el('span', 'stat-period-divider'));
       var f = el('button', 'stat-field');
       f.type = 'button';
       f.appendChild(txt('span', '', v));
@@ -342,7 +357,7 @@
 
   function chevronSvg() {
     var span = el('span', 'chevron-icon');
-    span.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    span.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     return span;
   }
 
@@ -351,7 +366,7 @@
       var col = el('div', 'stat-content-col');
       var kpiRow = el('div', 'kpi-row');
       ADMIN.items.forEach(function (it) {
-        kpiRow.appendChild(buildKpiCard({ id: it.id, label: it.label, unit: it.kpiUnit, value: it.kpiValue, color: it.color }, state.adminItem));
+        kpiRow.appendChild(buildKpiCard({ id: it.id, label: it.label, unit: it.kpiUnit, value: it.kpiValue, color: it.color, icon: it.icon }, state.adminItem));
       });
       col.appendChild(kpiRow);
       var active = ADMIN.items.filter(function (it) { return it.id === state.adminItem; })[0];

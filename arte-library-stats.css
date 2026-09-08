@@ -1,0 +1,217 @@
+/* ==========================================================================
+   arte 라이브러리 — 통계 페이지 전용
+   Figma 통계 확정본(2026-09-08) 1:1 재구현. 공통(헤더·푸터·토큰)은 arte-library-line.css.
+   라운드 없음 · 블랙 1px 보더 · 카테고리 팔레트가 이 페이지의 핵심 규칙이다(다른 서브페이지의
+   블루 단일 액센트/999px 라운드 규칙과 다르게, Figma 확정본을 그대로 따른다).
+   ========================================================================== */
+
+/* ---- 서브페이지 공통 셸 (docs/region/ai-search 와 동일 패턴, 이 페이지 전용으로 재정의) ---- */
+
+.sub { background: var(--white); }
+.sub-in {
+  width: min(var(--content), calc(100% - var(--side) * 2));
+  margin-inline: auto;
+  padding: 20px 0 80px;
+}
+
+.sub-title { display: flex; flex-direction: column; gap: clamp(24px, 4.17vw, 80px); }
+.crumb { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 500; color: var(--gray-555); }
+.crumb img { width: 12px; height: 12px; }
+.crumb span, .crumb strong { font-weight: 500; }
+.crumb a:hover { color: var(--ink); text-decoration: underline; }
+
+.sub-h1 {
+  font-family: 'Paperlogy', 'ArteBasic', 'Pretendard', sans-serif; font-weight: 600;
+  font-size: clamp(32px, 4.17vw, 80px); line-height: 1; letter-spacing: -0.02em;
+  margin: 0 0 clamp(20px, 2.08vw, 40px);
+}
+
+/* ---- 상단 탭 (행정/조사/자료통계) ---- */
+
+.stat-tabs { display: flex; gap: 8px; }
+.stat-tab {
+  flex: 1; padding: clamp(12px, 0.83vw, 16px) 0;
+  border: 1px solid var(--ink); background: var(--white);
+  font-size: clamp(15px, 1.46vw, 28px); font-weight: 600;
+}
+.stat-tab.is-active { background: var(--ink); color: #fff; border-color: var(--ink); }
+.stat-tab:hover:not(.is-active) { background: var(--gray-bg); }
+
+.stat-desc {
+  margin: clamp(24px, 2.5vw, 48px) 0 clamp(16px, 1.77vw, 34px);
+  font-size: clamp(13px, 0.83vw, 16px); font-weight: 500; color: var(--gray-555);
+}
+.stat-divider { height: 4px; background: var(--ink); margin-bottom: clamp(28px, 4.17vw, 80px); }
+
+/* ---- 본문 레이아웃 ---- */
+
+.stat-main { display: flex; align-items: flex-start; gap: clamp(32px, 6.25vw, 120px); }
+.stat-main--full { display: block; }
+.stat-content-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.stat-content-col--full { width: 100%; }
+
+/* ---- 좌측 항목/기간 네비 ---- */
+
+.stat-nav { flex: none; width: clamp(220px, 15.2vw, 292px); display: flex; flex-direction: column; gap: 20px; }
+.stat-nav-label { font-size: 16px; font-weight: 400; margin: 0; }
+
+.stat-nav-current, .stat-field {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;
+  border: 1px solid var(--ink); background: var(--white); padding: 12px 16px;
+  font-size: 18px; font-weight: 500; text-align: left;
+}
+.stat-nav-current:hover, .stat-field:hover { background: var(--gray-bg); }
+.chevron-icon { display: flex; flex: none; color: var(--ink); }
+
+.stat-nav-list { display: flex; flex-direction: column; border: 1px solid var(--ink); }
+.stat-nav-item {
+  border: 0; background: var(--white); color: #374151;
+  padding: 14px 16px; font-size: 15px; font-weight: 600; text-align: left;
+}
+.stat-nav-item.is-active { background: var(--ink); color: #f9fafb; }
+.stat-nav-item:hover:not(.is-active) { background: var(--gray-bg); }
+
+.stat-period-row { display: flex; gap: 8px; }
+.stat-period-row .stat-field { flex: 1; }
+.stat-field--full { width: 100%; }
+
+.stat-search-btn {
+  width: 100%; border: 0; background: #111111; color: #fff;
+  padding: 16px 0; font-size: 18px; font-weight: 600;
+}
+.stat-search-btn:hover { background: #000000; }
+
+/* ---- KPI 카드 (행정통계) ---- */
+
+.kpi-row { display: flex; border: 1px solid var(--ink); }
+.kpi-card {
+  --kpi-color: #007ade;
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 16px;
+  padding: 16px 36px; background: var(--white); color: inherit;
+  border-left: 1px solid var(--ink);
+}
+.kpi-card:first-child { border-left: 0; }
+.kpi-card.is-active { border-left-color: transparent; color: #fff; }
+.kpi-card:not(.is-active) .kpi-value { color: var(--kpi-color); }
+.kpi-label { display: block; font-size: 14px; font-weight: 500; }
+.kpi-card.is-active .kpi-label { color: #fff; }
+.kpi-value { display: block; font-size: 24px; font-weight: 700; margin-top: 4px; }
+
+/* ---- KPI 카드 (자료통계) ---- */
+
+.data-kpi-row { display: flex; border: 1px solid var(--ink); margin-bottom: 16px; }
+.data-kpi-card {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: clamp(16px, 1.67vw, 32px) 8px; border-left: 1px solid var(--ink);
+  background: var(--white);
+}
+.data-kpi-card:first-child { border-left: 0; }
+.data-kpi-card.is-active { background: #007ade; color: #fff; }
+.data-kpi-icon { display: block; width: clamp(28px, 2.5vw, 48px); height: clamp(28px, 2.5vw, 48px); }
+.data-kpi-icon svg { width: 100%; height: 100%; }
+.data-kpi-label { font-size: clamp(13px, 0.94vw, 18px); font-weight: 500; }
+.data-kpi-value { font-size: clamp(18px, 1.77vw, 34px); font-weight: 700; }
+
+.data-charts-row { display: flex; gap: 24px; align-items: flex-start; }
+.data-charts-row .chart-card { flex: 1; min-width: 0; }
+
+/* ---- 차트 카드 ---- */
+
+.chart-card {
+  --chart-h: 210px;
+  border: 1px solid var(--ink); background: var(--white);
+  padding: 24px; display: flex; flex-direction: column; gap: 16px;
+}
+.chart-card--admin { --chart-h: 340px; }
+
+.chart-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.chart-title-wrap { display: flex; align-items: baseline; gap: 8px; }
+.chart-title { font-size: 18px; font-weight: 600; }
+.chart-subtitle { font-size: 18px; font-weight: 600; color: #007ade; }
+.chart-unit { font-size: 14px; font-weight: 500; color: var(--gray-888); }
+
+.chart-legend { display: flex; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
+.legend-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; color: var(--gray-888); }
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+
+.chart-body { display: flex; gap: 8px; height: var(--chart-h); }
+.chart-yaxis {
+  flex: none; width: 44px; display: flex; flex-direction: column; justify-content: space-between;
+  font-size: 11px; font-weight: 400; color: var(--gray-888); text-align: left; padding-bottom: 1px;
+}
+.yaxis-label:first-child { transform: translateY(-6px); }
+
+.chart-plot-wrap { flex: 1; min-width: 0; }
+.chart-plot { position: relative; height: 100%; }
+.gridline { position: absolute; left: 0; right: 0; height: 1px; background: #ededed; }
+.chart-bars { position: absolute; inset: 0; display: flex; align-items: flex-end; gap: clamp(4px, 1.2vw, 24px); }
+.bar-cluster { flex: 1; min-width: 0; height: 100%; display: flex; align-items: flex-end; gap: 2px; }
+.bar-col { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+.bar { width: 100%; }
+.bar-value { font-size: 12px; font-weight: 500; color: var(--ink); margin-bottom: 4px; white-space: nowrap; }
+
+.chart-xaxis { display: flex; gap: clamp(4px, 1.2vw, 24px); }
+.xaxis-spacer { flex: none; width: 44px; }
+.xaxis-cells { flex: 1; min-width: 0; display: flex; gap: clamp(4px, 1.2vw, 24px); }
+.xaxis-label { flex: 1; min-width: 0; text-align: center; font-size: 11px; font-weight: 500; color: var(--gray-888); }
+
+/* 행정통계 19개년 차트 — 넓은 폭이라 가로 스크롤 허용 */
+.admin-chart-scroll { overflow-x: auto; }
+.admin-chart-scroll .chart-card { min-width: 900px; }
+
+/* ---- 모바일 (768px 이하) ---- */
+
+@media (max-width: 768px) {
+  .sub-in { padding: 16px 0 48px; }
+  .sub-title { gap: 20px; }
+  .crumb { font-size: 13px; gap: 6px; }
+  .sub-h1 { margin-bottom: 20px; }
+
+  .stat-tab { font-size: 13px; padding: 12px 0; }
+  .stat-desc { font-size: 13px; margin: 20px 0 16px; }
+  .stat-divider { height: 3px; margin-bottom: 20px; }
+
+  .stat-main, .stat-content-col { gap: 20px; }
+  .stat-main { flex-direction: column; }
+  .stat-nav { width: 100%; }
+
+  .stat-nav-list { max-height: 0; overflow: hidden; border-width: 0; transition: max-height 0.25s ease; }
+  .stat-nav.is-open .stat-nav-list { max-height: 600px; border-width: 1px; }
+  .stat-nav-current { font-size: 14px; padding: 12px 14px; }
+  .stat-nav-item { font-size: 14px; padding: 14px 16px; }
+  .stat-field { font-size: 14px; padding: 12px 14px; }
+  .stat-search-btn { font-size: 14px; padding: 14px 0; }
+
+  .kpi-row { flex-wrap: wrap; }
+  .kpi-card {
+    flex: 1 1 50%; width: 50%; padding: 20px 12px; flex-direction: column; align-items: flex-start; gap: 6px;
+    border-left: 0; border-top: 1px solid var(--ink);
+  }
+  .kpi-card:nth-child(odd) { border-left: 0; }
+  .kpi-card:nth-child(2n) { border-left: 1px solid var(--ink); }
+  .kpi-card:nth-child(-n+2) { border-top: 0; }
+  .kpi-label { font-size: 11px; }
+  .kpi-value { font-size: 16px; }
+
+  .data-kpi-row { flex-wrap: wrap; }
+  .data-kpi-card { flex: 1 1 50%; width: 50%; flex-direction: row; justify-content: flex-start; border-top: 1px solid var(--ink); }
+  .data-kpi-card:nth-child(-n+2) { border-top: 0; }
+  .data-kpi-card:nth-child(2n) { border-left: 1px solid var(--ink); }
+  .data-kpi-icon { width: 24px; height: 24px; }
+  .data-charts-row { flex-direction: column; }
+
+  .chart-card { --chart-h: 170px; padding: 12px; gap: 10px; }
+  .chart-card--admin { --chart-h: 160px; }
+  .chart-title { font-size: 14px; }
+  .chart-subtitle { font-size: 14px; }
+  .chart-unit { font-size: 10px; }
+  .legend-chip { font-size: 9px; }
+  .legend-dot { width: 6px; height: 6px; }
+  .chart-yaxis, .xaxis-spacer { width: 36px; font-size: 8px; }
+  .xaxis-label { font-size: 7px; }
+  .bar-value { font-size: 9px; }
+  .chart-bars, .chart-xaxis, .xaxis-cells { gap: 3px; }
+  .bar-cluster { gap: 1.5px; }
+
+  .admin-chart-scroll .chart-card { min-width: 640px; }
+}

@@ -90,25 +90,29 @@
     ]
   };
 
+  /* Lucide 아이콘(lucide.dev, ISC License) 경로를 그대로 사용 — 24x24 grid, stroke-width 2 통일로
+     아이콘 간 시각적 크기·굵기가 어긋나지 않도록 함. */
   var ICONS = {
-    file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>',
-    book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
-    video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><path d="M15 10l6-3v10l-6-3"/></svg>',
-    thumb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88z"/></svg>',
-    globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
-    person: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>',
-    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9C.5 8.5 2 4 6.2 4c2.1 0 3.5 1.2 4.3 2.4C11.3 5.2 12.7 4 14.8 4 19 4 20.5 8.5 22 12c-2.5 4.4-10 9-10 9z"/></svg>',
-    piggy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10a4 4 0 0 1 4-4h6a5 5 0 0 1 5 5v1l2 2-2 1v2a2 2 0 0 1-2 2h-1v2h-2v-2H9v2H7v-2a4 4 0 0 1-4-4v-2z"/><circle cx="8" cy="12" r=".8" fill="currentColor" stroke="none"/></svg>',
-    building: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="3" width="12" height="18"/><path d="M16 8h4v13h-4"/><path d="M8 7h1M11 7h1M8 11h1M11 11h1M8 15h1M11 15h1"/></svg>'
+    file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>',
+    book: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>',
+    video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 13 5.22 3.48a.5.5 0 0 0 .78-.42V7.87a.5.5 0 0 0-.75-.43L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>',
+    thumb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88z"/></svg>',
+    globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>',
+    person: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg>',
+    piggy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-.71.71"/></svg>',
+    building: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M16 6h.01M12 6h.01M12 10h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01M12 14h.01"/></svg>'
   };
 
   var DATA = {
+    /* Figma 확정본(19679:885)은 "추천" 카드만 보라 배경 활성 상태로 고정되어 있고,
+       나머지 카드는 각자 값 텍스트만 고유 색(문서=블루/도서=옐로/영상=그린/지역별정보=핑크). */
     kpi: [
-      { icon: 'file', label: '문서', unit: '', value: '4,793' },
-      { icon: 'book', label: '도서', unit: '', value: '12,374' },
-      { icon: 'video', label: '영상', unit: '', value: '2,063' },
-      { icon: 'thumb', label: '추천', unit: '', value: '6,444' },
-      { icon: 'globe', label: '지역별 정보', unit: '', value: '6,314' }
+      { icon: 'file', label: '문서', value: '4,793', color: '#007ade' },
+      { icon: 'book', label: '도서', value: '12,374', color: '#eab308' },
+      { icon: 'video', label: '영상', value: '2,063', color: '#16a34a' },
+      { icon: 'thumb', label: '추천', value: '6,444', color: '#8b5cf6', active: true },
+      { icon: 'globe', label: '지역별 정보', value: '6,314', color: '#ff2268' }
     ],
     charts: [
       { title: '추천 전체', unit: '(단위: 건)', color: '#8b5cf6', cats: ['주제별큐레이션', '프로그램아카이브', '최신인기자료', '북큐레이션', '추천도서'], values: [137, 137, 137, 137, 137], scaleMax: 200 },
@@ -237,8 +241,9 @@
     return card;
   }
 
-  function buildDataKpiCard(d, i) {
-    var card = el('div', 'data-kpi-card' + (i === 0 ? ' is-active' : ''));
+  function buildDataKpiCard(d) {
+    var card = el('div', 'data-kpi-card' + (d.active ? ' is-active' : ''));
+    if (!d.active) card.style.setProperty('--data-kpi-color', d.color);
     var icon = el('span', 'data-kpi-icon');
     icon.innerHTML = ICONS[d.icon] || '';
     card.appendChild(icon);
@@ -382,7 +387,7 @@
     // data tab
     var wrap = el('div', 'stat-content-col stat-content-col--full');
     var kpiRow2 = el('div', 'data-kpi-row');
-    DATA.kpi.forEach(function (d, i) { kpiRow2.appendChild(buildDataKpiCard(d, i)); });
+    DATA.kpi.forEach(function (d) { kpiRow2.appendChild(buildDataKpiCard(d)); });
     wrap.appendChild(kpiRow2);
     var chartsRow = el('div', 'data-charts-row');
     DATA.charts.forEach(function (c) {

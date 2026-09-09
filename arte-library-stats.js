@@ -24,18 +24,22 @@
     items: [
       {
         id: 'lecturers', label: '강사 수', icon: 'person', kpiUnit: '(명)', kpiValue: '169,635', color: CAT_COLOR.강사수, unit: '(단위: 명)', scaleMax: 16000,
+        showLine: true, showValues: true,
         values: [3086, 4091, 5087, 5412, 6116, 7494, 9883, 9032, 9527, 9422, 10194, 12164, 11666, 10681, 11093, 14049, 12577, 11994, 6071]
       },
       {
         id: 'beneficiaries', label: '수혜자 수', icon: 'heart', kpiUnit: '(명)', kpiValue: '44,017,237', color: CAT_COLOR.수혜자수, unit: '(단위: 명)', scaleMax: 3500000,
+        showLine: true, showValues: true,
         values: [1202514, 1574022, 1798883, 1916201, 1984637, 2317039, 2698324, 2805866, 3079609, 2620112, 2698324, 2727654, 2561453, 2874302, 2678771, 3108939, 2424581, 1867318, 1065642]
       },
       {
         id: 'budget', label: '예산', icon: 'piggy', kpiUnit: '(백만원)', kpiValue: '2,178,013', color: CAT_COLOR.예산, unit: '(단위: 백만원)', scaleMax: 160000,
+        showLine: true, showValues: true,
         values: [37542, 67486, 75978, 77765, 88939, 117989, 135866, 132737, 147933, 146592, 150168, 147039, 136760, 132291, 125140, 121564, 91173, 98324, 146592]
       },
       {
         id: 'orgs', label: '지원기관 수', icon: 'building', kpiUnit: '(개)', kpiValue: '190,986', color: CAT_COLOR.지원기관수, unit: '(단위: 개)', scaleMax: 14000,
+        showLine: true, showValues: true,
         values: [4419, 5592, 6687, 6765, 7939, 9659, 10676, 11223, 12788, 12201, 11849, 12749, 12592, 13179, 11419, 11966, 10128, 10089, 8994]
       }
     ]
@@ -46,7 +50,7 @@
       {
         id: 'rate', label: '문화예술교육 참여율', approximate: true,
         charts: [
-          { title: '문화예술교육 참여율', subtitle: '전체', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[22], [16], [28], [28], [28]], colors: BLUE_ONLY, scaleMax: 40 },
+          { title: '문화예술교육 참여율', subtitle: '전체', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[22], [16], [28], [28], [28]], colors: BLUE_ONLY, scaleMax: 40, showLine: true, showValues: true },
           { title: '참여율', subtitle: '성별', unit: '(단위:%)', cats: ['남성', '여성'], series: [[15.4, 22.9], [13, 22.5], [15.8, 26.1], [16.2, 26.3], [16.2, 26.3]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 30 },
           { title: '참여율', subtitle: '생애주기별', unit: '(단위:%)', cats: ['아동', '청소년', '성인', '중장년', '노년'], series: [[63.6, 9.3, 6.9, 9.1, 9], [70.9, 25.6, 8.9, 6.7, 9.5], [72.1, 27.6, 10.8, 8.2, 9.9], [65.1, 29.1, 12, 8.7, 11.6], [65.1, 29.1, 12, 8.7, 11.6]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 80 },
           { title: '참여율', subtitle: '분야별', unit: '(단위:%)', cats: ['음악', '미술', '문학', '연극/뮤지컬', '무용', '영화', '공예', '사진/디자인', '전통예술', '기타'], series: [[38.3, 24.5, 4.3, 2.5, 2.1, 1, 1.3, 2.3, 1, 2], [39.7, 26.5, 8.9, 3.7, 1.9, 3.9, 1.9, 1.1, 1.1, 2.5], [35.9, 29.1, 7.5, 4.5, 4.5, 2.8, 2.7, 2.5, 1.9, 1.2], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 60 }
@@ -55,8 +59,8 @@
       {
         id: 'time-cost', label: '문화예술교육 참여 시간 및 비용',
         charts: [
-          { title: '연간 참여 시간', unit: '(단위:시간)', cats: ['2021년', '2022년', '2023년', '2024년', '2025년'], series: [[78.5], [89.8], [64.5], [61.6], [61.6]], colors: BLUE_ONLY, scaleMax: 100, showValues: true },
-          { title: '연간 참여 비용', unit: '(단위:만원)', cats: ['2021년', '2022년', '2023년', '2024년', '2025년'], series: [[61.4], [53.5], [46.2], [44.7], [44.7]], colors: BLUE_ONLY, scaleMax: 100, showValues: true }
+          { title: '연간 참여 시간', unit: '(단위:시간)', cats: ['2021년', '2022년', '2023년', '2024년', '2025년'], series: [[78.5], [89.8], [64.5], [61.6], [61.6]], colors: BLUE_ONLY, scaleMax: 100, showValues: true, showLine: true },
+          { title: '연간 참여 비용', unit: '(단위:만원)', cats: ['2021년', '2022년', '2023년', '2024년', '2025년'], series: [[61.4], [53.5], [46.2], [44.7], [44.7]], colors: BLUE_ONLY, scaleMax: 100, showValues: true, showLine: true }
         ]
       },
       {
@@ -174,6 +178,7 @@
     body.appendChild(yAxis);
 
     var plotWrap = el('div', 'chart-plot-wrap');
+    var tooltip = buildTooltip();
     var plot = el('div', 'chart-plot');
     for (var g = 0; g <= steps; g++) {
       var gl = el('div', 'gridline');
@@ -181,21 +186,39 @@
       plot.appendChild(gl);
     }
     var barsRow = el('div', 'chart-bars');
+    var linePoints = [];
     cats.forEach(function (cat, ci) {
       var cluster = el('div', 'bar-cluster');
-      (seriesData[ci] || []).forEach(function (val, si) {
+      var vals = seriesData[ci] || [];
+      vals.forEach(function (val, si) {
         var col = el('div', 'bar-col');
-        if (cfg.showValues) col.appendChild(txt('span', 'bar-value', formatNum(val)));
+        var seriesLabel = cfg.legend && cfg.legend[si] ? cfg.legend[si] : '';
+        if (cfg.showValues && !cfg.showLine) col.appendChild(txt('span', 'bar-value', formatValue(val)));
         var bar = el('div', 'bar');
         bar.style.height = Math.max((val / scaleMax) * 100, 0) + '%';
         bar.style.background = colors[si % colors.length];
+        attachTooltip(bar, tooltip, plotWrap, cat, seriesLabel, formatValue(val));
         col.appendChild(bar);
         cluster.appendChild(col);
       });
       barsRow.appendChild(cluster);
+
+      if (cfg.showLine) {
+        var topVal = vals[0] || 0;
+        linePoints.push({
+          xPct: ((ci + 0.5) / cats.length) * 100,
+          yPct: 100 - Math.max((topVal / scaleMax) * 100, 0),
+          val: topVal,
+          cat: cat
+        });
+      }
     });
     plot.appendChild(barsRow);
+    if (cfg.showLine && linePoints.length) {
+      plot.appendChild(buildLineOverlay(linePoints, colors[0], cfg.showValues, tooltip, plotWrap));
+    }
     plotWrap.appendChild(plot);
+    plotWrap.appendChild(tooltip);
     body.appendChild(plotWrap);
     card.appendChild(body);
 
@@ -219,8 +242,69 @@
     }
     return out;
   }
-  function formatNum(v) {
-    return (Math.round(v * 10) / 10).toString();
+  function formatValue(v) {
+    var n = Math.round(v * 10) / 10;
+    return n.toLocaleString('ko-KR', { maximumFractionDigits: 1 });
+  }
+
+  /* 단일 시리즈(연도 추이) 차트 위에 얹는 꺾은선 오버레이 — SVG path(선) + 절대배치 dot/값라벨.
+     bar-cluster가 전부 flex:1 균등폭이라 x좌표는 DOM 실측 없이 (index+0.5)/N로 계산 가능하다. */
+  function buildLineOverlay(points, color, showValues, tooltip, plotWrap) {
+    var frag = document.createDocumentFragment();
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'chart-line-svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    var d = points.map(function (p, i) { return (i === 0 ? 'M' : 'L') + p.xPct + ',' + p.yPct; }).join(' ');
+    path.setAttribute('d', d);
+    path.setAttribute('class', 'chart-line-path');
+    path.setAttribute('stroke', color);
+    path.setAttribute('vector-effect', 'non-scaling-stroke');
+    svg.appendChild(path);
+    frag.appendChild(svg);
+
+    points.forEach(function (p) {
+      var dot = el('span', 'chart-dot');
+      dot.style.left = p.xPct + '%';
+      dot.style.top = p.yPct + '%';
+      dot.style.borderColor = color;
+      attachTooltip(dot, tooltip, plotWrap, p.cat, '', formatValue(p.val));
+      frag.appendChild(dot);
+      if (showValues) {
+        var lbl = txt('span', 'chart-point-value', formatValue(p.val));
+        lbl.style.left = p.xPct + '%';
+        lbl.style.top = p.yPct + '%';
+        lbl.style.color = color;
+        frag.appendChild(lbl);
+      }
+    });
+    return frag;
+  }
+
+  /* 차트당 하나씩 두는 공용 호버 툴팁. 막대/도트에 mouseenter·mousemove·mouseleave로 값을 띄운다. */
+  function buildTooltip() {
+    var tip = el('div', 'chart-tooltip');
+    tip.setAttribute('aria-hidden', 'true');
+    return tip;
+  }
+  function attachTooltip(target, tooltip, plotWrap, cat, seriesLabel, valueText) {
+    function show(evt) {
+      tooltip.textContent = seriesLabel ? (cat + ' · ' + seriesLabel + ' ' + valueText) : (cat + ' ' + valueText);
+      tooltip.classList.add('is-visible');
+      position(evt);
+    }
+    function position(evt) {
+      var rect = plotWrap.getBoundingClientRect();
+      tooltip.style.left = (evt.clientX - rect.left) + 'px';
+      tooltip.style.top = (evt.clientY - rect.top) + 'px';
+    }
+    function hide() {
+      tooltip.classList.remove('is-visible');
+    }
+    target.addEventListener('mouseenter', show);
+    target.addEventListener('mousemove', position);
+    target.addEventListener('mouseleave', hide);
   }
 
   function buildKpiCard(item, activeId) {
@@ -292,6 +376,7 @@
     root.appendChild(main);
 
     revealStack(root.querySelectorAll('.chart-card, .kpi-card, .data-kpi-card'));
+    animateCharts(root);
   }
 
   function descFor(tab) {
@@ -401,7 +486,8 @@
     var wrap = el('div', 'admin-chart-scroll');
     var chart = buildBarChart({
       title: item.label, unit: item.unit, cats: ADMIN_YEARS,
-      values: item.values, color: item.color, scaleMax: item.scaleMax
+      values: item.values, color: item.color, scaleMax: item.scaleMax,
+      showLine: item.showLine, showValues: item.showValues
     });
     chart.classList.add('chart-card--admin');
     wrap.appendChild(chart);
@@ -425,6 +511,62 @@
       nodes,
       { opacity: 0, y: 28 },
       { opacity: 1, y: 0, duration: 0.55, ease: 'power2.out', stagger: 0.09, clearProps: 'transform' }
+    );
+  }
+
+  /* --------------------------------------------------------------------
+     5. GSAP 차트 모션 — 막대 아래→위로 차오르기, 꺾은선 좌→우로 그려지기, 점/값 라벨 페이드인.
+        renderShell()이 매번 #stats-root를 통째로 새로 그리므로(정적 마크업 없음), 공통
+        arte-motion.js의 DOMContentLoaded 훅으로는 잡을 수 없다 — revealStack과 같은 이유로
+        이 페이지 로컬에 둔다.
+     -------------------------------------------------------------------- */
+
+  function animateCharts(scopeEl) {
+    var bars = scopeEl.querySelectorAll('.bar');
+    var paths = scopeEl.querySelectorAll('.chart-line-path');
+    var dots = scopeEl.querySelectorAll('.chart-dot');
+    var pointValues = scopeEl.querySelectorAll('.chart-point-value');
+    if (!bars.length) return;
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || typeof gsap === 'undefined') {
+      Array.prototype.forEach.call(bars, function (b) { b.style.transform = 'none'; });
+      Array.prototype.forEach.call(paths, function (p) { p.style.strokeDasharray = 'none'; p.style.strokeDashoffset = '0'; });
+      Array.prototype.forEach.call(dots, function (d) { d.style.opacity = 1; });
+      Array.prototype.forEach.call(pointValues, function (l) { l.style.opacity = 1; });
+      return;
+    }
+
+    gsap.killTweensOf(bars);
+    gsap.killTweensOf(dots);
+    gsap.killTweensOf(pointValues);
+
+    gsap.fromTo(
+      bars,
+      { scaleY: 0 },
+      { scaleY: 1, duration: 0.7, ease: 'power2.out', stagger: 0.03 }
+    );
+
+    Array.prototype.forEach.call(paths, function (path) {
+      if (typeof path.getTotalLength !== 'function') return;
+      var len = path.getTotalLength();
+      gsap.killTweensOf(path);
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+      gsap.to(path, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut', delay: 0.15 });
+    });
+
+    gsap.fromTo(
+      dots,
+      { opacity: 0, scale: 0 },
+      { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(2)', stagger: 0.05, delay: 0.2, transformOrigin: 'center' }
+    );
+    /* opacity만 애니메이션 — pointValues는 CSS transform(translate)으로 위치를 고정하고 있어
+       GSAP가 x/y로 transform을 건드리면 그 위치 고정이 깨진다 */
+    gsap.fromTo(
+      pointValues,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.4, ease: 'power1.out', stagger: 0.05, delay: 0.25 }
     );
   }
 

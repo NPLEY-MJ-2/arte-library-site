@@ -7,7 +7,9 @@
 (function () {
   'use strict';
 
-  var PALETTE = ['#007ade', '#ff2268', '#eab308', '#22c55e', '#8b5cf6'];
+  /* 2026-09-09 재확정: 연도별 스택 막대(관심도/만족도/참여동기/미참여이유/향후참여/참여율)의
+     5색은 레인보우가 아니라 행정통계와 같은 블루 계열 그라데이션 — Figma 실측(관심도 차트) */
+  var PALETTE = ['#173bff', '#007ade', '#39d1ff', '#80f4c2', '#76aaff'];
   var BLUE_ONLY = ['#007ade'];
   var YEAR_LEGEND = ['2021년', '2022년', '2023년', '2024년', '2025년'];
   /* 2026-09-09 "통계_상단바꾼버전"(19906:62325) 재확정 색상 — 기존 레인보우 카테고리색 폐기,
@@ -52,10 +54,13 @@
       {
         id: 'rate', label: '문화예술교육 참여율', approximate: true,
         charts: [
-          { title: '문화예술교육 참여율', subtitle: '전체', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[22], [16], [28], [28], [28]], colors: BLUE_ONLY, scaleMax: 40, showLine: true, showValues: true, pointUnit: '%' },
-          { title: '참여율', subtitle: '성별', unit: '(단위:%)', cats: ['남성', '여성'], series: [[15.4, 22.9], [13, 22.5], [15.8, 26.1], [16.2, 26.3], [16.2, 26.3]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 30 },
-          { title: '참여율', subtitle: '생애주기별', unit: '(단위:%)', cats: ['아동', '청소년', '성인', '중장년', '노년'], series: [[63.6, 9.3, 6.9, 9.1, 9], [70.9, 25.6, 8.9, 6.7, 9.5], [72.1, 27.6, 10.8, 8.2, 9.9], [65.1, 29.1, 12, 8.7, 11.6], [65.1, 29.1, 12, 8.7, 11.6]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 80 },
-          { title: '참여율', subtitle: '분야별', unit: '(단위:%)', cats: ['음악', '미술', '문학', '연극/뮤지컬', '무용', '영화', '공예', '사진/디자인', '전통예술', '기타'], series: [[38.3, 24.5, 4.3, 2.5, 2.1, 1, 1.3, 2.3, 1, 2], [39.7, 26.5, 8.9, 3.7, 1.9, 3.9, 1.9, 1.1, 1.1, 2.5], [35.9, 29.1, 7.5, 4.5, 4.5, 2.8, 2.7, 2.5, 1.9, 1.2], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 60 }
+          { title: '문화예술교육 참여율', subtitle: '전체', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[22], [16], [28], [28], [28]], colors: BLUE_ONLY, scaleMax: 100, steps: 5, showLine: true, showValues: true, pointUnit: '%' },
+          /* 성별/생애주기별/분야별은 X축이 연도, 각 연도 막대는 하위 카테고리(성별/생애주기/분야)를
+             누적 스택 — cats=연도, legend=카테고리로 둬야 Figma와 같은 구조가 된다(예전엔 반대로
+             cats=카테고리·legend=연도라 실제로는 무의미한 조합으로 그려지고 있었음). */
+          { title: '참여율', subtitle: '성별', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[15.4, 22.9], [13, 22.5], [15.8, 26.1], [16.2, 26.3], [16.2, 26.3]], legend: ['남성', '여성'], colors: PALETTE, scaleMax: 50, steps: 5 },
+          { title: '참여율', subtitle: '생애주기별', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[63.6, 9.3, 6.9, 9.1, 9], [70.9, 25.6, 8.9, 6.7, 9.5], [72.1, 27.6, 10.8, 8.2, 9.9], [65.1, 29.1, 12, 8.7, 11.6], [65.1, 29.1, 12, 8.7, 11.6]], legend: ['아동', '청소년', '성인', '중장년', '노년'], colors: PALETTE, scaleMax: 250, steps: 5 },
+          { title: '참여율', subtitle: '분야별', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[38.3, 24.5, 4.3, 2.5, 2.1, 1, 1.3, 2.3, 1, 2], [39.7, 26.5, 8.9, 3.7, 1.9, 3.9, 1.9, 1.1, 1.1, 2.5], [35.9, 29.1, 7.5, 4.5, 4.5, 2.8, 2.7, 2.5, 1.9, 1.2], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1]], legend: ['음악', '미술', '문학', '연극/뮤지컬', '무용', '영화', '공예', '사진/디자인', '전통예술', '기타'], colors: PALETTE.concat(['#8b5cf6', '#ff2268', '#eab308', '#22c55e', '#94a3b8']), scaleMax: 150, steps: 3 }
         ]
       },
       {
@@ -159,7 +164,7 @@
     var body = el('div', cfg.wide ? 'chart-body chart-body--wide' : 'chart-body');
 
     var yAxis = el('div', 'chart-yaxis');
-    var steps = 4;
+    var steps = cfg.steps || 4;
     for (var i = steps; i >= 0; i--) {
       yAxis.appendChild(txt('span', 'yaxis-label', i === 0 ? '0' : String(Math.round((scaleMax * i) / steps))));
     }
@@ -179,16 +184,22 @@
     cats.forEach(function (cat, ci) {
       var cluster = el('div', 'bar-cluster');
       var vals = seriesData[ci] || [];
+      var cumPct = 0;
       vals.forEach(function (val, si) {
-        var col = el('div', 'bar-col');
         var seriesLabel = cfg.legend && cfg.legend[si] ? cfg.legend[si] : '';
-        if (cfg.showValues && !cfg.showLine) col.appendChild(txt('span', 'bar-value', formatValue(val)));
+        var segPct = Math.max((val / scaleMax) * 100, 0);
         var bar = el('div', 'bar');
-        bar.style.height = Math.max((val / scaleMax) * 100, 0) + '%';
+        bar.style.bottom = cumPct + '%';
+        bar.style.height = segPct + '%';
         bar.style.background = colors[si % colors.length];
         attachTooltip(bar, tooltip, plotWrap, cat, seriesLabel, formatValue(val) + pointUnit);
-        col.appendChild(bar);
-        cluster.appendChild(col);
+        cluster.appendChild(bar);
+        cumPct += segPct;
+        if (cfg.showValues && !cfg.showLine && si === vals.length - 1) {
+          var lbl = txt('span', 'bar-value', formatValue(val));
+          lbl.style.bottom = cumPct + '%';
+          cluster.appendChild(lbl);
+        }
       });
       barsRow.appendChild(cluster);
 
@@ -472,7 +483,7 @@
       return col;
     }
     if (state.tab === 'survey') {
-      var col2 = el('div', 'stat-content-col');
+      var col2 = el('div', 'stat-content-col' + (state.surveyItem === 'rate' ? ' stat-content-col--grid' : ''));
       var active2 = SURVEY.items.filter(function (it) { return it.id === state.surveyItem; })[0];
       active2.charts.forEach(function (c) { col2.appendChild(buildBarChart(c)); });
       return col2;
@@ -589,18 +600,22 @@
         gsap.to(path, { strokeDashoffset: 0, duration: finishAt, ease: 'power1.inOut' });
       }
 
-      gsap.fromTo(
-        dots,
-        { opacity: 0, scale: 0 },
-        { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2)', stagger: stagger, delay: finishAt - 0.35, transformOrigin: 'center' }
-      );
+      if (dots.length) {
+        gsap.fromTo(
+          dots,
+          { opacity: 0, scale: 0 },
+          { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2)', stagger: stagger, delay: finishAt - 0.35, transformOrigin: 'center' }
+        );
+      }
       /* opacity만 애니메이션 — pointValues는 CSS transform(translate)으로 위치를 고정하고 있어
          GSAP가 x/y로 transform을 건드리면 그 위치 고정이 깨진다 */
-      gsap.fromTo(
-        pointValues,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.35, ease: 'power1.out', stagger: stagger, delay: finishAt - 0.3 }
-      );
+      if (pointValues.length) {
+        gsap.fromTo(
+          pointValues,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.35, ease: 'power1.out', stagger: stagger, delay: finishAt - 0.3 }
+        );
+      }
     });
   }
 

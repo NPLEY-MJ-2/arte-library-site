@@ -506,7 +506,8 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .ft-policy { display: flex; gap: 40px; font-size: 15px; color: var(--ink-soft); }
 .ft-policy a:hover { text-decoration: underline; }
-.ft-copytxt { font-size: 14px; color: #6d7882; }
+.ft-policy-accent { color: #0078d7; font-weight: 600; }
+.ft-copytxt { font-size: 15px; color: #464c53; }
 
 .ft-identifier { background: var(--ink-soft); height: 40px; display: flex; align-items: center; padding: 0 var(--side); }
 .ft-id-in { display: flex; align-items: center; gap: 16px; color: #cdd1d5; font-size: 13px; }

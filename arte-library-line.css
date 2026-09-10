@@ -83,10 +83,11 @@ h1, h2, h3, h4, p { margin: 0; }
    마스트헤드 / 헤더 / GNB
    ========================================================================== */
 
-.masthead { background: var(--surface-mast); }
+/* mh-in은 hd-in과 같은 좌측 기준선(--side 패딩)에 맞춰야 한다 — 예전에는 마스트헤드를
+   1200px 폭으로 화면 중앙 정렬해서, GNB(hd-in)의 좌측 패딩 기준 시작점과 어긋나 있었다. */
+.masthead { background: var(--surface-mast); padding: 0 var(--side); }
 .mh-in {
-  width: min(1200px, calc(100% - var(--side) * 2));
-  margin-inline: auto;
+  width: min(1200px, 100%);
   display: flex; align-items: center; gap: 8px; height: 32px;
   font-size: 15px; color: var(--ink-soft);
 }
@@ -511,7 +512,9 @@ h1, h2, h3, h4, p { margin: 0; }
 
 .ft-identifier { background: var(--ink-soft); height: 40px; display: flex; align-items: center; padding: 0 var(--side); }
 .ft-id-in { display: flex; align-items: center; gap: 16px; color: #cdd1d5; font-size: 13px; }
-.ft-id-in img { filter: brightness(0) invert(1); opacity: 0.9; }
+/* 로고 이미지는 각자 고유 브랜드 컬러(문화체육관광부 남색+빨강, 아르떼 빨강)를 그대로
+   유지해야 한다 — 예전엔 brightness(0) invert(1)로 전부 흰색으로 뭉개고 있었음 */
+.ft-id-in img { opacity: 0.95; }
 
 /* ==========================================================================
    서브페이지 공통 컴포넌트 (docs / region / ai-search 에서 사용)

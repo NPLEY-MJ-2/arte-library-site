@@ -223,7 +223,7 @@
 @media (max-width: 768px) {
   .sub-in { padding: 16px 0 48px; }
   .sub-title { gap: 20px; }
-  .crumb { font-size: 13px; gap: 6px; }
+  .crumb { display: none; }
   .sub-h1 { margin-bottom: 20px; }
 
   .stat-tab { font-size: 13px; padding: 12px 0; }

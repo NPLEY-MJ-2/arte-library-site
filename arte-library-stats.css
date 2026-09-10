@@ -5,6 +5,11 @@
    블루 단일 액센트/999px 라운드 규칙과 다르게, Figma 확정본을 그대로 따른다).
    ========================================================================== */
 
+/* GNB "통계" 호버·활성 색상 — 공용 --blue-badge(#0428da)는 사이트 전체 다른 컴포넌트에서도
+   쓰여서 여기서 바꾸면 영향 범위가 너무 넓다. 이 페이지에서 로드되는 스타일시트로만
+   범위를 좁혀 재정의(2026-09-10 사용자 확정: rgb(0,122,222)) */
+.gnb a:hover, .gnb a[aria-current='page'] { color: #007ade; }
+
 /* ---- 서브페이지 공통 셸 (docs/region/ai-search 와 동일 패턴, 이 페이지 전용으로 재정의) ---- */
 
 .sub { background: var(--white); }
@@ -159,6 +164,9 @@
 .chart-plot { position: relative; height: 100%; overflow: visible; }
 .gridline { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed #d9d9d9; }
 .chart-bars { position: absolute; inset: 0; display: flex; gap: clamp(4px, 1.2vw, 24px); }
+/* 항목 2~3개뿐인 차트는 고정폭(80px) + 가운데 정렬 — flex:1로 늘리면 막대가 과하게 두꺼워짐 */
+.chart-bars--narrow { justify-content: center; gap: clamp(24px, 6vw, 120px); }
+.chart-bars--narrow .bar-cluster { flex: none; width: 80px; }
 /* 다중 시리즈(연도별 등)는 옆으로 나열이 아니라 누적 스택으로 쌓는다 — 각 .bar는
    자기 구간만큼의 높이를 bottom(누적치)에서부터 절대배치. 리빌 모션은 세그먼트가 아니라
    클러스터(카테고리) 전체를 한 블록으로 scaleY하므로 transform-origin은 클러스터에 둔다. */
@@ -202,6 +210,8 @@
 .chart-xaxis { display: flex; gap: clamp(4px, 1.2vw, 24px); }
 .xaxis-spacer { flex: none; width: 44px; }
 .xaxis-cells { flex: 1; min-width: 0; display: flex; gap: clamp(4px, 1.2vw, 24px); }
+.xaxis-cells--narrow { justify-content: center; gap: clamp(24px, 6vw, 120px); }
+.xaxis-cells--narrow .xaxis-label { flex: none; width: 80px; }
 .xaxis-label { flex: 1; min-width: 0; text-align: center; font-size: 11px; font-weight: 500; color: var(--gray-888); white-space: pre-line; }
 
 /* 행정통계 19개년 차트 — 넓은 폭이라 가로 스크롤 허용 */
@@ -267,6 +277,10 @@
   .chart-yaxis, .xaxis-spacer { width: 36px; font-size: 8px; }
   .xaxis-label { font-size: 7px; }
   .bar-value { font-size: 9px; }
+  .chart-bars--narrow { gap: clamp(16px, 8vw, 40px); }
+  .chart-bars--narrow .bar-cluster { width: 40px; }
+  .xaxis-cells--narrow { gap: clamp(16px, 8vw, 40px); }
+  .xaxis-cells--narrow .xaxis-label { width: 40px; }
   .chart-bars, .chart-xaxis, .xaxis-cells { gap: 3px; }
 
   .chart-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; border-width: 1.5px; }

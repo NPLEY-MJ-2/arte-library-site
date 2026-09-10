@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'ArteBasic';
-  src: url('fonts/ArteBasic-Regular.otf') format('opentype');
+  src: url('../../design-system/fonts/ArteBasic-Regular.otf') format('opentype');
   font-weight: 400 900;
   font-display: swap;
 }
@@ -90,7 +90,7 @@ h1, h2, h3, h4, p { margin: 0; }
   display: flex; align-items: center; gap: 8px; height: 32px;
   font-size: 15px; color: var(--ink-soft);
 }
-.mh-flag { width: 24px; height: 24px; flex: none; }
+.mh-flag { width: 24px; height: 16px; flex: none; }
 
 .hd { background: var(--white); }
 .hd-in {

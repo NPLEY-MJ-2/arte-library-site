@@ -22,7 +22,7 @@
         실측이 아닌 항목은 각 데이터 객체에 approximate:true 로 표시한다.
      -------------------------------------------------------------------- */
 
-  var ADMIN_YEARS = ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026 1분기'];
+  var ADMIN_YEARS = ['2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026\n1분기'];
 
   var ADMIN = {
     items: [
@@ -58,64 +58,75 @@
           /* 성별/생애주기별/분야별은 X축이 연도, 각 연도 막대는 하위 카테고리(성별/생애주기/분야)를
              누적 스택 — cats=연도, legend=카테고리로 둬야 Figma와 같은 구조가 된다(예전엔 반대로
              cats=카테고리·legend=연도라 실제로는 무의미한 조합으로 그려지고 있었음). */
-          { title: '참여율', subtitle: '성별', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[15.4, 22.9], [13, 22.5], [15.8, 26.1], [16.2, 26.3], [16.2, 26.3]], legend: ['남성', '여성'], colors: PALETTE, scaleMax: 50, steps: 5 },
+          /* 성별 여성은 Figma 실측(#007ade)보다 사용자 지정색(#80f4c2, rgb(128,244,194))을
+             명시적으로 우선 적용 — 2026-09-10 사용자 확정 */
+          { title: '참여율', subtitle: '성별', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[15.4, 22.9], [13, 22.5], [15.8, 26.1], [16.2, 26.3], [16.2, 26.3]], legend: ['남성', '여성'], colors: ['#173bff', '#80f4c2'], scaleMax: 50, steps: 5 },
           { title: '참여율', subtitle: '생애주기별', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[63.6, 9.3, 6.9, 9.1, 9], [70.9, 25.6, 8.9, 6.7, 9.5], [72.1, 27.6, 10.8, 8.2, 9.9], [65.1, 29.1, 12, 8.7, 11.6], [65.1, 29.1, 12, 8.7, 11.6]], legend: ['아동', '청소년', '성인', '중장년', '노년'], colors: PALETTE, scaleMax: 250, steps: 5 },
-          { title: '참여율', subtitle: '분야별', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[38.3, 24.5, 4.3, 2.5, 2.1, 1, 1.3, 2.3, 1, 2], [39.7, 26.5, 8.9, 3.7, 1.9, 3.9, 1.9, 1.1, 1.1, 2.5], [35.9, 29.1, 7.5, 4.5, 4.5, 2.8, 2.7, 2.5, 1.9, 1.2], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1]], legend: ['음악', '미술', '문학', '연극/뮤지컬', '무용', '영화', '공예', '사진/디자인', '전통예술', '기타'], colors: PALETTE.concat(['#8b5cf6', '#ff2268', '#eab308', '#22c55e', '#94a3b8']), scaleMax: 150, steps: 3 }
+          /* 분야별 10색은 Figma 범례 실측(미술/음악/무용/문학/전통문화/연극/만화/영화/사진/국악 순) */
+          { title: '참여율', subtitle: '분야별', unit: '(단위:%)', cats: ['2021', '2022', '2023', '2024', '2025'], series: [[38.3, 24.5, 4.3, 2.5, 2.1, 1, 1.3, 2.3, 1, 2], [39.7, 26.5, 8.9, 3.7, 1.9, 3.9, 1.9, 1.1, 1.1, 2.5], [35.9, 29.1, 7.5, 4.5, 4.5, 2.8, 2.7, 2.5, 1.9, 1.2], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1], [37.3, 27.8, 6.7, 4.2, 2.3, 1.5, 2.5, 1.9, 0.5, 1]], legend: ['음악', '미술', '문학', '연극/뮤지컬', '무용', '영화', '공예', '사진/디자인', '전통예술', '기타'], colors: ['#173bff', '#007ade', '#39d1ff', '#80f4c2', '#76aaff', '#b4f5a7', '#ffef75', '#173bff', '#007ade', '#39d1ff'], scaleMax: 150, steps: 3 }
         ]
       },
       {
         id: 'time-cost', label: '문화예술교육 참여 시간 및 비용',
         charts: [
           { title: '연간 참여 시간', unit: '(단위:시간)', cats: ['2021년', '2022년', '2023년', '2024년', '2025년'], series: [[78.5], [89.8], [64.5], [61.6], [61.6]], colors: BLUE_ONLY, scaleMax: 100, showValues: true, showLine: true, pointUnit: '시간' },
-          { title: '연간 참여 비용', unit: '(단위:만원)', cats: ['2021년', '2022년', '2023년', '2024년', '2025년'], series: [[61.4], [53.5], [46.2], [44.7], [44.7]], colors: BLUE_ONLY, scaleMax: 100, showValues: true, showLine: true, pointUnit: '만원' }
+          { title: '연간 참여 비용', unit: '(단위:만원)', cats: ['2021년', '2022년', '2023년', '2024년', '2025년'], series: [[61.4], [53.5], [46.2], [44.7], [44.7]], colors: ['#173bff'], scaleMax: 100, showValues: true, showLine: true, pointUnit: '만원' }
         ]
       },
       {
         id: 'interest-satisfaction', label: '문화예술교육 관심도 및 만족도',
         charts: [
-          { title: '관심도', subtitle: '참여자', unit: '(단위:%)', cats: ['매우 그렇다', '대체로 그렇다', '보통', '대체로 아니다', '전혀 아니다'], series: [[35, 40, 15, 6, 4], [33, 39, 15, 6, 4], [32, 38, 15, 6, 4], [31, 37, 15, 6, 4], [30, 36, 15, 6, 4]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 100 },
-          { title: '만족도', unit: '(단위:%)', cats: ['매우 만족', '대체로 만족', '보통', '대체로 불만족', '매우 불만족'], series: [[38, 42, 13, 5, 2], [36, 41, 13, 5, 2], [35, 40, 14, 5, 2], [34, 39, 15, 5, 2], [33, 38, 16, 5, 2]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 100 }
+          { title: '관심도', subtitle: '참여자', unit: '(단위:%)', cats: ['매우 그렇다', '대체로 그렇다', '보통', '대체로 아니다', '전혀 아니다'], series: [[35, 40, 15, 6, 4], [33, 39, 15, 6, 4], [32, 38, 15, 6, 4], [31, 37, 15, 6, 4], [30, 36, 15, 6, 4]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 200 },
+          { title: '만족도', unit: '(단위:%)', cats: ['매우 만족', '대체로 만족', '보통', '대체로 불만족', '매우 불만족'], series: [[38, 42, 13, 5, 2], [36, 41, 13, 5, 2], [35, 40, 14, 5, 2], [34, 39, 15, 5, 2], [33, 38, 16, 5, 2]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 250 }
         ]
       },
       {
         id: 'motivation', label: '문화예술교육 참여 동기',
         charts: [
-          { title: '학교문화예술교육(정규교과/전공과정 외) 참여동기', subtitle: '복수응답', unit: '(단위:%)', cats: ['개인의 즐거움', '교양함양및지식습득', '진로직업직무능력개발', '친목도모', '추천혹은독려'], series: [[78, 65, 35, 42, 25], [75, 63, 33, 40, 24], [72, 60, 31, 38, 23], [70, 58, 30, 37, 22], [68, 56, 28, 36, 21]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 100 },
-          { title: '사회문화예술교육 참여동기', subtitle: '복수응답', unit: '(단위:%)', cats: ['개인의 즐거움', '교양함양및지식습득', '건강관리', '친목도모', '추천혹은독려', '진로직업직무능력개발'], series: [[80, 60, 55, 48, 22, 20], [78, 58, 54, 47, 21, 19], [76, 57, 52, 46, 20, 18], [74, 56, 51, 45, 19, 17], [73, 55, 50, 44, 18, 16]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 100 }
+          { title: '학교문화예술교육(정규교과/전공과정 외) 참여동기', subtitle: '복수응답', unit: '(단위:%)', cats: ['개인의 즐거움', '교양함양및지식습득', '진로직업직무능력개발', '친목도모', '추천혹은독려'], series: [[78, 65, 35, 42, 25], [75, 63, 33, 40, 24], [72, 60, 31, 38, 23], [70, 58, 30, 37, 22], [68, 56, 28, 36, 21]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 450 },
+          { title: '사회문화예술교육 참여동기', subtitle: '복수응답', unit: '(단위:%)', cats: ['개인의 즐거움', '교양함양및지식습득', '건강관리', '친목도모', '추천혹은독려', '진로직업직무능력개발'], series: [[80, 60, 55, 48, 22, 20], [78, 58, 54, 47, 21, 19], [76, 57, 52, 46, 20, 18], [74, 56, 51, 45, 19, 17], [73, 55, 50, 44, 18, 16]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 450 }
         ]
       },
       {
         id: 'non-participation', label: '문화예술교육 미참여 이유',
         charts: [
-          { title: '문화예술교육 미참여 이유', subtitle: '복수응답', unit: '(단위:%)', cats: ['시간이 없어서', '프로그램이 없어서', '정보가 부족해서', '동기,자신감 부족', '시설이 없어서'], series: [[72, 58, 45, 38, 30], [70, 57, 44, 37, 29], [68, 56, 43, 36, 28], [67, 55, 42, 35, 27], [66, 54, 41, 34, 26]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 100 }
+          { title: '문화예술교육 미참여 이유', subtitle: '복수응답', unit: '(단위:%)', cats: ['시간이 없어서', '프로그램이 없어서', '정보가 부족해서', '동기,자신감 부족', '시설이 없어서'], series: [[72, 58, 45, 38, 30], [70, 57, 44, 37, 29], [68, 56, 43, 36, 28], [67, 55, 42, 35, 27], [66, 54, 41, 34, 26]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 400 }
         ]
       },
       {
         id: 'future', label: '향후 문화예술교육 참여 관련',
         charts: [
-          { title: '향후 문화예술교육 참여 의향률 및 비용지불 의향률', unit: '(단위:%)', cats: ['향후 참여 의향률', '향후 비용지불 의향률'], series: [[22.8, 18.2], [24.5, 19.5], [26.1, 20.8], [27.8, 22.1], [29.4, 23.4]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 40, transpose: true },
-          { title: '향후 참여 희망 분야', subtitle: '복수응답', unit: '(단위:%)', cats: ['생활문화예술', '전통예술', '시각예술', '공연예술', '디자인·공예', '문학'], series: [[38, 22, 18, 15, 12, 8], [36, 21, 17, 15, 12, 8], [35, 20, 17, 14, 11, 7], [34, 20, 16, 14, 11, 7], [33, 19, 16, 13, 10, 7]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 60 },
-          { title: '향후 문화예술교육 활성화를 위해 정부가 노력해야 할 사항', subtitle: '복수응답', unit: '(단위:%)', cats: ['교육비 지원 확대', '프로그램 다양화', '접근성 개선(장소,시간)', '정보제공 확대', '강사 전문성 강화'], series: [[52, 45, 38, 30, 25], [50, 44, 37, 29, 24], [49, 43, 36, 28, 24], [48, 42, 35, 28, 23], [46, 41, 34, 27, 22]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 60 }
+          { title: '향후 문화예술교육 참여 의향률 및 비용지불 의향률', unit: '(단위:%)', cats: ['향후 참여 의향률', '향후 비용지불 의향률'], series: [[22.8, 18.2], [24.5, 19.5], [26.1, 20.8], [27.8, 22.1], [29.4, 23.4]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 150, transpose: true },
+          { title: '향후 참여 희망 분야', subtitle: '복수응답', unit: '(단위:%)', cats: ['생활문화예술', '전통예술', '시각예술', '공연예술', '디자인·공예', '문학'], series: [[38, 22, 18, 15, 12, 8], [36, 21, 17, 15, 12, 8], [35, 20, 17, 14, 11, 7], [34, 20, 16, 14, 11, 7], [33, 19, 16, 13, 10, 7]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 200 },
+          { title: '향후 문화예술교육 활성화를 위해 정부가 노력해야 할 사항', subtitle: '복수응답', unit: '(단위:%)', cats: ['교육비 지원 확대', '프로그램 다양화', '접근성 개선(장소,시간)', '정보제공 확대', '강사 전문성 강화'], series: [[52, 45, 38, 30, 25], [50, 44, 37, 29, 24], [49, 43, 36, 28, 24], [48, 42, 35, 28, 23], [46, 41, 34, 27, 22]], legend: YEAR_LEGEND, colors: PALETTE, scaleMax: 300 }
         ]
       }
     ]
   };
 
+  /* 2026-09-10: 자료통계 KPI 카드도 행정통계처럼 클릭해서 항목을 전환한다. Figma 기본 화면은
+     "문서"가 활성 상태이고 문서 전체 차트가 보인다(19906:62982) — 추천/지역별정보는 클릭 시
+     보이는 별도 화면(19906:64773)에 둘이 같이 묶여 있다. 도서/영상은 Figma에 전용 차트 화면이
+     없어 자기 KPI 총합을 단일 막대로 보여주는 걸로 대체(approximate:true로 표시). */
   var DATA = {
-    /* Figma 확정본(19679:885)은 "추천" 카드만 보라 배경 활성 상태로 고정되어 있고,
-       나머지 카드는 각자 값 텍스트만 고유 색(문서=블루/도서=옐로/영상=그린/지역별정보=핑크). */
     kpi: [
-      { label: '문서', value: '4,793', color: '#007ade' },
-      { label: '도서', value: '12,374', color: '#eab308' },
-      { label: '영상', value: '2,063', color: '#16a34a' },
-      { label: '추천', value: '6,444', color: '#712eec', active: true },
-      { label: '지역별 정보', value: '6,314', color: '#76aaff' }
+      { id: 'doc', label: '문서', value: '4,793', numValue: 4793, color: '#007ade' },
+      { id: 'book', label: '도서', value: '12,374', numValue: 12374, color: '#eab308' },
+      { id: 'video', label: '영상', value: '2,063', numValue: 2063, color: '#16a34a' },
+      { id: 'recommend', label: '추천', value: '6,444', numValue: 6444, color: '#712eec' },
+      { id: 'region', label: '지역별 정보', value: '6,314', numValue: 6314, color: '#76aaff' }
     ],
-    charts: [
-      { title: '추천 전체', unit: '(단위: 건)', color: '#712eec', cats: ['주제별큐레이션', '프로그램아카이브', '최신인기자료', '북큐레이션', '추천도서'], values: [137, 137, 137, 137, 137], scaleMax: 200 },
-      { title: '지역별 정보 전체', unit: '(단위: 건)', color: '#76aaff', cats: ['프로그램', '운영단체', '지역별자료'], values: [3095, 1441, 1778], scaleMax: 4000 }
-    ]
+    charts: {
+      doc: [
+        { title: '문서', subtitle: '전체', unit: '(단위: 건)', color: '#007ade', cats: ['문화예술교육현장', '연구보고서', '연수결과자료집', '축제학술행사기록', '문화예술교육사', '연차보고서', '국제교류', '기타'], values: [2107, 1199, 2107, 1199, 2107, 1199, 2107, 1199], scaleMax: 5000, steps: 5 }
+      ],
+      recommend: [
+        { title: '추천 전체', unit: '(단위: 건)', color: '#712eec', cats: ['주제별큐레이션', '프로그램아카이브', '최신인기자료', '북큐레이션', '추천도서'], values: [137, 137, 137, 137, 137], scaleMax: 200 },
+        { title: '지역별 정보 전체', unit: '(단위: 건)', color: '#76aaff', cats: ['프로그램', '운영단체', '지역별자료'], values: [3095, 1441, 1778], scaleMax: 4000 }
+      ]
+    }
   };
+  DATA.charts.region = DATA.charts.recommend;
 
   /* --------------------------------------------------------------------
      2. DOM 빌더
@@ -182,7 +193,7 @@
     var barsRow = el('div', 'chart-bars');
     var linePoints = [];
     cats.forEach(function (cat, ci) {
-      var cluster = el('div', 'bar-cluster');
+      var cluster = el('div', 'bar-cluster' + (cfg.legend ? ' bar-cluster--stacked' : ''));
       var vals = seriesData[ci] || [];
       var cumPct = 0;
       vals.forEach(function (val, si) {
@@ -198,6 +209,7 @@
         if (cfg.showValues && !cfg.showLine && si === vals.length - 1) {
           var lbl = txt('span', 'bar-value', formatValue(val));
           lbl.style.bottom = cumPct + '%';
+          lbl.style.color = colors[si % colors.length];
           cluster.appendChild(lbl);
         }
       });
@@ -206,6 +218,7 @@
       if (cfg.showLine) {
         var topVal = vals[0] || 0;
         linePoints.push({
+          ci: ci,
           xPct: ((ci + 0.5) / cats.length) * 100,
           yPct: 100 - Math.max((topVal / scaleMax) * 100, 0),
           val: topVal,
@@ -279,6 +292,7 @@
       dot.style.left = p.xPct + '%';
       dot.style.top = p.yPct + '%';
       dot.style.borderColor = color;
+      dot.__idx = p.ci;
       attachTooltip(dot, tooltip, plotWrap, p.cat, '', formatValue(p.val) + pointUnit);
       frag.appendChild(dot);
       if (showValues) {
@@ -286,6 +300,7 @@
         lbl.style.left = p.xPct + '%';
         lbl.style.top = p.yPct + '%';
         lbl.style.color = color;
+        lbl.__idx = p.ci;
         frag.appendChild(lbl);
       }
     });
@@ -336,6 +351,12 @@
     var card = el('a', 'kpi-card' + (isActive ? ' is-active' : ''));
     card.href = '#' + item.id;
     card.style.setProperty('--kpi-color', item.color);
+    card.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (state.adminItem === item.id) return;
+      state.adminItem = item.id;
+      renderShell();
+    });
 
     var stack = el('span', 'kpi-stack');
     var labelRow = el('span', 'kpi-label-row');
@@ -347,9 +368,17 @@
     return card;
   }
 
-  function buildDataKpiCard(d) {
-    var card = el('div', 'data-kpi-card' + (d.active ? ' is-active' : ''));
+  function buildDataKpiCard(d, activeId) {
+    var isActive = d.id === activeId;
+    var card = el('a', 'data-kpi-card' + (isActive ? ' is-active' : ''));
+    card.href = '#' + d.id;
     card.style.setProperty('--data-kpi-color', d.color);
+    card.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (state.dataItem === d.id) return;
+      state.dataItem = d.id;
+      renderShell();
+    });
     var body = el('div', 'data-kpi-body');
     body.appendChild(txt('span', 'data-kpi-label', d.label));
     body.appendChild(txt('strong', 'data-kpi-value', d.value));
@@ -364,7 +393,7 @@
   var root = document.getElementById('stats-root');
   if (!root) return;
 
-  var state = { tab: 'admin', adminItem: 'lecturers', surveyItem: 'rate' };
+  var state = { tab: 'admin', adminItem: 'lecturers', surveyItem: 'rate', dataItem: 'doc' };
 
   function renderShell() {
     root.innerHTML = '';
@@ -491,12 +520,16 @@
     // data tab
     var wrap = el('div', 'stat-content-col stat-content-col--full');
     var kpiRow2 = el('div', 'data-kpi-row');
-    DATA.kpi.forEach(function (d) { kpiRow2.appendChild(buildDataKpiCard(d)); });
+    DATA.kpi.forEach(function (d) { kpiRow2.appendChild(buildDataKpiCard(d, state.dataItem)); });
     wrap.appendChild(kpiRow2);
     var chartsRow = el('div', 'data-charts-row');
-    DATA.charts.forEach(function (c, ci) {
+    var activeKpi = DATA.kpi.filter(function (d) { return d.id === state.dataItem; })[0];
+    var charts = DATA.charts[state.dataItem] || [
+      { title: activeKpi.label, subtitle: '전체', unit: '(단위: 건)', color: activeKpi.color, cats: [activeKpi.label], values: [activeKpi.numValue], scaleMax: Math.ceil(activeKpi.numValue * 1.3 / 1000) * 1000 }
+    ];
+    charts.forEach(function (c, ci) {
       if (ci > 0) chartsRow.appendChild(el('div', 'data-chart-divider'));
-      chartsRow.appendChild(buildBarChart({ title: c.title, unit: c.unit, cats: c.cats, values: c.values, color: c.color, scaleMax: c.scaleMax, showValues: true, noBorder: true }));
+      chartsRow.appendChild(buildBarChart({ title: c.title, subtitle: c.subtitle, unit: c.unit, cats: c.cats, values: c.values, color: c.color, scaleMax: c.scaleMax, steps: c.steps, showValues: true, noBorder: true }));
     });
     wrap.appendChild(chartsRow);
     return wrap;
@@ -549,17 +582,42 @@
     var hasGsap = typeof gsap !== 'undefined';
 
     Array.prototype.forEach.call(cards, function (card) {
-      var bars = card.querySelectorAll('.bar');
+      var clusters = card.querySelectorAll('.bar-cluster');
       var path = card.querySelector('.chart-line-path');
       var dots = card.querySelectorAll('.chart-dot');
       var pointValues = card.querySelectorAll('.chart-point-value');
-      if (!bars.length) return;
+      if (!clusters.length) return;
+
+      /* 각 bar-cluster의 실제 렌더 중심(%)을 측정한다 — flex gap 때문에 (index+0.5)/N 같은
+         단순 계산은 gap이 클수록 실제 막대 중심에서 어긋난다. 점/값라벨/꺾은선 전부 이 실측
+         중심에 맞춰 다시 배치한다. */
+      var plot = card.querySelector('.chart-plot');
+      var plotRect = plot ? plot.getBoundingClientRect() : null;
+      var centers = [];
+      if (plotRect && plotRect.width) {
+        Array.prototype.forEach.call(clusters, function (c) {
+          var r = c.getBoundingClientRect();
+          centers.push(((r.left + r.width / 2) - plotRect.left) / plotRect.width * 100);
+        });
+      }
+      function centerPctFor(idx) {
+        return (idx != null && centers[idx] != null) ? centers[idx] : null;
+      }
+
+      Array.prototype.forEach.call(dots, function (d) {
+        var pct = centerPctFor(d.__idx);
+        if (pct != null) d.style.left = pct + '%';
+      });
+      Array.prototype.forEach.call(pointValues, function (l) {
+        var pct = centerPctFor(l.__idx);
+        if (pct != null) l.style.left = pct + '%';
+      });
 
       /* 꺾은선을 %기반 viewBox 대신 실제 렌더 픽셀 크기로 다시 그린다 — 차트마다 가로세로
          비율이 크게 다른 상태에서 %+non-scaling-stroke를 쓰면 선이 중간에 끊겨 보이는
-         브라우저 렌더링 문제가 있어, 레이아웃이 끝난 뒤(clientWidth/Height) 정확한 좌표로 교체 */
+         브라우저 렌더링 문제가 있어, 레이아웃이 끝난 뒤(clientWidth/Height) 정확한 좌표로 교체.
+         x좌표도 위에서 측정한 실제 막대 중심을 그대로 쓴다. */
       if (path && path.__linePoints) {
-        var plot = path.closest('.chart-plot');
         var w = plot ? plot.clientWidth : 0;
         var h = plot ? plot.clientHeight : 0;
         if (w > 0 && h > 0) {
@@ -567,31 +625,35 @@
           path.parentNode.removeAttribute('preserveAspectRatio');
           path.removeAttribute('vector-effect');
           path.setAttribute('d', path.__linePoints.map(function (p, i) {
-            return (i === 0 ? 'M' : 'L') + ((p.xPct / 100) * w) + ',' + ((p.yPct / 100) * h);
+            var xPct = centerPctFor(p.ci);
+            if (xPct == null) xPct = p.xPct;
+            return (i === 0 ? 'M' : 'L') + ((xPct / 100) * w) + ',' + ((p.yPct / 100) * h);
           }).join(' '));
         }
       }
 
       if (reduceMotion || !hasGsap) {
-        Array.prototype.forEach.call(bars, function (b) { b.style.transform = 'none'; });
+        Array.prototype.forEach.call(clusters, function (c) { c.style.transform = 'none'; });
         if (path) { path.style.strokeDasharray = 'none'; path.style.strokeDashoffset = '0'; }
         Array.prototype.forEach.call(dots, function (d) { d.style.opacity = 1; });
         Array.prototype.forEach.call(pointValues, function (l) { l.style.opacity = 1; });
         return;
       }
 
-      gsap.killTweensOf(bars);
+      gsap.killTweensOf(clusters);
       if (path) gsap.killTweensOf(path);
       gsap.killTweensOf(dots);
       gsap.killTweensOf(pointValues);
 
       /* 막대 리빌과 꺾은선 드로잉이 항목 개수와 무관하게 같은 시점에 끝나도록, 카드마다
-         막대 스태거 총 시간을 계산해 꺾은선 duration을 그 값에 맞춘다 */
+         스태거 총 시간을 계산해 꺾은선 duration을 그 값에 맞춘다. 스택 막대는 세그먼트별이
+         아니라 클러스터(카테고리) 단위로 통째로 아래→위로 올라오고, 카테고리 간에만 좌→우로
+         순차 등장한다. */
       var barDuration = 0.6;
-      var stagger = bars.length > 1 ? Math.min(0.4, 0.4 / bars.length) : 0;
-      var finishAt = stagger * (bars.length - 1) + barDuration;
+      var stagger = clusters.length > 1 ? Math.min(0.4, 0.4 / clusters.length) : 0;
+      var finishAt = stagger * (clusters.length - 1) + barDuration;
 
-      gsap.fromTo(bars, { scaleY: 0 }, { scaleY: 1, duration: barDuration, ease: 'power2.out', stagger: stagger });
+      gsap.fromTo(clusters, { scaleY: 0 }, { scaleY: 1, duration: barDuration, ease: 'power2.out', stagger: stagger });
 
       if (path && typeof path.getTotalLength === 'function') {
         var len = path.getTotalLength();

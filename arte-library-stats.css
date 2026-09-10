@@ -102,7 +102,7 @@
 .kpi-card {
   --kpi-color: #007ade;
   flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center;
-  padding: 20px 24px; background: #f9f9f9; color: inherit; text-align: left;
+  padding: 20px 24px; background: #f9f9f9; color: inherit; text-align: left; text-decoration: none;
 }
 .kpi-card.is-active { background: var(--white); border: 2px solid var(--ink); }
 .kpi-stack { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
@@ -118,7 +118,7 @@
   --data-kpi-color: #007ade;
   flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
   height: 120px; padding: clamp(16px, 1.67vw, 32px) 8px;
-  background: #f9f9f9; color: #111;
+  background: #f9f9f9; color: #111; text-decoration: none;
 }
 .data-kpi-card.is-active { background: var(--white); border: 2px solid var(--ink); }
 .data-kpi-body { display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
@@ -157,12 +157,15 @@
 
 .chart-plot-wrap { flex: 1; min-width: 0; position: relative; }
 .chart-plot { position: relative; height: 100%; overflow: visible; }
-.gridline { position: absolute; left: 0; right: 0; height: 1px; background: #ededed; }
+.gridline { position: absolute; left: 0; right: 0; height: 0; border-top: 1px dashed #d9d9d9; }
 .chart-bars { position: absolute; inset: 0; display: flex; gap: clamp(4px, 1.2vw, 24px); }
 /* 다중 시리즈(연도별 등)는 옆으로 나열이 아니라 누적 스택으로 쌓는다 — 각 .bar는
-   자기 구간만큼의 높이를 bottom(누적치)에서부터 절대배치 */
-.bar-cluster { position: relative; flex: 1; min-width: 0; height: 100%; }
-.bar { position: absolute; left: 0; right: 0; transform-origin: bottom; cursor: pointer; }
+   자기 구간만큼의 높이를 bottom(누적치)에서부터 절대배치. 리빌 모션은 세그먼트가 아니라
+   클러스터(카테고리) 전체를 한 블록으로 scaleY하므로 transform-origin은 클러스터에 둔다. */
+.bar-cluster { position: relative; flex: 1; min-width: 0; height: 100%; transform-origin: bottom; }
+.bar { position: absolute; left: 0; right: 0; cursor: pointer; }
+/* 스택된 세그먼트 사이는 1px 흰 라인으로 살짝 떨어져 보이게 구분 */
+.bar-cluster--stacked .bar { border-top: 1px solid #fff; box-sizing: border-box; }
 .bar-value {
   position: absolute; left: 50%; transform: translate(-50%, calc(-100% - 4px));
   font-size: 12px; font-weight: 500; color: var(--ink); white-space: nowrap;
@@ -199,7 +202,7 @@
 .chart-xaxis { display: flex; gap: clamp(4px, 1.2vw, 24px); }
 .xaxis-spacer { flex: none; width: 44px; }
 .xaxis-cells { flex: 1; min-width: 0; display: flex; gap: clamp(4px, 1.2vw, 24px); }
-.xaxis-label { flex: 1; min-width: 0; text-align: center; font-size: 11px; font-weight: 500; color: var(--gray-888); }
+.xaxis-label { flex: 1; min-width: 0; text-align: center; font-size: 11px; font-weight: 500; color: var(--gray-888); white-space: pre-line; }
 
 /* 행정통계 19개년 차트 — 넓은 폭이라 가로 스크롤 허용 */
 .admin-chart-scroll { overflow-x: auto; }

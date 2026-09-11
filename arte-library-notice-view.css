@@ -1,0 +1,82 @@
+/* ==========================================================================
+   arte 라이브러리 — 누리집 안내 · 공지/소식 (상세) 페이지 전용
+   Figma 'sub_누리집 안내_공지/소식_02'(weJUFzS3ekDRZrzokWEe3e / 19442:22358) 1:1.
+   공통(헤더·푸터·토큰)은 arte-library-line.css, 타이틀·탭은 arte-library-docs.css,
+   게시판 구분선(.nt-rule 계열)은 arte-library-notice.css 재사용.
+   ========================================================================== */
+
+.ntv { display: flex; flex-direction: column; gap: 24px; width: 100%; }
+
+/* ---- 제목 + 액션 아이콘 -------------------------------------------------- */
+
+.ntv-top {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  padding-bottom: 12px; border-bottom: 2px solid var(--ink);
+}
+.ntv-title-wrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.ntv-title { font-size: clamp(20px, 1.67vw, 32px); font-weight: 600; line-height: 1.5; color: var(--ink); }
+.ntv-date { font-size: 18px; font-weight: 500; color: var(--gray-888); }
+
+.ntv-actions { display: flex; align-items: center; gap: 6px; }
+.ntv-ic {
+  width: 32px; height: 32px; flex: none; display: grid; place-items: center; padding: 0;
+  border: 1px solid var(--gray-888); border-radius: 999px; background: var(--white);
+}
+.ntv-ic:hover { border-color: var(--ink); }
+.ntv-ic img { width: 20px; height: 20px; }
+.ntv-sns { width: 32px; height: 32px; flex: none; border: 0; background: none; padding: 0; display: block; }
+.ntv-sns:hover { opacity: 0.8; }
+.ntv-scrap {
+  display: inline-flex; align-items: center; gap: 3px;
+  border: 1px solid var(--blue-badge); border-radius: 999px; background: var(--white);
+  padding: 5px 10px 5px 12px; font-size: 14px; font-weight: 500; line-height: 1.4; color: var(--blue-badge);
+}
+.ntv-scrap:hover { background: var(--blue-badge); color: #fff; }
+.ntv-scrap[aria-pressed='true'] { background: var(--blue-badge); color: #fff; }
+
+/* ---- 본문 ----------------------------------------------------------------- */
+
+.ntv-body { font-size: clamp(15px, 1.04vw, 20px); font-weight: 500; color: var(--gray-555); line-height: 1.5; }
+.ntv-body p { margin: 0; }
+
+/* ---- 이전글 / 다음글 ------------------------------------------------------ */
+
+.ntv-nav { margin-top: 16px; display: flex; flex-direction: column; gap: 30px; width: 100%; }
+.ntv-nav-row { display: flex; align-items: center; gap: 24px; width: 100%; background: none; border: 0; text-align: left; }
+a.ntv-nav-row:hover .ntv-nav-t { color: var(--blue-badge); }
+.ntv-nav-label {
+  display: inline-flex; align-items: center; gap: 7px; flex: none; width: 76px;
+  font-size: 20px; font-weight: 700; color: var(--ink);
+}
+.ntv-nav-arw { width: 20px; height: 20px; }
+.ntv-nav-arw--up { transform: rotate(-90deg); }
+.ntv-nav-arw--down { transform: rotate(90deg); }
+.ntv-nav-t {
+  flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 20px; font-weight: 600; color: var(--ink);
+}
+.ntv-nav-t--muted { font-weight: 500; color: var(--gray-888); }
+.ntv-nav-d { flex: none; font-size: 20px; font-weight: 500; color: var(--gray-555); white-space: nowrap; }
+.ntv-nav-d--hidden { opacity: 0; }
+
+/* ---- 목록 버튼 ------------------------------------------------------------ */
+
+.ntv-foot { margin-top: 24px; display: flex; justify-content: flex-end; width: 100%; }
+.ntv-list-btn {
+  display: inline-flex; border: 0; background: var(--ink); color: #fff;
+  padding: 6px 16px; font-size: 18px; font-weight: 600;
+}
+.ntv-list-btn:hover { background: var(--blue-badge); }
+
+/* ---- 모바일 ---------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .ntv-top { padding-bottom: 16px; }
+  .ntv-title-wrap { gap: 8px; }
+  .ntv-date { font-size: 13px; }
+  .ntv-actions { gap: 4px; }
+  .ntv-scrap { font-size: 12px; padding: 4px 8px 4px 10px; }
+  .ntv-nav { gap: 20px; }
+  .ntv-nav-label { width: 60px; font-size: 15px; }
+  .ntv-nav-t, .ntv-nav-d { font-size: 14px; }
+}

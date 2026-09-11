@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>arte 라이브러리 — 아카이브 · 도서</title>
+<title>arte 라이브러리 — 누리집 안내 · 공지/소식</title>
 <!--
-  arte 라이브러리 — 아카이브 · 도서
-  · Figma 'sub_아카이브 · 도서'(fileKey MggyO8qQHuiYJRDenEWqlL / node 19388:1376) 1:1 재구현 (2026-09-04)
-  · 이미지: Figma 실제 에셋(assets/)
-  · Figma 내 잔존 표기(브레드크럼·탭의 "문서")는 사용자 확정 네이밍(아카이브)으로 통일
+  arte 라이브러리 — 누리집 안내 · 공지/소식 (목록)
+  · Figma 'sub_누리집 안내_공지/소식_01'(fileKey weJUFzS3ekDRZrzokWEe3e / node 19442:22180) 1:1 재구현 (2026-09-11)
+  · 공통 셸(헤더·푸터·토큰)은 arte-library-line.css, 서브페이지 타이틀·탭·필터·페이지네이션은
+    arte-library-docs.css 공유 컴포넌트 재사용 (video/region/ai-search/reco 와 동일 패턴)
+  · 게시판형 목록(배지+제목+날짜)만 이 페이지 전용(arte-library-notice.css)으로 신규 작성
 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <link rel="stylesheet" href="arte-library-line.css">
 <link rel="stylesheet" href="arte-library-docs.css">
+<link rel="stylesheet" href="arte-library-notice.css">
 </head>
 <body>
 
@@ -34,12 +36,12 @@
     </a>
 
     <nav class="gnb" aria-label="주 메뉴">
-      <a href="arte-library-docs.html" aria-current="page">아카이브·도서</a>
+      <a href="arte-library-docs.html">아카이브·도서</a>
       <a href="arte-library-video.html">영상</a>
       <a href="arte-library-reco.html">추천</a>
       <a href="arte-library-region.html">지역별 정보</a>
       <a href="arte-library-stats.html">통계</a>
-      <a href="arte-library-notice.html">누리집 안내</a>
+      <a href="arte-library-notice.html" aria-current="page">누리집 안내</a>
     </nav>
 
     <div class="hd-btn">
@@ -68,17 +70,27 @@
       <nav class="crumb" aria-label="현재 위치">
         <a href="arte-library-line.html">HOME</a>
         <img src="assets/icon-crumb.svg" alt="" width="12" height="12">
-        <span>아카이브·도서</span>
+        <span>누리집 안내</span>
         <img src="assets/icon-crumb.svg" alt="" width="12" height="12">
-        <strong>아카이브</strong>
+        <strong>공지/소식</strong>
       </nav>
 
       <div class="sub-title-b">
-        <h1 class="sub-h1">아카이브 · 도서</h1>
-        <nav class="sub-tabs" aria-label="아카이브·도서 분류">
-          <a href="arte-library-docs.html" aria-current="page">아카이브</a>
-          <a href="#">도서</a>
-        </nav>
+        <h1 class="sub-h1">누리집 안내</h1>
+        <div class="tab-grid">
+          <nav class="sub-tabs" aria-label="누리집 안내 분류 1">
+            <a href="#">arte라이브러리 소개</a>
+            <a href="#">회원 안내</a>
+            <a href="arte-library-notice.html" aria-current="page">공지/소식</a>
+            <a href="#">이벤트</a>
+          </nav>
+          <nav class="sub-tabs" aria-label="누리집 안내 분류 2">
+            <a href="#">OPEN API 서비스</a>
+            <a href="#">FAQ</a>
+            <a href="#">도서관 방문예약</a>
+            <a href="#">저작권 안내</a>
+          </nav>
+        </div>
       </div>
     </div>
 
@@ -86,23 +98,29 @@
     <div class="sub-content">
 
       <div class="sub-head">
-        <h2 class="sub-h2">아카이브</h2>
-        <p>연구보고서, 현장, 행사 기록, 연수, 국제교류, 보고서 등 문화예술교육 관련 문서 자료를 제공합니다.</p>
+        <h2 class="sub-h2">공지/소식</h2>
+        <p>아르떼라이브러리 누리집의 공지와 소식을 전달합니다.</p>
       </div>
 
       <div class="sub-board">
 
         <!-- ---------- 좌측: 검색 조건 ---------- -->
         <aside class="fil" aria-label="검색 조건">
-
           <div class="fil-top">
             <div class="fil-block">
               <p class="fil-label">검색 조건</p>
               <div class="fil-fields">
-                <button class="fil-select" type="button">
-                  전체
-                  <img src="assets/icon-chevron.svg" alt="" width="20" height="20">
-                </button>
+                <div class="fil-dropdown">
+                  <button class="fil-select" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span>전체</span>
+                    <img src="assets/icon-chevron.svg" alt="" width="20" height="20">
+                  </button>
+                  <div class="fil-dropdown-list" role="listbox">
+                    <button class="fil-dropdown-item is-active" type="button" role="option" aria-selected="true">전체</button>
+                    <button class="fil-dropdown-item" type="button" role="option" aria-selected="false">공지</button>
+                    <button class="fil-dropdown-item" type="button" role="option" aria-selected="false">소식</button>
+                  </div>
+                </div>
                 <div class="fil-search">
                   <label class="sr" for="kw">검색어</label>
                   <input id="kw" type="search" placeholder="검색어를 입력하세요">
@@ -110,68 +128,13 @@
                 </div>
               </div>
             </div>
-            <p class="fil-note">
-              <img src="assets/icon-info.svg" alt="" width="20" height="20">
-              다양한 조건을 설정하여 원하는 자료를 검색할 수 있습니다. (중복 선택 가능)
-            </p>
-          </div>
-
-          <div class="fil-group">
-            <p class="fil-label">주제</p>
-            <div class="fil-chips">
-              <button type="button" aria-pressed="true">전체</button>
-              <button type="button" aria-pressed="false">문화예술교육현장</button>
-              <button type="button" aria-pressed="false">연구보고서</button>
-              <button type="button" aria-pressed="false">연수결과자료집</button>
-              <button type="button" aria-pressed="false">축제·학술행사기록</button>
-              <button type="button" aria-pressed="false">문화예술교육사</button>
-              <button type="button" aria-pressed="false">연차보고서</button>
-              <button type="button" aria-pressed="false">국제교류</button>
-              <button type="button" aria-pressed="false">기타</button>
-            </div>
-          </div>
-
-          <button class="fil-acc" type="button" aria-expanded="false">장르 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
-          <button class="fil-acc" type="button" aria-expanded="false">교육대상 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
-          <button class="fil-acc" type="button" aria-expanded="false">자료유형 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
-          <button class="fil-acc" type="button" aria-expanded="false">저작권자 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
-
-          <div class="fil-group">
-            <p class="fil-label">발행연도</p>
-            <div class="fil-range">
-              <button class="fil-select" type="button">2021년 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
-              <span class="fil-tilde" aria-hidden="true">–</span>
-              <button class="fil-select" type="button">2025년 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
-            </div>
           </div>
         </aside>
 
-        <!-- ---------- 우측: 목록 ---------- -->
-        <section class="lst" aria-label="아카이브 검색 결과">
+        <!-- ---------- 우측: 게시판 목록 ---------- -->
+        <section class="lst" aria-label="공지/소식 목록">
 
-          <div class="lst-cat" role="tablist" aria-label="주제 분류">
-            <button role="tab" aria-selected="true">전체</button>
-            <button role="tab" aria-selected="false">문화예술교육현장</button>
-            <button role="tab" aria-selected="false">연구보고서</button>
-            <button role="tab" aria-selected="false">행사자료</button>
-            <button role="tab" aria-selected="false">연수자료</button>
-            <button role="tab" aria-selected="false">문화예술교육사</button>
-            <button role="tab" aria-selected="false">국제교류</button>
-            <button role="tab" aria-selected="false">연차보고서</button>
-            <button role="tab" aria-selected="false">기타</button>
-          </div>
-
-          <p class="lst-tip">
-            한국문화예술교육진흥원 저작권 자료에는
-            <img src="assets/mark-arte.svg" alt="arte" width="74" height="24">
-            가 표시됩니다
-          </p>
-
-          <div class="lst-bar">
-            <div class="lst-count">
-              <span><em>전체</em> <b>4,793건</b></span>
-              <span><em>페이지</em> <b>1 / 200</b></span>
-            </div>
+          <div class="ntc-bar">
             <div class="lst-sort">
               <button type="button" aria-pressed="true">최신순</button>
               <img class="lst-divider" src="assets/icon-divider.svg" alt="" width="16" height="1">
@@ -180,48 +143,78 @@
             </div>
           </div>
 
-          <div class="lst-grid">
+          <div class="ntc-board">
+            <div class="nt-rule"></div>
 
-            <a class="doc" href="#">
-              <div class="doc-cover">
-                <img class="doc-cover-bg" src="assets/docs-book1.png" alt="">
-                <img class="doc-cover-fg" src="assets/docs-book1.png" alt="2025 지역 문화예술교육 성과자료집 표지">
-              </div>
-              <div class="doc-body">
-                <div class="doc-head">
-                  <p class="doc-cat">문화예술교육현장</p>
-                  <h3 class="doc-t">2025 지역 문화예술교육 성과자료집 <img class="doc-mark" src="assets/mark-arte.svg" alt="arte 저작권"></h3>
-                </div>
-                <p class="doc-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육 정책 흐름과 현장 실천 사례, 사업 운영 성과, 향후 지역 기반 문화예술교육의 지속 방향</p>
-                <dl class="doc-meta">
-                  <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                  <dt>장르</dt><dd>기타</dd>
-                  <dt>발행연도</dt><dd>2025</dd>
-                  <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-                </dl>
-              </div>
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge ntc-badge--notice">공지</span>
+              <span class="ntc-t">2026 유네스코 문화예술교육 주간 행사 안내 (2026. 5. 19.~5. 31.)</span>
+              <span class="ntc-d">2026-05-14</span>
             </a>
+            <div class="nt-rule nt-rule--thin"></div>
 
-            <a class="doc" href="#">
-              <div class="doc-cover doc-cover--dark">
-                <img class="doc-cover-bg" src="assets/docs-book2.png" alt="">
-                <img class="doc-cover-fg" src="assets/docs-book2.png" alt="꿈다락 문화예술학교 프로그램 북 표지">
-              </div>
-              <div class="doc-body">
-                <div class="doc-head">
-                  <p class="doc-cat">문화예술교육현장</p>
-                  <h3 class="doc-t">꿈다락 문화예술학교 프로그램 북 <img class="doc-mark" src="assets/mark-arte.svg" alt="arte 저작권"></h3>
-                </div>
-                <p class="doc-d">2025년 지역 문화예술교육의 추진 경과와 주요 성과, 지역별 운영 사례를 종합적으로 정리한 성과자료집으로, 지역 문화예술교육 정책 흐름과 현장 실천 사례, 사업 운영 성과, 향후 지역 기반 문화예술교육의 지속 방향</p>
-                <dl class="doc-meta">
-                  <dt>자료유형</dt><dd>자료집/일반문서</dd>
-                  <dt>장르</dt><dd>기타</dd>
-                  <dt>발행연도</dt><dd>2025</dd>
-                  <dt>만든이(단체)</dt><dd>한국문화예술교육진흥원, 17개 광역문화예술교육지원센터</dd>
-                </dl>
-              </div>
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge ntc-badge--notice">공지</span>
+              <span class="ntc-t">문화예술교육 자원지도 통계 데이터(단체) 및 프로그램 DB 등록 안내</span>
+              <span class="ntc-d">2026-05-08</span>
             </a>
+            <div class="nt-rule nt-rule--sub"></div>
 
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge">197</span>
+              <span class="ntc-t">시스템 점검 안내(7.15 12:00~13:00)</span>
+              <span class="ntc-d">2026-07-13</span>
+            </a>
+            <div class="nt-rule nt-rule--sub"></div>
+
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge">196</span>
+              <span class="ntc-t">[서비스 영향 안내] 아르떼라이브러리 일부 콘텐츠 표시 오류 예정 (6/26(금), 12:00~14:00)</span>
+              <span class="ntc-d">2026-06-22</span>
+            </a>
+            <div class="nt-rule nt-rule--sub"></div>
+
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge">195</span>
+              <span class="ntc-t">[서비스 영향 안내] 아르떼라이브러리 일부 콘텐츠 표시 오류 예정 (6/21, 10:00~15:00)</span>
+              <span class="ntc-d">2026-06-19</span>
+            </a>
+            <div class="nt-rule nt-rule--sub"></div>
+
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge">194</span>
+              <span class="ntc-t">2026년 한국문화예술교육진흥원 ㄱㄱㄷㅇㅌ 활용 아이디어 공모전 초성 퀴즈 이벤트</span>
+              <span class="ntc-d">2026-06-15</span>
+            </a>
+            <div class="nt-rule nt-rule--sub"></div>
+
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge">193</span>
+              <span class="ntc-t">2026년 한국문화예술교육진흥원 공공데이터 활용 아이디어 공모전 개최 안내</span>
+              <span class="ntc-d">2026-05-14</span>
+            </a>
+            <div class="nt-rule nt-rule--sub"></div>
+
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge">192</span>
+              <span class="ntc-t">2026 유네스코 문화예술교육 주간 행사 안내 (2026. 5. 19.~5. 31)</span>
+              <span class="ntc-d">2026-05-08</span>
+            </a>
+            <div class="nt-rule nt-rule--sub"></div>
+
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge">191</span>
+              <span class="ntc-t">문화예술교육 자원지도 통계 데이터(단체) 및 프로그램 DB 등록 안내</span>
+              <span class="ntc-d">2026-03-06</span>
+            </a>
+            <div class="nt-rule nt-rule--sub"></div>
+
+            <a class="ntc-row" href="arte-library-notice-view.html">
+              <span class="ntc-badge">190</span>
+              <span class="ntc-t">시스템 점검 안내(3.11/19:00~20:00)</span>
+              <span class="ntc-d">2025-12-10</span>
+            </a>
+            <div class="nt-rule"></div>
           </div>
 
           <nav class="pager" aria-label="페이지">
@@ -312,7 +305,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="arte-library-docs.js"></script>
+<script src="arte-library-notice.js"></script>
 <script src="arte-header.js"></script>
 <script src="arte-motion.js"></script>
 </body>

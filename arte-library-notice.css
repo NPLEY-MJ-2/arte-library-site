@@ -1,0 +1,65 @@
+/* ==========================================================================
+   arte 라이브러리 — 누리집 안내 · 공지/소식 (목록) 페이지 전용
+   Figma 'sub_누리집 안내_공지/소식_01'(weJUFzS3ekDRZrzokWEe3e / 19442:22180) 1:1.
+   공통(헤더·푸터·토큰)은 arte-library-line.css, 타이틀·탭·필터셸·페이지네이션은 arte-library-docs.css.
+   ========================================================================== */
+
+/* ---- 탭(2행 4열) — .sub-tabs(1행)를 세로로 쌓는다 ------------------------- */
+
+.tab-grid { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.tab-grid .sub-tabs a { min-width: 0; text-align: center; word-break: keep-all; }
+
+/* ---- 검색조건 드롭다운 (video/reco 와 동일 패턴, 최초 스타일 정의) -------- */
+
+.fil-dropdown { position: relative; }
+.fil-dropdown-list {
+  position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 10;
+  display: none; flex-direction: column;
+  border: 1px solid var(--ink); background: var(--white);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+.fil-dropdown.is-open .fil-dropdown-list { display: flex; }
+.fil-dropdown-item {
+  border: 0; background: none; padding: 12px 16px; text-align: left;
+  font-size: 18px; font-weight: 500; color: var(--ink);
+}
+.fil-dropdown-item:hover { background: var(--gray-bg); }
+.fil-dropdown-item.is-active,
+.fil-dropdown-item[aria-selected='true'] { color: var(--blue-badge); font-weight: 600; }
+
+/* ---- 정렬/표시개수 바 (필터 좌측 없이 우측 정렬만) ------------------------ */
+
+.ntc-bar { display: flex; align-items: center; justify-content: flex-end; width: 100%; }
+
+/* ---- 게시판형 목록 ------------------------------------------------------- */
+
+.ntc-board { display: flex; flex-direction: column; gap: 30px; width: 100%; }
+
+.nt-rule { background: var(--ink); height: 2px; width: 100%; flex: none; }
+.nt-rule--sub { background: var(--gray-888); height: 2px; width: 100%; flex: none; }
+.nt-rule--thin { background: var(--gray-888); height: 1px; width: 100%; flex: none; }
+
+.ntc-row { display: flex; align-items: center; gap: 24px; width: 100%; }
+.ntc-badge {
+  flex: none; min-width: 49px; display: flex; align-items: center; justify-content: center;
+  padding: 3px 12px; font-size: 14px; font-weight: 500; color: var(--ink); white-space: nowrap;
+}
+.ntc-badge--notice { background: var(--ink); color: #fff; border: 1.5px solid var(--ink); }
+.ntc-t {
+  flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  font-size: 20px; font-weight: 600; line-height: 1.5; color: var(--ink);
+}
+.ntc-row:hover .ntc-t { color: var(--blue-badge); }
+.ntc-d { flex: none; font-size: 20px; font-weight: 500; color: var(--gray-555); text-align: right; white-space: nowrap; }
+
+/* ---- 모바일 ------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .tab-grid .sub-tabs a { font-size: 12px; padding: 10px 2px; line-height: 1.3; }
+  .ntc-board { gap: 20px; }
+  .ntc-row { gap: 12px; }
+  .ntc-badge { width: 40px; font-size: 12px; }
+  .ntc-t { font-size: 15px; }
+  .ntc-d { font-size: 13px; }
+  .fil-dropdown-item { font-size: 15px; padding: 10px 14px; }
+}

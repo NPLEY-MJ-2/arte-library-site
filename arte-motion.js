@@ -40,7 +40,43 @@
   }
 
   /* --------------------------------------------------------------------
-     2. 스크롤 리빌 — 섹션 헤드 + 카드형 컴포넌트
+     2. 서브페이지 타이틀 등장 모션 (영상 · 추천)
+     .title-reveal 스코프: 브레드크럼 + h1이 하→상 페이드로 등장하고,
+     (있다면) 상단 분류 탭(.sub-tabs a)이 왼쪽부터 순차로 이어서 등장한 뒤,
+     본문 영역(.sub-content)이 페이드인한다.
+     -------------------------------------------------------------------- */
+  function titleReveal() {
+    var scopes = document.querySelectorAll('.title-reveal');
+    if (!scopes.length) return;
+
+    scopes.forEach(function (scope) {
+      var titleTargets = [scope.querySelector('.crumb'), scope.querySelector('.sub-h1')].filter(Boolean);
+      var tabs = scope.querySelectorAll('.sub-tabs a');
+      var content = scope.nextElementSibling;
+
+      if (reduceMotion) {
+        gsap.set(titleTargets, { opacity: 1, y: 0 });
+        if (tabs.length) gsap.set(tabs, { opacity: 1, y: 0 });
+        if (content) gsap.set(content, { opacity: 1 });
+        return;
+      }
+
+      var tl = gsap.timeline({ delay: 0.1 });
+      tl.fromTo(titleTargets, { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out', stagger: 0.08 });
+
+      if (tabs.length) {
+        tl.fromTo(tabs, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: 'expo.out', stagger: 0.06 }, '-=0.25');
+      }
+
+      if (content) {
+        gsap.set(content, { opacity: 0 });
+        tl.to(content, { opacity: 1, duration: 0.5, ease: 'power1.out' }, '-=0.1');
+      }
+    });
+  }
+
+  /* --------------------------------------------------------------------
+     3. 스크롤 리빌 — 섹션 헤드 + 카드형 컴포넌트
      -------------------------------------------------------------------- */
   function scrollReveal() {
     if (reduceMotion || typeof ScrollTrigger === 'undefined') return;
@@ -76,7 +112,7 @@
   }
 
   /* --------------------------------------------------------------------
-     3. 페이지 전환 — 사이트 내부 링크 클릭 시 페이드 아웃 후 이동, 도착 시 페이드 인
+     4. 페이지 전환 — 사이트 내부 링크 클릭 시 페이드 아웃 후 이동, 도착 시 페이드 인
      -------------------------------------------------------------------- */
   function pageTransitions() {
     var overlay = document.createElement('div');
@@ -120,6 +156,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     heroReveal();
+    titleReveal();
     scrollReveal();
     pageTransitions();
   });

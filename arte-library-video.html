@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>arte 라이브러리 — 영상</title>
+<!--
+  arte 라이브러리 — 영상
+  · Figma 'sub_영상'(fileKey dnNHHVsQf4miN5XvML1N8n / node 18183:1596) 1:1 재구현 (2026-09-10)
+  · 공통 셸(헤더·푸터·토큰·필터/목록 컴포넌트)은 arte-library-line.css + arte-library-docs.css 재사용
+  · 이미지: Figma 실제 에셋(assets/video-list-thumb-*.jpg)
+  · 스크롤 리빌(ScrollTrigger)은 arte-motion.js 가 사이트 공통으로 처리 (.vidcard 셀렉터 등록)
+  · 업데이트(fileKey weJUFzS3ekDRZrzokWEe3e / node 19433:2210, 2026-09-10): 재생목록형 카드에
+    "쌓인 카드" 배경 레이어 + 우하단 배지("동영상 N개") 추가, 단일 영상 카드는 재생시간 배지로 대체.
+    "전체 재생목록 보기" 버튼 기본/호버 상태(node 19433:2347 / 19433:2378)는 기존 구현이 이미 일치.
+  · 등장 모션(타이틀 하→상 페이드 + 이후 본문 영역 페이드인)은 arte-motion.js 의
+    titleReveal() 이 .title-reveal 스코프로 처리 (arte-library-reco.html 과 공용)
+  · 보정(2026-09-10): get_screenshot으로 3개 행을 모두 재확인한 결과, 1·3열(재생목록형) 카드는
+    실제로 동일한 인물 썸네일(video-list-thumb-1.jpg)을 공유한다. get_metadata의 레이어명만
+    보고 3열에 잘못 넣었던 전용 이미지(video-list-thumb-3.jpg, 미사용 삭제)를 바로잡음.
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<link rel="stylesheet" href="arte-library-line.css">
+<link rel="stylesheet" href="arte-library-docs.css">
+<link rel="stylesheet" href="arte-library-video.css">
+</head>
+<body>
+
+<a class="skip" href="#main">본문 바로가기</a>
+
+<!-- ========== 마스트헤드 (정부 공식 누리집 안내) ========== -->
+<div class="masthead">
+  <div class="mh-in">
+    <img class="mh-flag" src="assets/icon-flag.svg" alt="" width="24" height="16">
+    <p>이 누리집은 대한민국 공식 전자정부 누리집입니다.</p>
+  </div>
+</div>
+
+<!-- ========== 헤더 / GNB ========== -->
+<header class="hd">
+  <div class="hd-in">
+    <a class="hd-logo" href="arte-library-line.html">
+      <img src="assets/logo-arte-library.png" alt="arte 라이브러리" width="199" height="28">
+    </a>
+
+    <nav class="gnb" aria-label="주 메뉴">
+      <a href="arte-library-docs.html">아카이브·도서</a>
+      <a href="arte-library-video.html" aria-current="page">영상</a>
+      <a href="arte-library-reco.html">추천</a>
+      <a href="arte-library-region.html">지역별 정보</a>
+      <a href="arte-library-stats.html">통계</a>
+      <a href="#">누리집 안내</a>
+    </nav>
+
+    <div class="hd-btn">
+      <div class="hd-account">
+        <a href="#">로그인</a>
+        <span class="hd-bar" aria-hidden="true"></span>
+        <a href="#">회원가입</a>
+        <span class="hd-bar" aria-hidden="true"></span>
+        <a href="#">화면설정</a>
+      </div>
+      <a class="hd-icon" href="arte-library-ai-search.html" aria-label="통합검색">
+        <img src="assets/icon-search-header.svg" alt="" width="30" height="30">
+      </a>
+      <button class="hd-icon" type="button" aria-label="전체메뉴">
+        <img src="assets/icon-menu.svg" alt="" width="30" height="30">
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="sub">
+  <div class="sub-in">
+
+    <!-- ========== 타이틀 ========== -->
+    <div class="sub-title title-reveal">
+      <nav class="crumb" aria-label="현재 위치">
+        <a href="arte-library-line.html">HOME</a>
+        <img src="assets/icon-crumb.svg" alt="" width="12" height="12">
+        <span>영상</span>
+      </nav>
+      <h1 class="sub-h1">영상</h1>
+    </div>
+
+    <!-- ========== 본문 ========== -->
+    <div class="sub-content">
+
+      <div class="sub-head">
+        <h2 class="sub-h2">영상</h2>
+        <p>교육프로그램, 포럼/세미나, 인터뷰 등 다채로운 문화예술교육 영상을 제공합니다.</p>
+      </div>
+
+      <div class="sub-board">
+
+        <!-- ---------- 좌측: 검색 조건 ---------- -->
+        <aside class="fil" aria-label="검색 조건">
+
+          <div class="fil-top">
+            <div class="fil-block">
+              <p class="fil-label">검색 조건</p>
+              <div class="fil-fields">
+                <div class="fil-dropdown">
+                  <button class="fil-select" type="button" aria-haspopup="listbox" aria-expanded="false">
+                    <span>전체</span>
+                    <img src="assets/icon-chevron.svg" alt="" width="20" height="20">
+                  </button>
+                  <div class="fil-dropdown-list" role="listbox">
+                    <button class="fil-dropdown-item" type="button" role="option" aria-selected="false">재생목록</button>
+                    <button class="fil-dropdown-item" type="button" role="option" aria-selected="false">동영상</button>
+                  </div>
+                </div>
+                <div class="fil-search">
+                  <label class="sr" for="kw">검색어</label>
+                  <input id="kw" type="search" placeholder="검색어를 입력하세요">
+                  <button type="button" aria-label="검색"><img src="assets/icon-search-sm.svg" alt="" width="20" height="20"></button>
+                </div>
+              </div>
+            </div>
+            <p class="fil-note">
+              <img src="assets/icon-info.svg" alt="" width="20" height="20">
+              다양한 조건을 설정하여 원하는 자료를 검색할 수 있습니다. (중복 선택 가능)
+            </p>
+          </div>
+
+          <div class="fil-group">
+            <p class="fil-label">분류</p>
+            <div class="fil-chips">
+              <button type="button" aria-pressed="true">전체</button>
+              <button type="button" aria-pressed="false">교육영상콘텐츠</button>
+              <button type="button" aria-pressed="false">포럼·홍보영상</button>
+            </div>
+          </div>
+
+          <div class="fil-group" style="padding-bottom:0;">
+            <p class="fil-label">제작연도</p>
+            <div class="fil-range">
+              <button class="fil-select" type="button">2021년 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+              <span class="fil-tilde" aria-hidden="true">–</span>
+              <button class="fil-select" type="button">2025년 <img src="assets/icon-chevron.svg" alt="" width="20" height="20"></button>
+            </div>
+          </div>
+        </aside>
+
+        <!-- ---------- 우측: 목록 ---------- -->
+        <section class="lst" aria-label="영상 검색 결과">
+
+          <div class="lst-cat" role="tablist" aria-label="영상 분류">
+            <button role="tab" aria-selected="true">전체</button>
+            <button role="tab" aria-selected="false">재생목록</button>
+            <button role="tab" aria-selected="false">동영상</button>
+          </div>
+
+          <div class="lst-bar">
+            <div class="lst-count">
+              <span><em>전체</em> <b>4,793건</b></span>
+              <span><em>페이지</em> <b>1 / 200</b></span>
+            </div>
+            <div class="lst-sort">
+              <button class="lst-per" type="button">10개씩 보기 <img src="assets/icon-chevron-white.svg" alt="" width="20" height="20"></button>
+            </div>
+          </div>
+
+          <div class="lst-grid lst-grid--video">
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb vidcard-thumb--stack">
+                <span class="vidcard-stack-a" aria-hidden="true"></span>
+                <span class="vidcard-stack-b" aria-hidden="true"></span>
+                <img src="assets/video-list-thumb-1.jpg" alt="미래 인적자원 함양을 위한 돌봄체계 — 신의진 교수 강연 썸네일" loading="lazy">
+                <span class="vidcard-badge">동영상 32개</span>
+              </div>
+              <div class="vidcard-body vidcard-body--stack">
+                <h3 class="vidcard-t">2024 세계문화예술교육 주간 행사</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화…</p>
+                <span class="vidcard-btn">전체 재생목록 보기 <span class="vidcard-btn-icon"><img class="ic-default" src="assets/icon-arrow-alt-right.svg" alt="" width="20" height="20"><img class="ic-hover" src="assets/icon-arrow-alt-right-white.svg" alt="" width="20" height="20"></span></span>
+              </div>
+            </a>
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb">
+                <img src="assets/video-list-thumb-2.jpg" alt="2024 문화예술교육 국제포럼 하이라이트 썸네일" loading="lazy">
+                <span class="vidcard-badge">3:08:30</span>
+              </div>
+              <div class="vidcard-body">
+                <h3 class="vidcard-t">2024 문화예술교육 국제포럼 하이라이트</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211 차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화</p>
+                <dl class="vidcard-meta">
+                  <dt>저작권자</dt><dd>한국문화예술교육진흥원</dd>
+                  <dt>제작연도</dt><dd>2024</dd>
+                </dl>
+              </div>
+            </a>
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb vidcard-thumb--stack">
+                <span class="vidcard-stack-a" aria-hidden="true"></span>
+                <span class="vidcard-stack-b" aria-hidden="true"></span>
+                <img src="assets/video-list-thumb-1.jpg" alt="미래 인적자원 함양을 위한 돌봄체계 — 신의진 교수 강연 썸네일" loading="lazy">
+                <span class="vidcard-badge">동영상 32개</span>
+              </div>
+              <div class="vidcard-body vidcard-body--stack">
+                <h3 class="vidcard-t">2024 세계문화예술교육 주간 행사</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화…</p>
+                <span class="vidcard-btn">전체 재생목록 보기 <span class="vidcard-btn-icon"><img class="ic-default" src="assets/icon-arrow-alt-right.svg" alt="" width="20" height="20"><img class="ic-hover" src="assets/icon-arrow-alt-right-white.svg" alt="" width="20" height="20"></span></span>
+              </div>
+            </a>
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb vidcard-thumb--stack">
+                <span class="vidcard-stack-a" aria-hidden="true"></span>
+                <span class="vidcard-stack-b" aria-hidden="true"></span>
+                <img src="assets/video-list-thumb-1.jpg" alt="미래 인적자원 함양을 위한 돌봄체계 — 신의진 교수 강연 썸네일" loading="lazy">
+                <span class="vidcard-badge">동영상 32개</span>
+              </div>
+              <div class="vidcard-body vidcard-body--stack">
+                <h3 class="vidcard-t">2024 세계문화예술교육 주간 행사</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화…</p>
+                <span class="vidcard-btn">전체 재생목록 보기 <span class="vidcard-btn-icon"><img class="ic-default" src="assets/icon-arrow-alt-right.svg" alt="" width="20" height="20"><img class="ic-hover" src="assets/icon-arrow-alt-right-white.svg" alt="" width="20" height="20"></span></span>
+              </div>
+            </a>
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb">
+                <img src="assets/video-list-thumb-2.jpg" alt="2024 문화예술교육 국제포럼 하이라이트 썸네일" loading="lazy">
+                <span class="vidcard-badge">3:08:30</span>
+              </div>
+              <div class="vidcard-body">
+                <h3 class="vidcard-t">2024 문화예술교육 국제포럼 하이라이트</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211 차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화</p>
+                <dl class="vidcard-meta">
+                  <dt>저작권자</dt><dd>한국문화예술교육진흥원</dd>
+                  <dt>제작연도</dt><dd>2024</dd>
+                </dl>
+              </div>
+            </a>
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb vidcard-thumb--stack">
+                <span class="vidcard-stack-a" aria-hidden="true"></span>
+                <span class="vidcard-stack-b" aria-hidden="true"></span>
+                <img src="assets/video-list-thumb-1.jpg" alt="미래 인적자원 함양을 위한 돌봄체계 — 신의진 교수 강연 썸네일" loading="lazy">
+                <span class="vidcard-badge">동영상 32개</span>
+              </div>
+              <div class="vidcard-body vidcard-body--stack">
+                <h3 class="vidcard-t">2024 세계문화예술교육 주간 행사</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화…</p>
+                <span class="vidcard-btn">전체 재생목록 보기 <span class="vidcard-btn-icon"><img class="ic-default" src="assets/icon-arrow-alt-right.svg" alt="" width="20" height="20"><img class="ic-hover" src="assets/icon-arrow-alt-right-white.svg" alt="" width="20" height="20"></span></span>
+              </div>
+            </a>
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb vidcard-thumb--stack">
+                <span class="vidcard-stack-a" aria-hidden="true"></span>
+                <span class="vidcard-stack-b" aria-hidden="true"></span>
+                <img src="assets/video-list-thumb-1.jpg" alt="미래 인적자원 함양을 위한 돌봄체계 — 신의진 교수 강연 썸네일" loading="lazy">
+                <span class="vidcard-badge">동영상 32개</span>
+              </div>
+              <div class="vidcard-body vidcard-body--stack">
+                <h3 class="vidcard-t">2024 세계문화예술교육 주간 행사</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화…</p>
+                <span class="vidcard-btn">전체 재생목록 보기 <span class="vidcard-btn-icon"><img class="ic-default" src="assets/icon-arrow-alt-right.svg" alt="" width="20" height="20"><img class="ic-hover" src="assets/icon-arrow-alt-right-white.svg" alt="" width="20" height="20"></span></span>
+              </div>
+            </a>
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb">
+                <img src="assets/video-list-thumb-2.jpg" alt="2024 문화예술교육 국제포럼 하이라이트 썸네일" loading="lazy">
+                <span class="vidcard-badge">3:08:30</span>
+              </div>
+              <div class="vidcard-body">
+                <h3 class="vidcard-t">2024 문화예술교육 국제포럼 하이라이트</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211 차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화</p>
+                <dl class="vidcard-meta">
+                  <dt>저작권자</dt><dd>한국문화예술교육진흥원</dd>
+                  <dt>제작연도</dt><dd>2024</dd>
+                </dl>
+              </div>
+            </a>
+
+            <a class="vidcard" href="#">
+              <div class="vidcard-thumb vidcard-thumb--stack">
+                <span class="vidcard-stack-a" aria-hidden="true"></span>
+                <span class="vidcard-stack-b" aria-hidden="true"></span>
+                <img src="assets/video-list-thumb-1.jpg" alt="미래 인적자원 함양을 위한 돌봄체계 — 신의진 교수 강연 썸네일" loading="lazy">
+                <span class="vidcard-badge">동영상 32개</span>
+              </div>
+              <div class="vidcard-body vidcard-body--stack">
+                <h3 class="vidcard-t">2024 세계문화예술교육 주간 행사</h3>
+                <p class="vidcard-d">유네스코와 유네스코 회원국은 2021년 제211차 집행이사회 결정문(EX 211/Decision 39)을 통해 유네스코 제1차와 제2차 세계문화…</p>
+                <span class="vidcard-btn">전체 재생목록 보기 <span class="vidcard-btn-icon"><img class="ic-default" src="assets/icon-arrow-alt-right.svg" alt="" width="20" height="20"><img class="ic-hover" src="assets/icon-arrow-alt-right-white.svg" alt="" width="20" height="20"></span></span>
+              </div>
+            </a>
+
+          </div>
+
+          <nav class="pager" aria-label="페이지">
+            <span class="pager-edge">
+              <button type="button" aria-label="첫 페이지"><img src="assets/icon-page-first.svg" alt="" width="20" height="20"></button>
+              <button type="button" aria-label="이전 페이지"><img src="assets/icon-page-prev.svg" alt="" width="20" height="20"></button>
+            </span>
+            <span class="pager-nums">
+              <button type="button" aria-current="page">1</button>
+              <button type="button">2</button>
+              <button type="button">3</button>
+              <button type="button">4</button>
+              <button type="button">5</button>
+              <button type="button">6</button>
+              <button type="button">7</button>
+              <button type="button">8</button>
+              <button type="button">9</button>
+              <button type="button">10</button>
+            </span>
+            <span class="pager-edge pager-edge--next">
+              <button type="button" aria-label="다음 페이지"><img src="assets/icon-page-prev.svg" alt="" width="20" height="20"></button>
+              <button type="button" aria-label="마지막 페이지"><img src="assets/icon-page-first.svg" alt="" width="20" height="20"></button>
+            </span>
+          </nav>
+
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ========== 푸터 ========== -->
+<footer class="ft">
+
+  <div class="ft-related">
+    <div class="ft-related-box">
+      <span>관련 사이트 바로 가기</span>
+      <img src="assets/icon-btn-more.svg" alt="" width="24" height="24">
+    </div>
+    <div class="ft-related-box">
+      <span>단체 회원</span>
+      <img src="assets/icon-btn-more.svg" alt="" width="24" height="24">
+    </div>
+  </div>
+
+  <div class="ft-surface">
+    <div class="ft-in">
+      <img class="ft-logo" src="assets/logo-arte-library.png" alt="arte 라이브러리" width="199" height="28">
+
+      <div class="ft-grid">
+        <div class="ft-info">
+          <p>(우 03926) 서울특별시 마포구 상암산로 76 YTN 뉴스퀘어 11~12층 한국문화예술교육진흥원</p>
+          <p>
+            <b>대표전화</b> <a href="tel:0262095900">02)6209-5900</a>
+            <b>팩스</b> 02)6209-1392
+            <b>Email</b> <a href="mailto:contact@arte.or.kr">contact@arte.or.kr</a>
+            <b>담당부서</b> 법무정보화팀
+          </p>
+        </div>
+        <nav class="ft-util" aria-label="바로가기">
+          <a href="#">외부자료등록 <img src="assets/icon-arrow-right-sm.svg" alt="" width="20" height="20"></a>
+          <a href="#">이벤트 <img src="assets/icon-arrow-right-sm.svg" alt="" width="20" height="20"></a>
+        </nav>
+      </div>
+
+      <div class="ft-copy">
+        <nav class="ft-policy" aria-label="정책">
+          <a href="#">저작권 안내</a>
+          <a href="#" class="ft-policy-accent">개인정보 처리방침</a>
+          <a href="#">홈페이지 저작권 정책</a>
+        </nav>
+        <p class="ft-copytxt">© 2026 Ministry of the Interior and Safety. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ft-identifier">
+    <div class="ft-id-in">
+      <img src="assets/identifier-logo.svg" alt="문화체육관광부" height="20">
+      <img src="assets/identifier-moc-txt.svg" alt="" height="13">
+      <img src="assets/identifier-arte-logo.svg" alt="" height="20">
+      <img src="assets/identifier-arte-txt.svg" alt="한국문화예술교육진흥원" height="13">
+      <span>이 누리집은 문화체육관광부 산하기관 누리집입니다.</span>
+    </div>
+  </div>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="arte-library-docs.js"></script>
+<script src="arte-header.js"></script>
+<script src="arte-motion.js"></script>
+</body>
+</html>

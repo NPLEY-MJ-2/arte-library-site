@@ -1,0 +1,72 @@
+/* ==========================================================================
+   arte 라이브러리 — 영상 페이지 전용
+   Figma 'sub_영상'(18183:1596) 1:1. 공통(헤더·푸터·토큰·필터/목록 셸)은
+   arte-library-line.css + arte-library-docs.css 재사용, 여기서는 카드형만 추가.
+   ========================================================================== */
+
+/* 결과 카드 — 3열 그리드 */
+.lst-grid--video { grid-template-columns: repeat(3, 1fr); }
+
+.vidcard { display: flex; flex-direction: column; border: 1px solid var(--ink); overflow: hidden; background: var(--white); }
+.vidcard-thumb { position: relative; height: 213px; overflow: hidden; }
+.vidcard-thumb img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 3; }
+
+/* 재생목록형 카드 — 프레임 자체가 380×225로 더 크고(이미지는 213 그대로, 아래 12px 여백에
+   배지가 걸침), 대신 본문 상단 패딩을 32→20px로 줄여 카드 전체 높이는 동일하게 맞춤
+   (Figma node 18183:1788 기준, px 값 그대로) */
+.vidcard-thumb--stack { height: 225px; }
+.vidcard-thumb--stack img { height: 213px; }
+
+/* 뒤에 쌓인 카드처럼 보이도록 두 겹의 배경 레이어를 살짝 어긋나게 배치 — Figma img01/img02 px 값 그대로.
+   z-index로 순서 명시: img01(맨 뒤) < img02(중간) < 앞면 사진 < 배지 */
+.vidcard-stack-a,
+.vidcard-stack-b { position: absolute; }
+.vidcard-stack-a { z-index: 2; left: 10px; top: 18px; width: 360px; height: 201px; background: #d9d9d9; } /* img02 — 중간 */
+.vidcard-stack-b { z-index: 1; left: 50%; top: 35px; width: 340px; height: 190px; background: #f4f5f6; transform: translateX(-50%); } /* img01 — 맨 뒤 */
+
+.vidcard-badge {
+  position: absolute; z-index: 4; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6); color: #fff;
+  padding: 4px 8px; font-size: 16px; font-weight: 500; line-height: 1.5;
+}
+.vidcard-thumb--stack .vidcard-badge { bottom: 12px; }
+
+.vidcard-body { display: flex; flex-direction: column; gap: 24px; padding: 32px; flex: 1; }
+.vidcard-body--stack { padding-top: 20px; }
+.vidcard-t { font-size: clamp(19px, 1.46vw, 28px); font-weight: 600; line-height: 1.5; }
+.vidcard:hover .vidcard-t { color: var(--blue); }
+.vidcard-d {
+  font-size: clamp(15px, 1.04vw, 20px); font-weight: 500; color: var(--gray-555); line-height: 1.5;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+.vidcard-meta {
+  display: grid; grid-template-columns: 92px 1fr; gap: 4px 24px; margin: auto 0 0;
+  font-size: clamp(14px, 0.89vw, 17px); font-weight: 500; line-height: 1.5;
+}
+.vidcard-meta dt { color: var(--ink); }
+.vidcard-meta dd { margin: 0; color: var(--gray-888); }
+
+.vidcard-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px; align-self: flex-start;
+  margin-top: auto; border: 1px solid var(--ink); padding: 6px 16px;
+  font-size: 18px; font-weight: 600;
+}
+.vidcard-btn-icon { position: relative; width: 20px; height: 20px; flex: none; }
+.vidcard-btn-icon img { position: absolute; inset: 0; width: 20px; height: 20px; transition: opacity 0.15s; }
+.vidcard-btn-icon .ic-hover { opacity: 0; }
+.vidcard:hover .vidcard-btn { background: var(--ink); color: #fff; }
+.vidcard:hover .vidcard-btn-icon .ic-default { opacity: 0; }
+.vidcard:hover .vidcard-btn-icon .ic-hover { opacity: 1; }
+
+/* ---- 모바일 ------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .lst-grid--video { grid-template-columns: 1fr; }
+  .vidcard-body { padding: 20px; gap: 16px; }
+  .vidcard-meta { grid-template-columns: 76px 1fr; gap: 4px 12px; }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .lst-grid--video { grid-template-columns: repeat(2, 1fr); }
+}

@@ -64,6 +64,22 @@
 .fil-select img { width: 20px; height: 20px; transform: rotate(90deg); flex: none; }
 .fil-select:hover { background: var(--gray-bg); }
 
+/* 검색 조건 드롭다운 — 버튼(.fil-select)과 그 아래 펼쳐지는 목록(.fil-dropdown-list)이
+   하나로 이어진 프레임. 기본은 접힌 상태이며, .fil-dropdown에 .is-open이 붙으면 펼쳐진다. */
+.fil-dropdown.is-open .fil-select { border-bottom: 0; background: var(--gray-bg); }
+.fil-dropdown.is-open .fil-select img { transform: rotate(-90deg); }
+
+.fil-dropdown-list {
+  display: flex; flex-direction: column; max-height: 0; overflow: hidden; border-width: 0;
+  transition: max-height 0.25s ease;
+}
+.fil-dropdown.is-open .fil-dropdown-list { max-height: 400px; border: 1px solid var(--ink); border-top: 0; }
+.fil-dropdown-item {
+  border: 0; background: var(--white); padding: 12px 16px;
+  font-size: 18px; font-weight: 500; text-align: left;
+}
+.fil-dropdown-item:hover, .fil-dropdown-item.is-active { background: var(--ink); color: #fff; }
+
 .fil-search {
   display: flex; align-items: center; gap: 8px;
   border: 1px solid var(--ink); padding: 12px 16px;

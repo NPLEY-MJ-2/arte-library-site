@@ -6,6 +6,42 @@
 (function () {
   'use strict';
 
+  /* ---- 검색 조건 드롭다운 (전체 ▸ 하위 목록) ------------------------------ */
+  document.querySelectorAll('.fil-dropdown').forEach(function (wrap) {
+    var trigger = wrap.querySelector('.fil-select');
+    var list = wrap.querySelector('.fil-dropdown-list');
+    if (!trigger || !list) return;
+
+    trigger.addEventListener('click', function () {
+      var open = wrap.classList.contains('is-open');
+      document.querySelectorAll('.fil-dropdown.is-open').forEach(function (w) {
+        if (w !== wrap) { w.classList.remove('is-open'); w.querySelector('.fil-select').setAttribute('aria-expanded', 'false'); }
+      });
+      wrap.classList.toggle('is-open', !open);
+      trigger.setAttribute('aria-expanded', String(!open));
+    });
+
+    list.querySelectorAll('.fil-dropdown-item').forEach(function (item) {
+      item.addEventListener('click', function () {
+        list.querySelectorAll('.fil-dropdown-item').forEach(function (i) {
+          i.classList.remove('is-active');
+          i.setAttribute('aria-selected', 'false');
+        });
+        item.classList.add('is-active');
+        item.setAttribute('aria-selected', 'true');
+        wrap.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (wrap.classList.contains('is-open') && !wrap.contains(e.target)) {
+        wrap.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
   /* ---- 필터 아코디언 (장르 / 교육대상 / 자료유형 / 저작권자) -------------- */
   document.querySelectorAll('.fil-acc').forEach(function (head) {
     head.addEventListener('click', function () {

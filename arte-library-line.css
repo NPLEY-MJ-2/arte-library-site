@@ -7,14 +7,7 @@
    · 서브페이지(docs/region/ai-search)가 쓰는 공통 컴포넌트는 하단 "서브페이지 공통" 블록에 유지
    ========================================================================== */
 
-@font-face {
-  font-family: 'ArteBasic';
-  src: url('../../design-system/fonts/ArteBasic-Regular.otf') format('opentype');
-  font-weight: 400 900;
-  font-display: swap;
-}
-
-/* 서브페이지 디스플레이 서체 — Figma 'Paperlogy 6 SemiBold' */
+/* 디스플레이 서체 — Figma 'Paperlogy 6 SemiBold' (2026-09-11 전 화면 ArteBasic → Paperlogy 통일) */
 @font-face {
   font-family: 'Paperlogy';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');
@@ -75,9 +68,20 @@ h1, h2, h3, h4, p { margin: 0; }
   overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 
+/* PC/모바일 전용 대체 레이아웃 토글 (예: 지역별 정보 — 같은 콘텐츠를 다른 구조로 보여줘야 할 때).
+   "숨길 때만" display:none을 걸고 보일 때는 아무것도 강제하지 않는다 — 그래야 .rgcard-rail
+   같은 컴포넌트 클래스가 정한 display:flex 등이 그대로 살아있다(예전엔 보이는 쪽에도
+   display:block !important를 걸어서 flex가 깨지는 버그가 있었음). */
+@media (min-width: 769px) {
+  .only-mobile { display: none !important; }
+}
+@media (max-width: 768px) {
+  .only-pc { display: none !important; }
+}
+
 .wrap { width: min(var(--content), calc(100% - var(--side) * 2)); margin-inline: auto; }
 
-.display { font-family: 'ArteBasic', 'Pretendard', sans-serif; }
+.display { font-family: 'Paperlogy', 'Pretendard', sans-serif; font-weight: 600; }
 
 /* ==========================================================================
    마스트헤드 / 헤더 / GNB
@@ -132,12 +136,12 @@ h1, h2, h3, h4, p { margin: 0; }
 
 .kv { padding: clamp(48px, 5.2vw, 100px) 0; background: var(--white); }
 .kv-title {
-  font-family: 'ArteBasic', 'Pretendard', sans-serif;
+  font-family: 'Paperlogy', 'Pretendard', sans-serif;
   font-size: clamp(24px, 5.21vw, 100px);
   line-height: 1.15;
   letter-spacing: -0.05em;
   color: var(--blue);
-  font-weight: 400;
+  font-weight: 600;
   word-break: keep-all;
 }
 .kv-search { margin-top: clamp(40px, 6.25vw, 120px); display: flex; flex-direction: column; gap: 32px; }
@@ -189,7 +193,7 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .sec-head--plain { justify-content: flex-start; }
 .sec-title {
-  font-family: 'ArteBasic', 'Pretendard', sans-serif; font-weight: 400;
+  font-family: 'Paperlogy', 'Pretendard', sans-serif; font-weight: 600;
   font-size: clamp(28px, 3.23vw, 62px); line-height: 1;
 }
 .sec-add { flex: none; display: block; width: 40px; height: 40px; }
@@ -235,7 +239,7 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .arc-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .arc::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 260px;
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 58%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
 }
 .arc-body {
@@ -322,29 +326,70 @@ h1, h2, h3, h4, p { margin: 0; }
 .book .tag-line { font-size: clamp(13px, 0.83vw, 16px); }
 
 /* ==========================================================================
-   지역별 정보 — 3행 바
+   지역별 정보 — PC: 01/02 리스트 + 03 지역 발간물 / 모바일: 퀵카드 3종 가로 스크롤
+   Figma 'main'(20425:126638 PC / 20425:138866 모바일) 2026-09-11 갱신
    ========================================================================== */
 
-.rg-list { margin-top: 40px; }
+.rg-body { margin-top: 40px; display: flex; gap: 40px; align-items: stretch; }
+.rg-list { flex: 0 0 clamp(320px, 33.5vw, 644px); display: flex; flex-direction: column; }
 .rg-row {
-  display: flex; align-items: center; gap: clamp(20px, 3.13vw, 60px);
+  flex: 1;
+  display: flex; flex-direction: column; gap: 12px; justify-content: center;
   padding: clamp(20px, 2.08vw, 40px);
   border: 1px solid var(--ink); border-top: 0;
   background: var(--white);
 }
 .rg-row:first-child { border-top: 1px solid var(--ink); }
 .rg-row--on { background: var(--ink); }
-.rg-num { flex: none; width: 25px; font-size: clamp(14px, 1.04vw, 20px); font-weight: 500; color: var(--gray-888); }
-.rg-t {
-  flex: none; width: clamp(110px, 10.4vw, 200px);
-  font-size: clamp(20px, 2.08vw, 40px); font-weight: 600; line-height: 1.5;
-}
+.rg-row-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.rg-row-label { display: flex; flex-direction: column; gap: 4px; }
+.rg-num { font-size: clamp(14px, 1.04vw, 20px); font-weight: 500; color: var(--gray-888); }
+.rg-t { font-size: clamp(20px, 2.08vw, 40px); font-weight: 600; line-height: 1.5; }
 .rg-row--on .rg-t { color: #fff; }
-.rg-d { flex: 1; min-width: 0; font-size: clamp(14px, 1.04vw, 20px); font-weight: 500; color: var(--gray-888); }
-.rg-arw { flex: none; width: clamp(40px, 3.75vw, 72px); height: auto; transform: rotate(-90deg); }
+.rg-d { font-size: clamp(14px, 1.04vw, 20px); font-weight: 500; color: var(--gray-888); }
+.rg-arw { flex: none; width: 40px; height: auto; transform: rotate(-90deg); }
 .rg-row:hover { background: var(--ink); }
 .rg-row:hover .rg-t { color: #fff; }
 .rg-row:hover .rg-arw { filter: brightness(0) invert(1); }
+
+.rg-pub {
+  flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: clamp(24px, 3.13vw, 60px);
+  border: 1px solid var(--ink); padding: clamp(20px, 2.08vw, 40px);
+}
+.rg-pub-head { display: flex; flex-direction: column; gap: 12px; }
+.rg-pub:hover .rg-t,
+.rg-pub:hover .rg-d { color: var(--blue-badge); }
+
+.rg-pub-grid { display: flex; gap: 40px; }
+.rg-pub-card { flex: 1 1 0; min-width: 0; display: flex; gap: 12px; align-items: center; }
+.rg-pub-card img { flex: none; width: 144px; height: 189px; object-fit: cover; }
+.rg-pub-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.rg-pub-badge {
+  align-self: flex-start; background: #007ade; color: #fff;
+  padding: 4px 12px; font-size: 16px; font-weight: 500;
+}
+.rg-pub-t { font-size: clamp(16px, 1.35vw, 26px); font-weight: 600; line-height: 1.5; word-break: keep-all; }
+.rg-pub-meta { display: flex; align-items: center; gap: 6px; font-size: 16px; color: var(--gray-999); }
+.rg-pub-meta span + span { padding-left: 6px; border-left: 1px solid var(--gray-999); }
+
+/* 모바일 퀵카드 (같은 콘텐츠의 대체 레이아웃 — .only-mobile) */
+.rgcard-rail {
+  margin-top: 40px; display: flex; gap: 24px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.rgcard-rail::-webkit-scrollbar { display: none; }
+.rgcard { flex: 0 0 260px; display: flex; flex-direction: column; gap: 14px; }
+.rgcard-thumb {
+  position: relative; height: 190px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 6px;
+  padding: 20px;
+}
+.rgcard-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.rgcard-thumb::after { content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.55); z-index: 1; }
+.rgcard-eyebrow, .rgcard-t { position: relative; z-index: 2; }
+.rgcard-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #d9d9d6; }
+.rgcard-t { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+.rgcard-d { font-size: 14px; font-weight: 500; color: var(--gray-888); line-height: 1.5; }
 
 /* ==========================================================================
    추천 + 북 큐레이션
@@ -370,7 +415,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .bookcur-label { font-size: clamp(14px, 0.94vw, 18px); font-weight: 500; color: var(--gray-888); }
 .bookcur-tag {
   display: inline-block; margin-top: 12px; padding: 2px 6px; background: #ff2268;
-  font-family: 'ArteBasic', 'Pretendard', sans-serif; font-weight: 400;
+  font-family: 'Paperlogy', 'Pretendard', sans-serif; font-weight: 600;
   font-size: clamp(26px, 2.5vw, 48px); line-height: 1; letter-spacing: -0.02em; color: #fff;
 }
 .bookcur-arw { margin-top: 12px; width: 40px; height: 40px; transform: rotate(-90deg); filter: brightness(0) invert(1); }
@@ -380,7 +425,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .bc { position: relative; flex: 0 0 clamp(140px, 12.97vw, 249px); aspect-ratio: 249 / 341; overflow: hidden; }
 .bc img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .bc-body {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 170px;
+  position: absolute; left: 0; right: 0; bottom: 0; height: 50%;
   display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; padding: 24px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
 }
@@ -388,6 +433,54 @@ h1, h2, h3, h4, p { margin: 0; }
 .bc-body p { font-size: 14px; color: var(--gray-999); line-height: 1.5; }
 .bc:hover img { transform: scale(1.04); }
 .bc img { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ==========================================================================
+   통계 (미리보기) — arte-library-stats-preview.js가 data-chart별로 그린다
+   Figma 'main'(20425:126638 PC / 20425:138866 모바일) 2026-09-11 신규
+   ========================================================================== */
+
+.statprev-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); }
+.statprev-card { display: flex; flex-direction: column; border: 1px solid var(--ink); }
+.statprev-card:not(:last-child) { border-right: 0; }
+.statprev-head { padding: 28px; display: flex; flex-direction: column; gap: 2px; }
+.statprev-t { font-size: clamp(18px, 1.88vw, 36px); font-weight: 600; line-height: 1.5; color: var(--ink); }
+.statprev-d { font-size: clamp(13px, 0.94vw, 18px); font-weight: 500; color: var(--gray-888); line-height: 1.5; }
+.statprev-body { flex: 1; padding: 28px; display: flex; align-items: center; justify-content: center; }
+
+/* 공용 차트 뼈대 (막대+선/누적막대 공용) */
+.pchart { width: 100%; }
+.pchart-body { display: flex; gap: 8px; align-items: stretch; }
+.pchart-yaxis {
+  flex: none; display: flex; flex-direction: column; justify-content: space-between;
+  font-size: clamp(8px, 0.6vw, 11px); color: var(--gray-999); text-align: right;
+}
+.pchart-plot { position: relative; flex: 1; min-width: 0; height: 152px; }
+.pchart-grid { position: absolute; left: 0; right: 0; height: 1px; background: #f3f4f6; }
+.pchart-bars { position: absolute; inset: 0; display: flex; align-items: flex-end; overflow: hidden; }
+.pchart-col { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; gap: 1px; }
+.pchart-bar { width: 100%; background: #173bff; border-radius: 1px 1px 0 0; }
+.pchart-seg { width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.pchart-seg span { font-size: 7px; color: #fff; line-height: 1; }
+.pchart-line { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.pchart-line path { fill: none; stroke: #173bff; stroke-width: 1.5; }
+.pchart-point { fill: #173bff; }
+.pchart-value {
+  position: absolute; transform: translate(-50%, -100%); font-size: 7px; font-weight: 500;
+  color: #173bff; white-space: nowrap;
+}
+.pchart-xaxis { display: flex; margin-top: 4px; }
+.pchart-xaxis span {
+  flex: 1; min-width: 0; text-align: center; font-size: clamp(7px, 0.55vw, 9px);
+  color: var(--gray-999); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* 자료통계 — 원그래프 */
+.pchart-pie-wrap { display: flex; align-items: center; gap: 24px; }
+.pchart-pie { flex: none; width: 132px; height: 132px; border-radius: 999px; }
+.pchart-legend { display: flex; flex-direction: column; gap: 8px; font-size: clamp(11px, 0.83vw, 14px); }
+.pchart-legend li { display: flex; align-items: center; gap: 8px; color: var(--gray-888); }
+.pchart-legend b { color: var(--ink); font-weight: 600; }
+.pchart-dot { flex: none; width: 8px; height: 8px; border-radius: 999px; }
 
 /* ==========================================================================
    이벤트·행사 + 공지·소식
@@ -421,7 +514,7 @@ h1, h2, h3, h4, p { margin: 0; }
 .ev-yr { font-size: clamp(14px, 1.67vw, 32px); font-weight: 600; line-height: 1; }
 .ev-d1, .ev-d2 {
   display: flex; align-items: center; gap: 6px;
-  font-family: 'ArteBasic', 'Pretendard', sans-serif; font-weight: 400;
+  font-family: 'Paperlogy', 'Pretendard', sans-serif; font-weight: 600;
   font-size: clamp(32px, 4.28vw, 82px); line-height: 1.1; letter-spacing: -0.08em;
 }
 .ev-d1 img { width: clamp(14px, 1.83vw, 35px); height: auto; }
@@ -658,16 +751,23 @@ h1, h2, h3, h4, p { margin: 0; }
   .book-cover { width: 100%; aspect-ratio: 16 / 10; }
   .book-body { padding: 20px; }
 
-  .rg-row { flex-wrap: wrap; gap: 8px 16px; }
-  .rg-d { flex-basis: 100%; order: 3; }
-  .rg-arw { width: 32px; }
-
   .reco-grid { grid-template-columns: 1fr; gap: 20px; }
   .reco-body { padding: 20px; gap: 20px; }
 
   .bookcur { flex-direction: column; align-items: flex-start; gap: 24px; padding: 24px; }
   .bookcur-books { width: 100%; overflow-x: auto; scrollbar-width: none; }
   .bookcur-books::-webkit-scrollbar { display: none; }
+  /* 좁은 카드(140px)에서는 고정 50% 오버레이에 2줄 제목+저자가 다 안 들어가 이미지 위로
+     넘치던 문제 → auto 높이 + 여백/폰트 축소로 카드 폭에 맞춘다 */
+  .bc-body { height: auto; min-height: 50%; padding: 14px; gap: 4px; }
+  .bc-body h4 { font-size: 14px; line-height: 1.35; }
+  .bc-body p { font-size: 12px; }
+
+  .statprev-grid { grid-template-columns: 1fr; }
+  .statprev-card:not(:last-child) { border-right: 1px solid var(--ink); border-bottom: 0; }
+  .statprev-head { padding: 20px; }
+  .statprev-body { padding: 20px; }
+  .pchart-plot { height: 130px; }
 
   .ev-body { padding: 20px; }
   .notices a { gap: 12px; }
